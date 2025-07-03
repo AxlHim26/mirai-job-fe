@@ -1,6 +1,12 @@
-import {auth_bg} from ".";
+import { heroImage, companyLogo, desktop, socialMedia, auth_bg } from ".";
 
-const image = {auth_bg} satisfies Record<string, string>;
+const image = {
+  heroImage,
+  companyLogo,
+  desktop,
+  socialMedia,
+  auth_bg,
+} satisfies Record<string, string>;
 
 type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   imageName: keyof typeof image;
