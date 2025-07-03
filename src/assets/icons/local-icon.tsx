@@ -1,8 +1,12 @@
 import React from "react";
-import {Logo} from ".";
+import { Logo, JobLogo, JobShare, BenefitIcon, SectionBlockIcon } from "./";
 
 const icon = {
-    Logo
+  Logo,
+  JobLogo,
+  JobShare,
+  BenefitIcon,
+  SectionBlockIcon,
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -14,13 +18,18 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   height?: number | "auto";
 };
 
-export const LoaclIcon = ({iconName, width, height, ...props}: ReactIconProps) => {
-    const Component = icon[iconName];
-    return (
-        <Component
-            {...(height !== "auto" && { height })}
-            {...(width !== "auto" && { width })}
-            {...props}
-        />
-    )
-}
+export const LoaclIcon = ({
+  iconName,
+  width,
+  height,
+  ...props
+}: ReactIconProps) => {
+  const Component = icon[iconName];
+  return (
+    <Component
+      {...(height !== "auto" && { height })}
+      {...(width !== "auto" && { width })}
+      {...props}
+    />
+  );
+};
