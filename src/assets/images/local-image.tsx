@@ -1,4 +1,14 @@
-import { heroImage, companyLogo, desktop, socialMedia, auth_bg } from ".";
+import {
+  heroImage,
+  companyLogo,
+  desktop,
+  socialMedia,
+  auth_bg,
+  CompanyLogo,
+  CompanyPic1,
+  CompanyPic2,
+  CompanyPic3,
+} from ".";
 
 const image = {
   heroImage,
@@ -6,6 +16,10 @@ const image = {
   desktop,
   socialMedia,
   auth_bg,
+  CompanyLogo,
+  CompanyPic1,
+  CompanyPic2,
+  CompanyPic3,
 } satisfies Record<string, string>;
 
 type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {

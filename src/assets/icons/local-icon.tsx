@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Logo,
   circleCheckmark,
@@ -15,6 +16,10 @@ import {
   gridView,
   horizontal,
   moreFilters,
+  JobLogo,
+  JobShare,
+  BenefitIcon,
+  SectionBlockIcon,
 } from ".";
 
 const icon = {
@@ -33,6 +38,10 @@ const icon = {
   gridView,
   horizontal,
   moreFilters,
+  JobLogo,
+  JobShare,
+  BenefitIcon,
+  SectionBlockIcon,
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
