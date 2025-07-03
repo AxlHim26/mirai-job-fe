@@ -64,7 +64,7 @@ const BrowseCompaniesRoute = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full bg-[#F8F9FC] max-w-[2000px]">
+    <>
       {/* Header Section */}
       <Header />
       
@@ -130,7 +130,7 @@ const BrowseCompaniesRoute = () => {
       </div>
       {/* Footer Section */}
       <Footer />
-    </div>
+    </>
   );
 };
 
