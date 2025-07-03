@@ -1,6 +1,6 @@
 import { LoaclIcon } from "@/assets/icons/local-icon";
 import { companyLogo } from "@/assets/images";
-import { LocalImage } from "@/assets/images/local-image";
+//import { LocalImage } from "@/assets/images/local-image";
 import { Footer, Header } from "@/components/layouts";
 import CompanyCard from "@/components/ui/card/CompanyCard";
 import CompanyResultCard from "@/components/ui/card/CompanyResultCard";
@@ -64,7 +64,7 @@ const BrowseCompaniesRoute = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-start w-full h-full bg-[#F8F9FC] max-w-[2000px]">
+    <>
       {/* Header Section */}
       <Header />
       
@@ -130,7 +130,7 @@ const BrowseCompaniesRoute = () => {
       </div>
       {/* Footer Section */}
       <Footer />
-    </div>
+    </>
   );
 };
 
