@@ -16,10 +16,10 @@ export const LandingHeader = () => {
       <div className="relative flex items-center justify-between h-20 px-8 bg-white">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-[#4f46e5] flex items-center justify-center">
-            <LocalIcon iconName="Logo" />
-          </div>
-          <span className="text-2xl font-semibold text-[#23272e]">JobHuntly</span>
+          <LocalIcon iconName="Logo" />
+          <span className="text-2xl font-semibold text-[#23272e]">
+            JobHuntly
+          </span>
         </div>
         {/* Nav */}
         <nav className="flex items-center gap-8">
@@ -27,7 +27,7 @@ export const LandingHeader = () => {
             <a
               key={item.label}
               href={item.href}
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 setActiveIndex(idx);
               }}
