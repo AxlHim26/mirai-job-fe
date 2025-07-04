@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { Facebook, Instagram, Dribbble, Linkedin, Twitter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Facebook, Instagram, Dribbble, Linkedin, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { LocalIcon } from "@/assets/icons/local-icon";
 
 export const LandingFooter = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleSubscribe = () => {
     if (email.trim()) {
       // Handle newsletter subscription
-      console.log('Subscribing email:', email);
-      setEmail('');
+      console.log("Subscribing email:", email);
+      setEmail("");
     }
   };
 
@@ -21,13 +22,12 @@ export const LandingFooter = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">J</span>
-              </div>
+              <LocalIcon iconName="Logo" />
               <span className="text-xl font-semibold">JobHuntly</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Great platform for the job seeker that passionate about startups. Find your dream job easier.
+              Great platform for the job seeker that passionate about startups.
+              Find your dream job easier.
             </p>
           </div>
 
@@ -35,11 +35,46 @@ export const LandingFooter = () => {
           <div>
             <h3 className="text-white font-medium mb-6">About</h3>
             <ul className="space-y-4">
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Companies</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Pricing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Terms</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Advice</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Companies
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Terms
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Advice
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -47,16 +82,46 @@ export const LandingFooter = () => {
           <div>
             <h3 className="text-white font-medium mb-6">Resources</h3>
             <ul className="space-y-4">
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Help Docs</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Guide</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Updates</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Contact Us</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Help Docs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Guide
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Updates
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Contact Us
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Newsletter Section */}
           <div>
-            <h3 className="text-white font-medium mb-6">Get job notifications</h3>
+            <h3 className="text-white font-medium mb-6">
+              Get job notifications
+            </h3>
             <p className="text-gray-400 text-sm mb-4">
               The latest job news, articles, sent to your inbox weekly.
             </p>
@@ -88,19 +153,34 @@ export const LandingFooter = () => {
 
             {/* Social Media Links */}
             <div className="flex items-center gap-4">
-              <Link to="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Facebook size={20} />
               </Link>
-              <Link to="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Instagram size={20} />
               </Link>
-              <Link to="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Dribbble size={20} />
               </Link>
-              <Link to="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Linkedin size={20} />
               </Link>
-              <Link to="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Twitter size={20} />
               </Link>
             </div>
