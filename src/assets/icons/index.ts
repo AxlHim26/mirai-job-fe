@@ -8,5 +8,11 @@ import search from './search.svg?react';
 import gridView from './grid-view.svg?react';
 import horizontal from './horizontal-view.svg?react';
 import moreFilters from './more-filter.svg?react';
+import Logo from "./logo.svg?react";
+import JobLogo from "./job-logo.svg?react";
+import JobShare from "./job-share.svg?react";
+import BenefitIcon from "./benefit-icon.svg?react";
+import SectionBlockIcon from "./block-desc-icon.svg?react";
 
-export { iconWhite, logo, arrowLeft, arrowRight , Location, menu, search, gridView, horizontal, moreFilters };
+export { Logo, JobLogo, JobShare, BenefitIcon, SectionBlockIcon,iconWhite, logo, arrowLeft, arrowRight , Location, menu, search, gridView, horizontal, moreFilters  };
+

@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   iconWhite,
   logo,
@@ -9,12 +10,20 @@ import {
   search,
   gridView,
   horizontal,
-  moreFilters
+  moreFilters,
+  JobLogo, 
+  JobShare, 
+  BenefitIcon, 
+  SectionBlockIcon
 } from ".";
 
 const icon = {
+  Logo,
+  JobLogo,
+  JobShare,
+  BenefitIcon,
+  SectionBlockIcon,
   iconWhite,
-  logo,
   arrowLeft,
   arrowRight,
   Location,
@@ -34,7 +43,7 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   height?: number | "auto";
 };
 
-export const LoaclIcon = ({
+export const LocalIcon = ({
   iconName,
   width,
   height,
