@@ -1,9 +1,7 @@
-import { LoaclIcon } from "@/assets/icons/local-icon";
+import { LocalIcon } from "@/assets/icons/local-icon";
 import { companyLogo } from "@/assets/images";
-//import { LocalImage } from "@/assets/images/local-image";
-import { Footer, Header } from "@/components/layouts";
+import { LandingFooter, LandingHeader } from "@/components/layouts/landing";
 import CompanyCard from "@/components/ui/card/CompanyCard";
-import CompanyResultCard from "@/components/ui/card/CompanyResultCard";
 import HorizontalCategoryCarousel from "@/components/ui/carousel/CategoryCarousel";
 
 const BrowseCompaniesRoute = () => {
@@ -65,10 +63,8 @@ const BrowseCompaniesRoute = () => {
 
   return (
     <>
-      {/* Header Section */}
-      <Header />
-      
-      {/* Content Section */}
+      <LandingHeader />
+
       <div className="flex flex-col items-start justify-center gap-6 pt-[72px] px-[124px] w-full ">
         <div>
           <h1 className="text-[#25324B] font-semibold text-3xl lg:text-4xl ">
@@ -98,7 +94,7 @@ const BrowseCompaniesRoute = () => {
         </h1>
         <HorizontalCategoryCarousel />
         <div className="flex items-center gap-4">
-          <LoaclIcon
+          <LocalIcon
             iconName="iconWhite"
             height={35}
             width={35}
@@ -120,16 +116,17 @@ const BrowseCompaniesRoute = () => {
           ))}
         </div>
         <div className="text-[#4640DE] flex items-center gap-3 w-full p-5 cursor-pointer">
-          <h1 className="font-semibold text-[16px]">View more Design companies</h1>
-          <LoaclIcon 
+          <h1 className="font-semibold text-[16px]">
+            View more Design companies
+          </h1>
+          <LocalIcon
             iconName="arrowRight"
             height={25}
-            width={25}/>
+            width={25}
+          />
         </div>
-        {/** <LocalImage imageName="desktop" /> */}
       </div>
-      {/* Footer Section */}
-      <Footer />
+      <LandingFooter />
     </>
   );
 };

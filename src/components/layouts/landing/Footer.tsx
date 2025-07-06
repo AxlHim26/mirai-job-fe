@@ -1,15 +1,15 @@
-import { LoaclIcon } from "@/assets/icons/local-icon"
+import { LocalIcon } from "@/assets/icons/local-icon"
 import { LocalImage } from "@/assets/images/local-image"
-import FooterColumn from "../ui/column/FooterColumn";
+import FooterColumn from "../../ui/column/FooterColumn";
 
-const Footer = () => {
+export const LandingFooter = () => {
   return (
     <div className="bg-[#202430] text-white py-10 px-[124px] w-full max-w-[2000px]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
         <div className="flex flex-col gap-7">
           <div className="flex items-center gap-2">
-            <LoaclIcon
-              iconName="logo"
+            <LocalIcon
+              iconName="Logo"
               width={40}
               height={40}
             />
@@ -73,5 +73,3 @@ const Footer = () => {
     </div>
   )
 }
-
-export default Footer;
