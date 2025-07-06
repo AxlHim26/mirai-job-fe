@@ -1,5 +1,21 @@
 import React from "react";
-import { Logo, JobLogo, JobShare, BenefitIcon, SectionBlockIcon } from "./";
+
+import {
+  iconWhite,
+  logo,
+  arrowLeft,
+  arrowRight,
+  Location,
+  menu,
+  search,
+  gridView,
+  horizontal,
+  moreFilters,
+  JobLogo, 
+  JobShare, 
+  BenefitIcon, 
+  SectionBlockIcon
+} from ".";
 
 const icon = {
   Logo,
@@ -7,6 +23,15 @@ const icon = {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  iconWhite,
+  arrowLeft,
+  arrowRight,
+  Location,
+  menu,
+  search,
+  gridView,
+  horizontal,
+  moreFilters
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -18,7 +43,7 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   height?: number | "auto";
 };
 
-export const LoaclIcon = ({
+export const LocalIcon = ({
   iconName,
   width,
   height,
