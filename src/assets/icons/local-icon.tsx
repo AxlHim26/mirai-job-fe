@@ -2,8 +2,8 @@ import React from "react";
 
 import {
   iconWhite,
-  logo,
   arrowLeft,
+  Logo,
   arrowRight,
   Location,
   menu,

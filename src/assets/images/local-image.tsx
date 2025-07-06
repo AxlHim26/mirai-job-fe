@@ -1,9 +1,8 @@
-import {heroImage, companyLogo, desktop, socialMedia, CompanyLogo, CompanyPic1, CompanyPic2, CompanyPic3 } from "./";
+import {heroImage, companyLogo, socialMedia, CompanyLogo, CompanyPic1, CompanyPic2, CompanyPic3 } from "./";
 
 const image = {
   heroImage, 
   companyLogo, 
-  desktop, 
   socialMedia,
   CompanyLogo,
   CompanyPic1,
