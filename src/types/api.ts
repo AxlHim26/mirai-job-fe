@@ -21,7 +21,7 @@ export type User = Entity<{
   firstName: string;
   lastName: string;
   email: string;
-  role: 'ROLE_ADMIN' | 'ROLE_RECRUITER' | 'ROLE_CANDIDATE';
+  role: 'ROLE_RECRUITER' | 'ROLE_CANDIDATE';
 }>;
 
 export type AuthResponse = {
