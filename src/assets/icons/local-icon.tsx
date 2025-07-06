@@ -1,8 +1,19 @@
 import React from "react";
-import {Logo} from ".";
+import {Logo,
+  circleCheckmark,
+  circleInfo,
+  circleWarn,
+  circleXmark,
+  successful
+} from ".";
 
 const icon = {
-    Logo
+    Logo,
+    circleCheckmark,
+    circleInfo,
+    circleWarn, 
+    circleXmark,
+    successful
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -14,7 +25,7 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   height?: number | "auto";
 };
 
-export const LoaclIcon = ({iconName, width, height, ...props}: ReactIconProps) => {
+export const LocalIcon = ({iconName, width, height, ...props}: ReactIconProps) => {
     const Component = icon[iconName];
     return (
         <Component

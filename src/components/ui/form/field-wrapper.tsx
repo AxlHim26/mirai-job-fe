@@ -9,7 +9,7 @@ type FieldWrapperProps = {
   error?: FieldError;
 };
 
-// type FieldWrapperPassThrough = Pick<FieldWrapperProps, "error" | "label">;
+export type FieldWrapperPassThroughProps = Pick<FieldWrapperProps, "error" | "label">;
 
 export const FieldWrapper = ({
   className,
