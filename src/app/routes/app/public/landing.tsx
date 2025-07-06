@@ -1,6 +1,4 @@
-import { LandingHeader } from "@/components/layouts/landing/header";
-import { LandingMain } from "@/components/layouts/landing/main";
-import { LandingFooter } from "@/components/layouts/landing/footer";
+import { LandingFooter, LandingHeader, LandingMain } from "@/components/layouts/landing";
 
 const LandingRoute = () => {
   return (

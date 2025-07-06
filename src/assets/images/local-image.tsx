@@ -1,7 +1,6 @@
 import {
   heroImage,
   companyLogo,
-  desktop,
   socialMedia,
   auth_bg,
   CompanyLogo,
@@ -13,7 +12,6 @@ import {
 const image = {
   heroImage,
   companyLogo,
-  desktop,
   socialMedia,
   auth_bg,
   CompanyLogo,
