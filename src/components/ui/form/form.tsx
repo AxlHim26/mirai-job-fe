@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import { z, ZodTypeAny } from "zod";
 
-type FormProps<Schema, TFormValues extends FieldValues> = {
+export type FormProps<Schema, TFormValues extends FieldValues> = {
   className?: string;
   option?: UseFormProps<TFormValues>;
   schema: Schema;

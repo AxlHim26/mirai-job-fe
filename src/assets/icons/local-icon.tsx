@@ -14,7 +14,13 @@ import {
   JobLogo, 
   JobShare, 
   BenefitIcon, 
-  SectionBlockIcon
+  SectionBlockIcon,
+    Logo,
+    circleCheckmark,
+    circleInfo,
+    circleWarn, 
+    circleXmark,
+    successful
 } from ".";
 
 const icon = {
@@ -31,7 +37,13 @@ const icon = {
   search,
   gridView,
   horizontal,
-  moreFilters
+  moreFilters,
+      Logo,
+    circleCheckmark,
+    circleInfo,
+    circleWarn, 
+    circleXmark,
+    successful
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -42,6 +54,7 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   width?: number | "auto";
   height?: number | "auto";
 };
+
 
 export const LocalIcon = ({
   iconName,

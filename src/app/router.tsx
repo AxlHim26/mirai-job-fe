@@ -24,7 +24,7 @@ export const createRouter = (queryClient: QueryClient) => {
     {
       path: "",
       lazy: () =>
-        import("./routes/app/root").then((mod) => {
+        import('./routes/root').then((mod) => {
           const { AppRouterRoot } = mod;
           return { Component: AppRouterRoot };
         }),
@@ -33,20 +33,30 @@ export const createRouter = (queryClient: QueryClient) => {
           path: "",
           lazy: () => import("./routes/app/public/landing").then(withClient),
         },
+        // authentication routes
         {
-          path: "profile",
-          lazy: () => import("./routes/app/private/profile").then(withClient),
-        },
-        {
-          path: "job-description",
+          path: 'auth',
           lazy: () =>
-            import("./routes/app/public/job-desc-page").then(withClient),
+            import('./routes/auth/auth-root').then(withClient),
+          children: [
+            {
+              path:"login",
+              lazy: () =>
+                import('./routes/auth/login').then(withClient),
+            },
+            {
+              path:"register",
+              lazy: () =>
+                import('./routes/auth/register').then(withClient),
+            }
+          ]
         },
       ],
     },
     {
-      path: "*",
-      lazy: () => import("./routes/app/not-found").then(withClient),
+      path: '*',
+      lazy: () =>
+        import('./routes/not-found').then(withClient),
     },
   ]);
 };
