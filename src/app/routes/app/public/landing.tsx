@@ -1,10 +1,13 @@
+import { LandingFooter, LandingHeader, LandingMain } from "@/components/layouts/landing";
 
 const LandingRoute = () => {
-      return (
-            <div>
-                  Landing
-            </div>
-      )
-}
+  return (
+    <>
+      <LandingHeader />
+      <LandingMain />
+      <LandingFooter />
+    </>
+  );
+};
 
 export default LandingRoute;
