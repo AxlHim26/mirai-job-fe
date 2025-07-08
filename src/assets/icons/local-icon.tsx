@@ -20,6 +20,8 @@ import {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  ChevronLeft,
+  ChevronRight,
 } from ".";
 
 const icon = {
@@ -42,6 +44,8 @@ const icon = {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  ChevronLeft,
+  ChevronRight,
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
