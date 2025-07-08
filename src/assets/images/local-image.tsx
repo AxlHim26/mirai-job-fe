@@ -1,18 +1,67 @@
-import {} from ".";
+import React from "react";
 
-const image = {} satisfies Record<string, string>;
+import {
+  americaImg,
+  australiaImg,
+  avatarImg,
+  bigImage,
+  chinaImg,
+  cssImg,
+  englandImg,
+  framerImg,
+  htmlImg,
+  japanImg,
+  jsImg,
+  logo,
+  mixpanelImg,
+  rubyImg,
+  smallImg,
+} from ".";
 
-type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
-  imageName: keyof typeof image;
+const images = {
+  americaImg,
+  australiaImg,
+  avatarImg,
+  bigImage,
+  chinaImg,
+  cssImg,
+  englandImg,
+  framerImg,
+  htmlImg,
+  japanImg,
+  jsImg,
+  logo,
+  mixpanelImg,
+  rubyImg,
+  smallImg,
+} satisfies Record<
+  string,
+  React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+>;
+
+export type ImageName = keyof typeof images;
+
+type ReactIconProps = React.SVGProps<SVGSVGElement> & {
+  imageName: keyof typeof images;
+  height?: number | "auto";
+  width?: number | "auto";
 };
 
-export const LocalImage = ({ imageName, ...props }: ImageProps) => {
-  const Comp = image[imageName];
-  return (
-    <img
-      src={Comp}
-      alt={imageName}
+/**
+ 
+Generator SVG Icon*/
+export const LocalImage = ({
+  imageName,
+  height = 24,
+  width = 24,
+  ...props
+}: ReactIconProps) => {
+  const Comp = images[imageName];
+  return Comp ? (
+    <Comp
+      {...(height !== "auto" && { height })}
+      {...(width !== "auto" && { width })}
       {...props}
     />
-  );
+  ) : null;
 };
