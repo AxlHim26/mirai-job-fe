@@ -17,6 +17,8 @@ import JobLogo from "./job-logo.svg?react";
 import JobShare from "./job-share.svg?react";
 import BenefitIcon from "./benefit-icon.svg?react";
 import SectionBlockIcon from "./block-desc-icon.svg?react";
+import ChevronLeft from "./chevron-left.svg?react";
+import ChevronRight from "./chevron-right.svg?react";
 
 export {
   Logo,
@@ -38,4 +40,6 @@ export {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  ChevronLeft,
+  ChevronRight,
 };
