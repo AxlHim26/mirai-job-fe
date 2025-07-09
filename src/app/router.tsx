@@ -35,6 +35,11 @@ export const createRouter = (queryClient: QueryClient) => {
             import('./routes/app/public/browse-companies').then(withClient),
         },
         {
+          path: "/company-profile",
+          lazy: () =>
+            import("./routes/app/public/company-profile-page").then(withClient),
+        },
+        {
           path: 'search',
           lazy: () =>
             import('./routes/app/public/search-companies').then(withClient),

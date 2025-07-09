@@ -20,6 +20,19 @@ import {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  fireIcon,
+  memberIcon,
+  locationIcon,
+  companyLogo,
+  faceBookIcon,
+  industryIcon,
+  insIcon,
+  linkedinIcon,
+  linkedinNonIcon,
+  twitterIcon,
+  socialMediaIcon,
+  arrowRightIcon,
+  plusIcon
 } from ".";
 
 const icon = {
@@ -42,6 +55,19 @@ const icon = {
   JobShare,
   BenefitIcon,
   SectionBlockIcon,
+  fireIcon,
+  memberIcon,
+  locationIcon,
+  companyLogo,
+  faceBookIcon,
+  industryIcon,
+  insIcon,
+  linkedinIcon,
+  linkedinNonIcon,
+  twitterIcon,
+  socialMediaIcon,
+  arrowRightIcon,
+  plusIcon
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -52,7 +78,7 @@ type ReactIconProps = React.SVGProps<SVGSVGElement> & {
   width?: number | "auto";
   height?: number | "auto";
 };
-
+export type IconName = keyof typeof icon;
 export const LocalIcon = ({
   iconName,
   width,

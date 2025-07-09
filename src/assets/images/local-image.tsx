@@ -7,6 +7,17 @@ import {
   CompanyPic1,
   CompanyPic2,
   CompanyPic3,
+  avatarImg,
+  bigImage,
+  cssImg,
+  flagImg,
+  framerImg,
+  htmlImg,
+  jsImg,
+  logo,
+  mixpanelImg,
+  rubyImg,
+  smallImg,
 } from ".";
 
 const image = {
@@ -18,8 +29,19 @@ const image = {
   CompanyPic1,
   CompanyPic2,
   CompanyPic3,
+  avatarImg,
+  bigImage,
+  cssImg,
+  flagImg,
+  framerImg,
+  htmlImg,
+  jsImg,
+  logo,
+  mixpanelImg,
+  rubyImg,
+  smallImg,
 } satisfies Record<string, string>;
-
+export type ImageName = keyof typeof image;
 type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   imageName: keyof typeof image;
 };
