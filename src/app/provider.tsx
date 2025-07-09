@@ -4,10 +4,7 @@ import * as React from 'react';
 import { Spinner } from '@/components/ui/spinner';
 import { AuthLoader } from '@/lib/auth';
 import { queryConfig } from '@/lib/react-query';
-<<<<<<< HEAD
-=======
 import { ToastContainer } from '@/components/ui';
->>>>>>> develop
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -37,10 +34,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
                 </div>
               )}
             >
-<<<<<<< HEAD
-=======
               <ToastContainer />
->>>>>>> develop
               {children}
             </AuthLoader>
           </QueryClientProvider>

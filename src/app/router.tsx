@@ -24,17 +24,12 @@ export const createRouter = (queryClient: QueryClient) => {
     {
       path: "",
       lazy: () =>
-<<<<<<< HEAD
         import("./routes/app/root").then((mod) => {
-=======
-        import('./routes/root').then((mod) => {
->>>>>>> develop
           const { AppRouterRoot } = mod;
           return { Component: AppRouterRoot };
         }),
       children: [
         {
-<<<<<<< HEAD
           path: "",
           lazy: () => import("./routes/app/public/landing").then(withClient),
         },
@@ -46,7 +41,6 @@ export const createRouter = (queryClient: QueryClient) => {
         {
           path: "profile",
           lazy: () => import("./routes/app/private/profile").then(withClient),
-=======
           path: '',
           lazy: () =>
             import('./routes/app/public/browse-companies').then(withClient),
@@ -73,7 +67,6 @@ export const createRouter = (queryClient: QueryClient) => {
                 import('./routes/auth/register').then(withClient),
             }
           ]
->>>>>>> develop
         },
       ],
     },

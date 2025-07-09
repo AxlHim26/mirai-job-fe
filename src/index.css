@@ -30,7 +30,6 @@
   .custom-scrollbar::-webkit-scrollbar-track {
     background: #f0f0f0;
   }
-<<<<<<< HEAD
 }
 
 @layer components {
@@ -41,7 +40,6 @@
   .content-container {
     @apply px-24;
   }
-=======
   .hide-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -56,5 +54,4 @@
   body {
     @apply min-[1440px]:max-w-[1440px] mx-auto;
   }
->>>>>>> develop
 }
