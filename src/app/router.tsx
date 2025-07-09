@@ -24,12 +24,17 @@ export const createRouter = (queryClient: QueryClient) => {
     {
       path: "",
       lazy: () =>
+<<<<<<< HEAD
         import("./routes/app/root").then((mod) => {
+=======
+        import('./routes/root').then((mod) => {
+>>>>>>> develop
           const { AppRouterRoot } = mod;
           return { Component: AppRouterRoot };
         }),
       children: [
         {
+<<<<<<< HEAD
           path: "",
           lazy: () => import("./routes/app/public/landing").then(withClient),
         },
@@ -41,12 +46,46 @@ export const createRouter = (queryClient: QueryClient) => {
         {
           path: "profile",
           lazy: () => import("./routes/app/private/profile").then(withClient),
+=======
+          path: '',
+          lazy: () =>
+            import('./routes/app/public/browse-companies').then(withClient),
+        },
+        {
+          path: 'search',
+          lazy: () =>
+            import('./routes/app/public/search-companies').then(withClient),
+        },
+        // authentication routes
+        {
+          path: 'auth',
+          lazy: () =>
+            import('./routes/auth/auth-root').then(withClient),
+          children: [
+            {
+              path:"login",
+              lazy: () =>
+                import('./routes/auth/login').then(withClient),
+            },
+            {
+              path:"register",
+              lazy: () =>
+                import('./routes/auth/register').then(withClient),
+            }
+          ]
+>>>>>>> develop
         },
       ],
     },
     {
+<<<<<<< HEAD
       path: "*",
       lazy: () => import("./routes/app/not-found").then(withClient),
+=======
+      path: '*',
+      lazy: () =>
+        import('./routes/not-found').then(withClient),
+>>>>>>> develop
     },
   ]);
 };

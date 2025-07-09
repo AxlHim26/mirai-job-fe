@@ -2,7 +2,10 @@ import * as React from 'react';
 import { useUser } from './auth';
 
 export enum ROLES {
+<<<<<<< HEAD
   ROLE_ADMIN = 'ROLE_ADMIN',
+=======
+>>>>>>> develop
   ROLE_RECRUITER = 'ROLE_RECRUITER',
   ROLE_CANDIDATE = 'ROLE_CANDIDATE'
 }
