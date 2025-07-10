@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 
 const SearchResultsRoute = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
@@ -133,7 +133,7 @@ const SearchResultsRoute = () => {
           <div className="flex justify-center mt-10">
             <Pagination
               currentPage={currentPage}
-              totalPages={10}
+              totalPages={0}
               onPageChange={(page) => setCurrentPage(page)}
             />
           </div>

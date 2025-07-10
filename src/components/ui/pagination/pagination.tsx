@@ -15,6 +15,10 @@ export const Pagination: React.FC<PaginationProps> = ({
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
 
+    if(totalPages <= 1){
+      return [];
+    }
+
     if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
@@ -42,7 +46,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="text-gray-500 disabled:opacity-50"
+        className={`text-gray-500 disabled:opacity-50 ${totalPages === 0 ? "hidden" : ""}`}
       >
         <LocalIcon
           iconName="ChevronLeft"
@@ -76,7 +80,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="text-gray-500 disabled:opacity-50"
+        className={`text-gray-500 disabled:opacity-50 ${totalPages === 0 ? "hidden" : ""}`}
       >
         <LocalIcon
           iconName="ChevronRight"

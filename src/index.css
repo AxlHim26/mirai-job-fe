@@ -10,13 +10,13 @@
   }
   
   body {
-    @apply font-montserrat min-[1440px]:max-w-full mx-auto;
+    @apply font-montserrat min-[2000px]:max-w-full mx-auto;
   }
 }
 
 @layer components {
   body {
-    @apply min-[1440px]:max-w-[1440px] mx-auto;
+    @apply min-[2000px]:max-w-[2000px] mx-auto;
   }
 
   /* Custom Scrollbar */
