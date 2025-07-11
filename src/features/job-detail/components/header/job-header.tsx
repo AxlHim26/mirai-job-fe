@@ -1,4 +1,4 @@
-import { LoaclIcon } from "@/assets/icons/local-icon";
+import { LocalIcon } from "@/assets/icons/local-icon";
 
 interface JobHeaderProps {
   jobName: string;
@@ -10,7 +10,7 @@ export const JobHeader = ({ jobName, jobType, location }: JobHeaderProps) => (
   <div className="px-32 py-24 bg-gray-100">
     <div className="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
       <div className="flex items-center space-x-5">
-        <LoaclIcon
+        <LocalIcon
           iconName="JobLogo"
           width={88}
           height={90}
@@ -24,7 +24,7 @@ export const JobHeader = ({ jobName, jobType, location }: JobHeaderProps) => (
       </div>
       <div className="flex items-center space-x-4">
         <figure className="py-3 cursor-pointer border-r border-gray-300 pr-8 mr-7 flex items-center h-full">
-          <LoaclIcon
+          <LocalIcon
             iconName="JobShare"
             width={32}
             height={33}
