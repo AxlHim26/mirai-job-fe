@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { LoaclIcon } from "@/assets/icons/local-icon";
+import { LocalIcon } from "@/assets/icons/local-icon";
 
 const categories = [
   { name: "Design", iconName: "design" },
@@ -59,7 +59,7 @@ export default function HorizontalCategoryCarousel() {
           onClick={scrollLeft}
           className="flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-[#4640DE] text-white p-2 cursor-pointer shadow active:scale-95 transition rounded"
         >
-          <LoaclIcon iconName="arrowLeft" />
+          <LocalIcon iconName="arrowLeft" />
         </button>
       )}
 
@@ -68,7 +68,7 @@ export default function HorizontalCategoryCarousel() {
           onClick={scrollRight}
           className="flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-[#4640DE] text-white p-2 cursor-pointer shadow active:scale-95 transition rounded"
         >
-          <LoaclIcon iconName="arrowRight" />
+          <LocalIcon iconName="arrowRight" />
         </button>
       )}
 
@@ -89,7 +89,7 @@ export default function HorizontalCategoryCarousel() {
                     : "bg-white text-[#25324B] border-gray-200 hover:border-[#4640DE]"
                 }`}
             >
-              <LoaclIcon
+              <LocalIcon
                 iconName="iconWhite"
                 className={`group-hover:text-[#4640DE] transition-colors duration-300 ${
                   activeCategory === cat.name ? "text-white" : "text-[#4640DE] group-hover:text-white"}`}
