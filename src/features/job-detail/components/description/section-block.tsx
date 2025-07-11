@@ -1,4 +1,4 @@
-import { LoaclIcon } from "@/assets/icons/local-icon";
+import { LocalIcon } from "@/assets/icons/local-icon";
 
 interface SectionBlockProps {
   title: string;
@@ -23,7 +23,7 @@ export const SectionBlock = ({
             key={i}
             className="flex items-start gap-2"
           >
-            <LoaclIcon
+            <LocalIcon
               iconName="SectionBlockIcon"
               width={20}
               height={20}
