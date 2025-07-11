@@ -1,6 +1,6 @@
 import auth_bg from "./auth-bg.png";
 import heroImage from './hero-heading.png';
-import companyLogo from './Nomad.png';
+import companyLogo from './nomad.png';
 import socialMedia from './social-media.png';
 import CompanyLogo from "./company-logo.jpg";
 import CompanyPic1 from "./company-pic1.jpg";
