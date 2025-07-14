@@ -10,7 +10,13 @@
   }
   
   body {
-    @apply font-montserrat min-[1440px]:max-w-full mx-auto;
+    @apply font-montserrat min-[2000px]:max-w-full mx-auto;
+  }
+}
+
+@layer components {
+  body {
+    @apply min-[2000px]:max-w-[2000px] mx-auto;
   }
 
   /* Custom Scrollbar */
@@ -31,17 +37,11 @@
     background: #f0f0f0;
   }
   .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
-}
-
-@layer components {
-  body {
-    @apply min-[1440px]:max-w-[1440px] mx-auto;
+    display: none;
   }
 }

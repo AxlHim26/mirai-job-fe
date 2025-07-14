@@ -32,12 +32,12 @@ export const createRouter = (queryClient: QueryClient) => {
         {
           path: '',
           lazy: () =>
-            import('./routes/app/public/browse-companies').then(withClient),
+            import('./routes/app/public/landing').then(withClient),
         },
         {
-          path: 'search',
+          path: 'search-results',
           lazy: () =>
-            import('./routes/app/public/search-companies').then(withClient),
+            import('./routes/app/public/search-results').then(withClient),
         },
         // authentication routes
         {
