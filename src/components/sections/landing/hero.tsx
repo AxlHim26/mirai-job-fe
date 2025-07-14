@@ -32,7 +32,7 @@ export const Hero = () => {
               width={24}
               height={24}
             />
-            <select className="w-full px-4 py-2 border-b border-[#D6DDEB] rounded text-gray-700">
+            <select className="w-full px-4 py-2 border-b border-[#D6DDEB] rounded text-gray-700 focus:outline-none focus:ring-0">
               <option value="">Select location</option>
               <option value="florence">Florence, Italy</option>
               <option value="paris">Paris, France</option>

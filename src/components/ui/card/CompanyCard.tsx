@@ -1,4 +1,4 @@
-export interface CompanyCardProps {
+interface CompanyCardProps {
   id: number;
   name: string;
   logo: string;

@@ -1,6 +1,6 @@
 import { LocalImage } from "@/assets/images/local-image";
 
-export interface CompanyCardProps {
+interface CompanyCardProps {
   id: number;
   name: string;
   logo: string;
