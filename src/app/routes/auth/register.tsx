@@ -1,14 +1,14 @@
 import { RegisterForm } from "@/features/auth";
 import { useState } from "react";
 
-const roles: { label: string; value: "ROLE_CANDIDATE" | "ROLE_RECRUITER" }[] = [
-  { label: "Job Seeker", value: "ROLE_CANDIDATE" },
-  { label: "Company", value: "ROLE_RECRUITER" },
+const roles: { label: string; value: "CANDIDATE" | "RECRUITER" }[] = [
+  { label: "Job Seeker", value: "CANDIDATE" },
+  { label: "Company", value: "RECRUITER" },
 ];
 
 const RegisterRoute = () => {
-  const [roleName, setRoleName] = useState<"ROLE_CANDIDATE" | "ROLE_RECRUITER">(
-    "ROLE_CANDIDATE"
+  const [roleName, setRoleName] = useState<"CANDIDATE" | "RECRUITER">(
+    "CANDIDATE"
   );
   const baseClass =
     "px-[7px] py-[12px] text-[16px] text-[#4640DE] font-[600] leading-[25.6px] transition-colors duration-300";
@@ -39,7 +39,7 @@ const RegisterRoute = () => {
         <span className="px-4">Or sign up with email</span>
         <div className="flex-1 h-px bg-gray-300" />
       </div>
-      <RegisterForm roleName={roleName} />
+      <RegisterForm role={roleName} />
     </div>
   );
 };

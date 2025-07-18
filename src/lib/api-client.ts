@@ -14,7 +14,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 
 //i need fix it
 export const api = Axios.create({
-  baseURL: env?.API_URL,
+  baseURL: "http://localhost:8080/api/",
 });
 
 api.interceptors.request.use(authRequestInterceptor);
