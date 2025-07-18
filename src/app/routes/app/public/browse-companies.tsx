@@ -2,6 +2,7 @@ import { LocalIcon } from "@/assets/icons/local-icon";
 import { companyLogo } from "@/assets/images";
 import { LandingFooter, LandingHeader } from "@/components/layouts/landing";
 import CompanyCard from "@/components/ui/card/CompanyCard";
+import CompanyResultCard from "@/components/ui/card/CompanyResultCard";
 import HorizontalCategoryCarousel from "@/components/ui/carousel/CategoryCarousel";
 
 const BrowseCompaniesRoute = () => {

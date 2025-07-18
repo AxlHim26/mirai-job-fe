@@ -19,12 +19,13 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: postLoginData,
-    onSuccess: async () => {
+    onSuccess: async (data) => {
       addToast({
         title: "Login success",
         message: "You have been logged in",
         type: "success",
       });
+      // Optionally redirect the user or perform other actions
     },
     onError: (error: AxiosError) => {
       const data = error.response?.data as ResponseMessage;

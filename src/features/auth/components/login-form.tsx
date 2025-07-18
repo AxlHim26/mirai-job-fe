@@ -11,7 +11,6 @@ export const LoginForm = () => {
       className="w-full"
       schema={loginInputSchema}
       onSubmit={(data) => {
-        console.log("Logging in with data:", data);
         fetchLogin.mutate(data);
       }}
     >

@@ -6,7 +6,7 @@ import { AlertOverlay } from "@/components/ui";
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { useNavigate } from "react-router-dom";
 
-export const RegisterForm = ({ roleName }: { roleName: string }) => {
+export const RegisterForm = ({ role }: { role: string }) => {
   const register = useRegister(<RegisterSuccessAlert />);
 
   return (
@@ -14,10 +14,9 @@ export const RegisterForm = ({ roleName }: { roleName: string }) => {
       className="w-full"
       schema={registerFormSchema}
       onSubmit={(data) => {
-        console.log("Registering with data:", {...data, roleName });
         register.mutate({
           ...data,
-          roleName,
+          role,
         });
       }}
     >
@@ -85,7 +84,7 @@ const RegisterSuccessAlert = () => {
       primaryOption={{
         text: "Back to login",
         onClick: () => {
-          navigate("/auth");
+          navigate("/auth/login");
         },
       }}
     />
