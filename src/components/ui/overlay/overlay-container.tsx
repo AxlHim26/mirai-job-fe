@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
-import { useOverlay } from "@/hooks";
 import { useEffect } from "react";
 import { OverlayLayout } from "./overlay-layout";
+import { useOverlayStore } from "@/stores/overlay-store";
 
 export const OverlayContainer = () => {
-    const { component, dismiss } = useOverlay();
+    const { component, dismiss } = useOverlayStore();
     const { pathname } = useLocation();
 
     useEffect(() => {

@@ -7,7 +7,7 @@ export type ToastStore = {
     dismissToast: (index: number) => void;
 }
 
-export const useToast = create<ToastStore>((set) => ({
+export const useToastStore = create<ToastStore>((set) => ({
     toasts: [],
     addToast: (props) => {
         set((state) => ({
