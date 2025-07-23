@@ -5,6 +5,8 @@ export const paths = {
   },
 
   auth: {
+    path: '/auth',
+    getHref: () => '/auth',
     register: {
       path: '/auth/register',
       getHref: (redirectTo?: string | null | undefined) =>
@@ -22,13 +24,21 @@ export const paths = {
       path: '/app',
       getHref: () => '/app',
     },
-    dashboard: {
-      path: '',
-      getHref: () => '/app',
+    candidate: {
+      path: '/app/candidate',
+      getHref: () => '/app/candidate',
     },
-    profile: {
-      path: 'profile',
-      getHref: () => '/app/profile',
+    recruiter: {
+      path: '/app/recruiter',
+      getHref: () => '/app/recruiter',
     },
+    admin: {
+      path: '/app/admin',
+      getHref: () => '/app/admin',
+    },
+  },
+  notFound: {
+    path: '*',
+    getHref: () => '*',
   },
 } as const;
