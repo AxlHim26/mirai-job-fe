@@ -19,6 +19,18 @@ import BenefitIcon from "./benefit-icon.svg?react";
 import SectionBlockIcon from "./block-desc-icon.svg?react";
 import ChevronLeft from "./chevron-left.svg?react";
 import ChevronRight from "./chevron-right.svg?react";
+import MessageIcon from "./message-icon.svg?react";
+import NotificationIcon from "./notification-icon.svg?react";
+import HomeIcon from "./home-icon.svg?react";
+import AttachmentIcon from "./attachment-icon.svg?react";
+import PinIcon from "./pin-icon.svg?react";
+import StarIcon from "./star-icon.svg?react";
+import MoreVertical from "./more-vertical.svg?react";
+import CloseIcon from "./close-icon.svg?react"
+import EqualIcon from "./equal-icon.svg?react";
+import EmojiIcon from "./emoji-icon.svg?react";
+import JobListing from "./job-listing.svg?react";
+import PeoPleIcon from "./people-icon.svg?react";
 
 export {
   Logo,
@@ -42,4 +54,16 @@ export {
   SectionBlockIcon,
   ChevronLeft,
   ChevronRight,
+  MessageIcon,
+  NotificationIcon,
+  HomeIcon,
+  AttachmentIcon,
+  MoreVertical,
+  StarIcon,
+  PinIcon,
+  CloseIcon,
+  EqualIcon,
+  EmojiIcon,
+  JobListing,
+  PeoPleIcon
 };
