@@ -9,8 +9,7 @@ const EnvSchema = z.object({
     .union([z.literal('true'), z.literal('false')])
     .transform((val) => val === 'true')
     .optional(),
-  APP_URL: z.string().default('http://localhost:3000'),
-  APP_MOCK_API_PORT: z.string().default('8080'),
+  APP_MOCK_URL: z.string().default('http://localhost:8080/api'),
 });
 
 // This function filters out the environment variables that start with 'VITE_APP_'
