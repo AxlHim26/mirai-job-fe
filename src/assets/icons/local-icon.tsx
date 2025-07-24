@@ -22,6 +22,18 @@ import {
   SectionBlockIcon,
   ChevronLeft,
   ChevronRight,
+  MessageIcon,
+  NotificationIcon,
+  HomeIcon,
+  AttachmentIcon,
+  MoreVertical,
+  StarIcon,
+  PinIcon,
+  CloseIcon,
+  EqualIcon,
+  EmojiIcon,
+  JobListing,
+  PeoPleIcon
 } from ".";
 
 const icon = {
@@ -46,6 +58,18 @@ const icon = {
   SectionBlockIcon,
   ChevronLeft,
   ChevronRight,
+  MessageIcon,
+  NotificationIcon,
+  HomeIcon,
+  AttachmentIcon,
+  MoreVertical,
+  StarIcon,
+  PinIcon,
+  CloseIcon,
+  EqualIcon,
+  EmojiIcon,
+  JobListing,
+  PeoPleIcon
 } satisfies Record<
   string,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -72,3 +96,5 @@ export const LocalIcon = ({
     />
   );
 };
+
+export type IconName = keyof typeof icon;
