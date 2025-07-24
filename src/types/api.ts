@@ -17,15 +17,3 @@ export type Meta = {
   totalPages: number;
 };
 
-export type User = Entity<{
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: 'ROLE_RECRUITER' | 'ROLE_CANDIDATE';
-}>;
-
-export type AuthResponse = {
-  jwt: string;
-  user: User;
-};
-
