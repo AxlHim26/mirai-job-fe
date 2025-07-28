@@ -52,6 +52,11 @@ export const createRouter = (queryClient: QueryClient) => {
             import('./routes/app/private/recruiter/recruiter').then(withClient),
           // Nested routes for recruiter
         },
+        {
+          path: 'dashboard',
+          lazy: () =>
+            import('./routes/app/public/dashboard').then(withClient),
+        },
         // authentication routes
         {
           path: 'auth',
