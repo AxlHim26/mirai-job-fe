@@ -32,7 +32,9 @@ export const LandingHeader = () => {
             <Link
               to={
                 DEFAULT_PATH[
-                  localStorage.getItem("role") as keyof typeof DEFAULT_PATH
+                  localStorage
+                    .getItem("role")
+                    ?.toString() as keyof typeof DEFAULT_PATH
                 ] ?? "/"
               }
               className="text-[#4640DE] font-medium text-lg"

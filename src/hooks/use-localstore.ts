@@ -1,34 +1,32 @@
 import { useState, useEffect } from "react";
 
-/**
- * How to use:
- * ```typescript
- * const [value, setValue, remove] = useLocalStore("myKey", initialValue);
- * ```
- * @param key 
- * @param initialValue 
- * @returns 
- */
 export const useLocalStore = <T>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  const readValue = (): T => {
     if (typeof window === "undefined") return initialValue;
+
     try {
       const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if (!item) return initialValue;
+      return typeof initialValue === "string" ? (item as T) : JSON.parse(item);
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
     }
-  });
+  };
 
+  const [storedValue, setStoredValue] = useState<T>(readValue);
   const setValue = (value: T | ((val: T) => T)) => {
     try {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
+
       setStoredValue(valueToStore);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(key, JSON.stringify(valueToStore));
-      }
+      const valueForStorage =
+        typeof valueToStore === "string"
+          ? valueToStore
+          : JSON.stringify(valueToStore);
+
+      localStorage.setItem(key, valueForStorage);
     } catch (error) {
       console.warn(`Error setting localStorage key “${key}”:`, error);
     }
@@ -44,16 +42,13 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const handleStorageChange = () => {
+      setStoredValue(readValue());
+    };
 
-    try {
-      const item = localStorage.getItem(key);
-      const value = item ? JSON.parse(item) : initialValue;
-      setStoredValue(value);
-    } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
-    }
-  }, [key, initialValue]);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   return [storedValue, setValue, remove] as const;
 };
