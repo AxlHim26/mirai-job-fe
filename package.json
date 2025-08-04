@@ -13,7 +13,9 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -47,30 +49,31 @@
     "@storybook/addon-onboarding": "^9.0.16",
     "@storybook/react-vite": "^9.0.16",
     "@tailwindcss/postcss": "^4.0.13",
-    "@types/jest": "^30.0.0",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-slick": "^0.23.13",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
+    "editorconfig-checker": "^6.1.0",
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-storybook": "^9.0.16",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
-    "jest": "^30.0.4",
+    "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "storybook": "^9.0.16",
     "tailwindcss": "^4.0.13",
-    "ts-jest": "^29.4.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.1",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-plugin-svgr": "^4.3.0",
+    "vitest": "^3.2.4"
   },
   "eslintConfig": {
     "extends": [
@@ -80,10 +83,12 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "editorconfig-checker"
     ],
     "*.{css,scss,md,json}": [
-      "prettier --write"
+      "prettier --write",
+      "editorconfig-checker"
     ]
   }
 }

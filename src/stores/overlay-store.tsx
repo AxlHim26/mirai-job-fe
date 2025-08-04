@@ -6,7 +6,7 @@ export type OverlayStore = {
     dismiss: () => void;
 };
 
-export const useOverlay = create<OverlayStore>((set) => ({
+export const useOverlayStore = create<OverlayStore>((set) => ({
     component: undefined,
     display: (component) => {
         set(() => ({
