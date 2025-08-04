@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React from "react";
-import { useOverlay, useToast } from "@/hooks";
+import { useOverlayStore } from "@/stores/overlay-store";
+import { useToastStore } from "@/stores/toast-store";
 import { api } from "@/lib/api-client";
-import { ResponseMessage } from "src/types/common";
+import { ResponseMessage } from "@/types/common";
 import { z } from "zod";
 
 export const registerInputSchema = z.object({
@@ -20,8 +21,8 @@ const postRegisterData = (data: z.infer<typeof registerInputSchema>) => {
 };
 
 export const useRegister = (alert: React.ReactNode) => {
-  const { display } = useOverlay();
-  const { addToast } = useToast();
+  const { display } = useOverlayStore();
+  const { addToast } = useToastStore();
 
   return useMutation({
     mutationFn: postRegisterData,

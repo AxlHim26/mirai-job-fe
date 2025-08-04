@@ -1,8 +1,11 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { DEFAULT_PATH } from "@/lib/redirect";
 
 export const LandingHeader = () => {
-  const navigate = useNavigate();
+  const isPreviousLoggedIn =
+    localStorage.getItem("previousLoggedIn") === "true";
+
   return (
     <>
       <div className="flex justify-between items-center py-0 px-[124px] w-full max-w-[2000px]">
@@ -25,14 +28,35 @@ export const LandingHeader = () => {
           </div>
         </div>
         <div className="gap-4 space-between items-center h-[78px] hidden md:flex">
-          <button className="text-[#4640DE] px-4 py-3.5 font-medium text-lg cursor-pointer border-r border-[#D6DDEB]"
-          onClick={() => navigate("/auth/login")}>
-            Login
-          </button>
-          <button className="bg-[#4640DE] text-white px-4 py-3.5 rounded font-medium text-lg cursor-pointer"
-          onClick={() => navigate("/auth/register")}>
-            Sign Up
-          </button>
+          {isPreviousLoggedIn ? (
+            <Link
+              to={
+                DEFAULT_PATH[
+                  localStorage
+                    .getItem("role")
+                    ?.toString() as keyof typeof DEFAULT_PATH
+                ] ?? "/"
+              }
+              className="text-[#4640DE] font-medium text-lg"
+            >
+              Open App
+            </Link>
+          ) : (
+            <>
+              <Link
+                to={"/auth/login"}
+                className="text-[#4640DE] px-4 py-3.5 font-medium text-lg cursor-pointer border-r border-[#D6DDEB]"
+              >
+                Login
+              </Link>
+              <Link
+                to={"/auth/register"}
+                className="bg-[#4640DE] text-white px-4 py-3.5 rounded font-medium text-lg cursor-pointer"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
         <div className="flex md:hidden">
           <LocalIcon

@@ -1,10 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import * as React from 'react';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as React from "react";
 
-import { Spinner } from '@/components/ui/spinner';
-import { AuthLoader } from '@/lib/auth';
-import { queryConfig } from '@/lib/react-query';
-import { ToastContainer } from '@/components/ui';
+import { Spinner } from "@/components/ui/spinner";
+import { queryConfig } from "@/lib/react-query";
+import { ToastContainer } from "@/components/ui";
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -15,7 +14,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     () =>
       new QueryClient({
         defaultOptions: queryConfig,
-      }),
+      })
   );
 
   return (
@@ -26,18 +25,10 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         </div>
       }
     >
-          <QueryClientProvider client={queryClient}>
-            <AuthLoader
-              renderLoading={() => (
-                <div className="flex h-screen w-screen items-center justify-center">
-                  <Spinner size="xl" />
-                </div>
-              )}
-            >
-              <ToastContainer />
-              {children}
-            </AuthLoader>
-          </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer />
+        {children}
+      </QueryClientProvider>
     </React.Suspense>
   );
 };
