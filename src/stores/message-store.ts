@@ -1,27 +1,16 @@
 import { create } from "zustand";
 import { api } from "@/lib/api-client";
+import { Message } from "@/types/message";
 
 interface MessageState {
-  messages: Record<number, MessageProps[]>;
+  messages: Record<number, Message[]>;
   loading: boolean;
   hasMore: Record<number, boolean>;
   page: Record<number, number>;
   fetchMessages: (conversationId: number, append?: boolean) => Promise<void>;
-  addMessages: (conversationId: number, messages: MessageProps[]) => void;
+  addMessages: (conversationId: number, messages: Message[]) => void;
   clearMessages: (conversationId: number) => void;
 }
-
-export type MessageProps = {
-  id?: number;
-  content: string;
-  createAt: string;
-  isSender?: boolean;
-  senderEmail?: string;
-  senderName?: string;
-  showHeader?: boolean;
-  fileUrl?: string;
-  isLastInGroup?: boolean;
-};
 
 export const useMessageStore = create<MessageState>((set, get) => ({
   messages: {},
@@ -39,7 +28,7 @@ export const useMessageStore = create<MessageState>((set, get) => ({
         params: { page: nextPage, size: 20 },
       });
 
-      const fetchedMessages: MessageProps[] = res.data || [];
+      const fetchedMessages: Message[] = res.data || [];
       const existingMessages = get().messages[conversationId] || [];
 
       set((state) => ({

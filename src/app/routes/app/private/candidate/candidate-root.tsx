@@ -1,5 +1,6 @@
 import { Authorization } from "@/lib/authorization";
 import { ROLES } from "@/hooks";
+import { Outlet } from "react-router-dom";
 
 const CandidateRoute = () => {
   return (
@@ -11,10 +12,9 @@ const CandidateRoute = () => {
         </div>
       }
     >
-      <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-2xl font-bold mb-4">Candidate Dashboard</h1>
-        {/* Additional candidate-specific content can go here */}
-      </div>
+      <>
+        <Outlet />
+      </>
     </Authorization>
   );
 };

@@ -1,4 +1,4 @@
-import { Message } from "@/features/dashboard-message/api/dashboard-message.mock";
+import { Message } from "@/types/message";
 
 interface GroupedMessage extends Message {
   showHeader: boolean;
@@ -6,7 +6,8 @@ interface GroupedMessage extends Message {
 }
 
 export const processGroupedMessages = (
-  messages: Message[]
+  messages: Message[],
+  currentUserEmail: string
 ): GroupedMessage[] => {
   return messages.map((message, index) => {
     const prev = messages[index - 1];
@@ -14,16 +15,17 @@ export const processGroupedMessages = (
 
     const showHeader =
       index === 0 ||
-      message.isSender !== prev?.isSender ||
+      message.senderEmail !== prev?.senderEmail ||
       message.senderName !== prev?.senderName;
 
     const isLastInGroup =
       index === messages.length - 1 ||
-      message.isSender !== next?.isSender ||
+      message.senderEmail !== next?.senderEmail ||
       message.senderName !== next?.senderName;
 
     return {
       ...message,
+      isSender: message.senderEmail === currentUserEmail,
       showHeader,
       isLastInGroup,
     };

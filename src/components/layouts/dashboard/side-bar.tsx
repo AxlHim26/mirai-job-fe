@@ -2,7 +2,7 @@ import { LocalIcon } from "@/assets/icons/local-icon";
 import { LocalImage } from "@/assets/images/local-image";
 import { SidebarMenuItem } from "@/components/ui/item/sidebar-menuI-item";
 import type { SidebarMenuItemProps } from "@/components/ui/item/sidebar-menuI-item";
-import { ROLES } from "@/lib/authorization";
+import { ROLES } from "@/hooks";
 
 const candidateMenus: SidebarMenuItemProps[] = [
   { label: "Dashboard", icon: "HomeIcon", href: "/recruiter/dashboard" },

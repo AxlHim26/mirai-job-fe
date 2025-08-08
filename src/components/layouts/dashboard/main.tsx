@@ -2,7 +2,7 @@ import React from "react";
 import { SideBar } from "./side-bar";
 import { HeaderDashboardCandidate } from "./header-dashboard-candidate";
 import { HeaderDashboardRecruiter } from "./header-dashboard-recruiter";
-import { ROLES } from "@/lib/authorization";
+import { ROLES } from "@/hooks";
 
 type DashboardLayoutProps = {
   title: string;

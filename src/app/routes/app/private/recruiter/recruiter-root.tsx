@@ -1,5 +1,6 @@
 import { Authorization } from "@/lib/authorization";
 import { ROLES } from "@/hooks";
+import { Outlet } from "react-router-dom";
 
 const RecruiterRoute = () => {
   return (
@@ -11,11 +12,9 @@ const RecruiterRoute = () => {
         </div>
       }
     >
-      <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-2xl font-bold mb-4">Recruiter Dashboard</h1>
-        <p className="text-gray-600">Welcome to your recruiter dashboard!</p>
-        {/* Add more recruiter-specific components or information here */}
-      </div>
+      <>
+        <Outlet />
+      </>
     </Authorization>
   );
 };

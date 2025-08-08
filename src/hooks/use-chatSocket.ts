@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
-import { MessageProps } from "@/stores/message-store";
-
+import { Message } from "@/types/message";
 
 const SOCKET_URL = "http://localhost:8080/ws";
 
 export const useChatSocket = (conversationId: number, userEmail: string) => {
   const clientRef = useRef<Client | null>(null);
-  const [messagesList, setMessages] = useState<MessageProps[]>([]);
+  const [messagesList, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     const socket = new SockJS(SOCKET_URL);
     const stompClient = new Client({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       webSocketFactory: () => socket as any,
       reconnectDelay: 0,
       heartbeatIncoming: 4000,
