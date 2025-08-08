@@ -1,38 +1,30 @@
 import { LocalImage } from "@/assets/images/local-image";
+import { useConversationStore } from "@/stores/conversation-store";
+import { Message } from "@/types/message";
+import { formatDate } from "@/utils";
 import { getFileType } from "@/utils/upload";
 import React from "react";
 
-type MessageBubbleProps = {
-  content?: string;
-  time: string;
-  isSender: boolean;
-  showHeader?: boolean;
-  avatarUrl?: string;
-  senderName?: string;
-  file?: string;
-  isLastInGroup?: boolean;
-};
-
-export const MessageBubble: React.FC<MessageBubbleProps> = ({
+export const MessageBubble: React.FC<Message> = ({
   content,
-  file,
-  time,
+  fileUrl,
+  createAt,
   isSender,
   showHeader = false,
-  avatarUrl = "",
-  senderName = "",
   isLastInGroup = true,
 }) => {
+  const partner = useConversationStore(state => state.selectedConversation());
+
   return (
     <div
       className={`flex ${isSender ? "justify-end" : "justify-start"} mb-0.5`}
     >
       {!isSender && (
         <div className={`mr-2 ${showHeader ? "visible" : "invisible"}`}>
-          {avatarUrl ? (
+          {partner?.partnerAvatar ? (
             <img
-              src={avatarUrl}
-              alt={senderName}
+              src={partner?.partnerAvatar}
+              alt={partner?.partnerName}
               className="w-8 h-8 rounded-full object-cover"
             />
           ) : (
@@ -51,7 +43,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
       >
         {!isSender && showHeader && (
           <span className="text-sm font-semibold text-[#515B6F] mb-1">
-            {senderName}
+            {partner?.partnerName}
           </span>
         )}
 
@@ -66,14 +58,14 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
           `}
         >
           {content && <span>{content}</span>}
-          {file
+          {fileUrl
             ? (() => {
-                const type = getFileType(file);
+                const type = getFileType(fileUrl);
 
                 if (type === "image") {
                   return (
                     <img
-                      src={file}
+                      src={fileUrl}
                       alt="image"
                       className="max-w-full rounded"
                     />
@@ -84,14 +76,14 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
                       controls
                       className="max-w-full rounded"
                     >
-                      <source src={file} />
+                      <source src={fileUrl} />
                       Trình duyệt không hỗ trợ video.
                     </video>
                   );
                 } else {
                   return (
                     <a
-                      href={file}
+                      href={fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500 underline pl-2"
@@ -105,7 +97,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         </div>
 
         {isLastInGroup && (
-          <span className="text-xs text-[#7C8493] mt-1">{time}</span>
+          <span className="text-xs text-[#7C8493] mt-1">{formatDate(createAt)}</span>
         )}
       </div>
     </div>

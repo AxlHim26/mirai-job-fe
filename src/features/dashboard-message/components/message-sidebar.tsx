@@ -1,7 +1,7 @@
 import React from "react";
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { MessageItem } from "./message-item";
-import { Conversation } from "../api/dashboard-message.mock";
+import { Conversation } from "@/stores/conversation-store";
 
 interface MessageSidebarProps {
   conversations: Conversation[];
@@ -27,15 +27,17 @@ export const MessageSidebar: React.FC<MessageSidebarProps> = ({
 
       <div className="flex-1 overflow-y-auto max-h-[680px] hide-scrollbar">
         {conversations.map((item) => {
-          const lastMessage = item.messages[item.messages.length - 1];
           return (
             <MessageItem
               key={item.id}
-              name={item.name}
-              message={lastMessage?.content || ""}
-              time={lastMessage?.time || ""}
+              name={item.partnerName || "Unknown"}
+              avatar={item.partnerAvatar}
+              message={item?.lastMsg || ""}
+              time={item?.lastMsgTime || 0}
               isActive={item.id === selectedId}
-              onClick={() => onSelect(item.id)}
+              onClick={() => {
+                onSelect(item.id);
+              }}
             />
           );
         })}

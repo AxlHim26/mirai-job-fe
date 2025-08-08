@@ -1,11 +1,12 @@
 import { LocalImage } from "@/assets/images/local-image";
+import { formatDate } from "@/utils";
 import React from "react";
 
 type MessageItemProps = {
   name: string;
   message: string;
-  time: string;
-  avatarUrl?: string;
+  time: number;
+  avatar?: string;
   isActive?: boolean;
   onClick?: () => void;
 };
@@ -14,7 +15,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   name,
   message,
   time,
-  avatarUrl,
+  avatar,
   isActive,
   onClick,
 }) => {
@@ -25,9 +26,9 @@ export const MessageItem: React.FC<MessageItemProps> = ({
       }`}
       onClick={onClick}
     >
-      {avatarUrl ? (
+      {avatar ? (
         <img
-          src={avatarUrl}
+          src={avatar}
           className="w-8 h-8 rounded-full object-cover"
         />
       ) : (
@@ -40,8 +41,8 @@ export const MessageItem: React.FC<MessageItemProps> = ({
       )}
       <div className="flex-1">
         <div className="flex justify-between items-center">
-          <div className="font-semibold text-[16px] text-gray-900">{name}</div>
-          <div className="text-[16px] text-[#7C8493]">{time}</div>
+          <div className="font-semibold text-[16px] text-gray-900">{name || "yiuen"}</div>
+          <div className="text-[16px] text-[#7C8493]">{formatDate(time)}</div>
         </div>
         <div className="text-[16px] font-normal text-[#515B6F] truncate max-w-[200px]">
           {message}

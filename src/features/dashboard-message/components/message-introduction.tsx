@@ -1,24 +1,22 @@
 import { LocalImage } from "@/assets/images/local-image";
+import { useConversationStore } from "@/stores/conversation-store";
 import React from "react";
 
 type MessageIntroProps = {
-  avatarUrl?: string;
-  name: string;
   position: string;
   company: string;
 };
 
 export const MessageIntro: React.FC<MessageIntroProps> = ({
-  avatarUrl,
-  name,
   position,
   company,
 }) => {
+  const partner = useConversationStore(state => state.selectedConversation());
   return (
     <div className="flex flex-col items-center text-center py-6 px-4">
-      {avatarUrl ? (
+      {partner?.partnerAvatar ? (
         <img
-          src={avatarUrl}
+          src={partner?.partnerAvatar}
           className="w-8 h-8 rounded-full object-cover"
         />
       ) : (
@@ -29,7 +27,7 @@ export const MessageIntro: React.FC<MessageIntroProps> = ({
           className="rounded-full"
         />
       )}
-      <div className="text-2xl font-semibold text-[#25324B]">{name}</div>
+      <div className="text-2xl font-semibold text-[#25324B]">{partner?.partnerName}</div>
       <div className="text-[16px] font-normal text-[#515B6F]">
         {position} at {company}
       </div>
@@ -37,7 +35,7 @@ export const MessageIntro: React.FC<MessageIntroProps> = ({
         <span className="font-normal text-[#7C8493]">
           This is the very beginning of your direct message with
         </span>
-        <span className="font-medium text-[#25324B]">{name}</span>
+        <span className="font-medium text-[#25324B]">{partner?.partnerName}</span>
       </div>
     </div>
   );

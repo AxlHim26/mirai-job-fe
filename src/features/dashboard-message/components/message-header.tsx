@@ -1,11 +1,10 @@
 import React from "react";
 import { LocalImage } from "@/assets/images/local-image";
 import { LocalIcon } from "@/assets/icons/local-icon";
-import { ROLES } from "@/lib/authorization";
+import { ROLES } from "@/hooks";
+import { useConversationStore } from "@/stores/conversation-store";
 
 type MessageHeaderProps = {
-  avatarUrl?: string;
-  name: string;
   role: ROLES;
   position?: string;
   company?: string;
@@ -15,8 +14,6 @@ type MessageHeaderProps = {
 };
 
 export const MessageHeader: React.FC<MessageHeaderProps> = ({
-  avatarUrl,
-  name,
   role,
   position,
   company,
@@ -24,12 +21,13 @@ export const MessageHeader: React.FC<MessageHeaderProps> = ({
   onStarClick,
   onMoreInfoClick,
 }) => {
+  const partner = useConversationStore(state => state.selectedConversation());
   return (
     <div className="flex items-center justify-between px-8 py-6 border-b border-[#D6DDEB]">
       <div className="flex items-center gap-3">
-        {avatarUrl ? (
+        {partner?.partnerAvatar ? (
           <img
-            src={avatarUrl}
+            src={partner?.partnerAvatar}
             className="w-8 h-8 rounded-full object-cover"
           />
         ) : (
@@ -41,7 +39,7 @@ export const MessageHeader: React.FC<MessageHeaderProps> = ({
           />
         )}
         <div className="flex flex-col">
-          <span className="text-xl font-semibold text-[#25324B]">{name}</span>
+          <span className="text-xl font-semibold text-[#25324B]">{partner?.partnerName}</span>
           {position && company && (
             <span className="text-[16px] font-normal text-[#515B6F]">
               {position + " at " + company} 

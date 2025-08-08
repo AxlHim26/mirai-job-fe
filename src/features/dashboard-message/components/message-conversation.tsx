@@ -1,73 +1,93 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { MessageBubble } from "./message-bubble";
 import { MessageInput } from "./message-input";
 import { MessageHeader } from "./message-header";
 import { MessageIntro } from "./message-introduction";
 import { MessageDateSeparator } from "./message-date-separator";
-import { formatDate } from "@/utils";
-import { processGroupedMessages } from "@/utils/grouped-messages";
-import { ROLES } from "@/lib/authorization";
-import { Conversation, Message } from "../api/dashboard-message.mock";
 import { uploadToCloudinary } from "@/utils/upload";
+import { ROLES } from "@/hooks";
+import { useMessageStore } from "@/stores/message-store";
+import { useAuthStore } from "@/stores";
+import { useChatSocket } from "@/hooks/use-chatSocket";
+import { processGroupedMessages } from "@/utils/grouped-messages";
 
 type MessageConversationProps = {
   role: ROLES;
-  conversation: Conversation | null;
-  onSendMessage: (conversationId: number, message: Message) => void;
+  conversationId: number;
 };
 
 export const MessageConversation: React.FC<MessageConversationProps> = ({
   role,
-  conversation,
-  onSendMessage,
+  conversationId,
 }) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<Message[]>(
-    conversation?.messages || []
+  const user = useAuthStore((state) => state.user);
+  const { sendMessage, messagesList } = useChatSocket(
+    conversationId,
+    user?.email ?? ""
   );
-  console.log(messages);
 
-  const scrollToBottom = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const prevScrollHeightRef = useRef<number>(0);
+
+  const {
+    messages,
+    fetchMessages,
+    addMessages,
+    hasMore,
+  } = useMessageStore();
+
+  const conversationMessages = React.useMemo(
+    () => messages[conversationId] || [],
+    [messages, conversationId]
+  );
+
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [conversationMessages]);
+
+  useEffect(() => {
+    if (!conversationId) return;
+    fetchMessages(conversationId);
+  }, [conversationId, fetchMessages]);
+
+  useEffect(() => {
+    if (messagesList.length > 0) {
+      addMessages(conversationId, messagesList);
+    }
+  }, [messagesList, conversationId, addMessages]);
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    if (container.scrollTop <= 0 && hasMore[conversationId]) {
+      prevScrollHeightRef.current = container.scrollHeight;
+      fetchMessages(conversationId, true).then(() => {
+        requestAnimationFrame(() => {
+          container.scrollTop =
+            container.scrollHeight - prevScrollHeightRef.current;
+        });
+      });
+    }
   };
 
-  useEffect(() => {
-    setMessages(conversation?.messages || []);
-  }, [conversation]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   const handleSendMessage = async (text: string, file: File | null) => {
-    if (!conversation) return;
-    if (!text.trim() && !file) return;
+    if (!conversationId || (!text.trim() && !file)) return;
 
     try {
       let fileUrl: string | undefined;
-
       if (file) {
         const { url } = await uploadToCloudinary(file);
         fileUrl = url;
       }
-
-      const newMessage: Message = {
-        id: Date.now(),
-        time: formatDate(new Date().getTime()),
-        isSender: true,
-        senderName: "You",
-        ...(text.trim() && { content: text.trim() }),
-        ...(fileUrl && { file: fileUrl }),
-      };
-
-      setMessages((prev) => [...prev, newMessage]);
-      onSendMessage(conversation.id, newMessage);
+      sendMessage(text.trim(), fileUrl);
     } catch (error) {
       console.error("Upload file thất bại:", error);
     }
   };
 
-  if (!conversation) {
+  if (!conversationMessages.length) {
     return (
       <div className="p-6 text-gray-500 items-center">
         Chọn một cuộc trò chuyện để bắt đầu.
@@ -77,31 +97,23 @@ export const MessageConversation: React.FC<MessageConversationProps> = ({
 
   return (
     <div className="flex flex-col h-[850px] border-r border-[#D6DDEB]">
-      <MessageHeader
-        name={conversation.name}
-        position={conversation.position}
-        company={conversation.company}
-        role={role}
-      />
+      <MessageHeader position={"position"} company={"company"} role={role} />
 
-      <div className="flex-1 overflow-y-auto max-h-[680px] hide-scrollbar">
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto max-h-[680px] hide-scrollbar"
+      >
         <div className="p-4 space-y-1">
-          <MessageIntro
-            name={conversation.name}
-            position={conversation.position}
-            company={conversation.company || "Nomad"}
-          />
+          <MessageIntro position={"position"} company={"company"} />
 
           <MessageDateSeparator dateLabel="Today" />
 
-          {processGroupedMessages(messages).map((message) => (
-            <MessageBubble
-              key={message.id}
-              {...message}
-              showHeader={message.showHeader}
-              isLastInGroup={message.isLastInGroup}
-            />
-          ))}
+          {processGroupedMessages(conversationMessages, user?.email ?? "").map(
+            (message) => (
+              <MessageBubble key={message.id} {...message} />
+            )
+          )}
 
           <div ref={messagesEndRef} />
         </div>
