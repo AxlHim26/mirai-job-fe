@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "@stomp/stompjs": "^7.1.1",
     "@tailwindcss/vite": "^4.0.13",
     "@tanstack/react-query": "^5.67.3",
     "axios": "^1.8.2",
@@ -37,6 +38,7 @@
     "react-router-dom": "^7.3.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
+    "sockjs-client": "^1.6.1",
     "tailwind-merge": "^3.0.2",
     "vystacss": "file:",
     "zod": "^3.24.3",
@@ -54,6 +56,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-slick": "^0.23.13",
+    "@types/sockjs-client": "^1.5.4",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
     "editorconfig-checker": "^6.1.0",
