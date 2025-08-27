@@ -5,9 +5,9 @@ import {
 } from "../api";
 import {
   SectionTitle,
-  CompanyLogoSection,
+  LogoSection,
   TagInput,
-} from "@/components/sections/company-setting";
+} from "@/components/sections/settings";
 import { RecruiterResponse } from "@/types";
 import {
   Form,
@@ -82,7 +82,13 @@ export const OverviewForm = () => {
         </p>
       </div>
 
-      <CompanyLogoSection />
+      <div className="grid grid-cols-12 gap-6 border-b border-gray-300 pb-6 items-start">
+        <div className="col-span-12 md:col-span-4">
+          <SectionTitle title="Company Logo" />
+          <h3 className="text-sm text-gray-500 mb-2">Company Logo</h3>
+        </div>
+        <LogoSection />
+      </div>
 
       <Form
         schema={companySettingsSchema}

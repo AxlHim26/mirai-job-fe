@@ -1,5 +1,5 @@
 import { Button, Form, Input, Spinner } from "@/components/ui";
-import { SectionTitle } from "@/components/sections/company-setting";
+import { SectionTitle } from "@/components/sections/settings";
 import { socialLinkSchema, useSocialLinks, useUpdateSocialLinks } from "../api";
 import z from "zod";
 
