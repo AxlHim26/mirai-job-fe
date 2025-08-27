@@ -1,4 +1,4 @@
-import { SettingTabNav } from "@/components/sections/company-setting";
+import { SettingTabNav } from "@/components/sections/settings/recruiter";
 import { Outlet } from "react-router-dom";
 
 export const CompanySettingsPage = () => {
