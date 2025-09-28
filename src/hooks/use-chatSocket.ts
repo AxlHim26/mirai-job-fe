@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
-import { Message } from "@/types/message";
+import { SocketMessage } from "@/types/chat";
 
 const SOCKET_URL = "http://localhost:8080/ws";
 
 export const useChatSocket = (conversationId: number, userEmail: string) => {
   const clientRef = useRef<Client | null>(null);
-  const [messagesList, setMessages] = useState<Message[]>([]);
+  const [messagesList, setMessages] = useState<SocketMessage[]>([]);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const socket = new SockJS(SOCKET_URL);
@@ -19,13 +20,17 @@ export const useChatSocket = (conversationId: number, userEmail: string) => {
       heartbeatOutgoing: 4000,
       debug: (str) => console.log(str),
       onConnect: () => {
+        setIsConnected(true);
         stompClient.subscribe(
           `/topic/conversation/${conversationId}`,
           (msg) => {
-            const message = JSON.parse(msg.body);
+            const message: SocketMessage = JSON.parse(msg.body);
             setMessages((prev) => [...prev, message]);
           }
         );
+      },
+      onDisconnect: () => {
+        setIsConnected(false);
       },
     });
 
@@ -34,11 +39,13 @@ export const useChatSocket = (conversationId: number, userEmail: string) => {
 
     return () => {
       stompClient.deactivate();
+      setIsConnected(false);
     };
   }, [conversationId, userEmail]);
 
   const sendMessage = async (content?: string, fileUrl?: string) => {
     if (!clientRef.current?.connected) {
+      console.warn("Socket not connected");
       return;
     }
 
@@ -48,5 +55,14 @@ export const useChatSocket = (conversationId: number, userEmail: string) => {
     });
   };
 
-  return { messagesList, sendMessage };
+  const clearMessages = () => {
+    setMessages([]);
+  };
+
+  return {
+    messagesList,
+    sendMessage,
+    clearMessages,
+    isConnected,
+  };
 };

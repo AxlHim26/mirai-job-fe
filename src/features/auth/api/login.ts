@@ -21,11 +21,11 @@ const postLoginData = (data: z.infer<typeof loginInputSchema>) => {
 };
 
 export const useLogin = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { addToast } = useToastStore();
   const [searchParams] = useSearchParams();
-  const [previousLoggedIn, setPreviousLoggedIn] = useLocalStore("previousLoggedIn", false);
-  const [role, setRole] = useLocalStore("role", "");
+  const [setPreviousLoggedIn] = useLocalStore("previousLoggedIn", false);
+  const [setRole] = useLocalStore("role", "");
   const redirectTo = searchParams.get("redirectTo");
 
   return useMutation({
