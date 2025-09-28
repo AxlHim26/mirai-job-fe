@@ -1,8 +1,6 @@
-import { log } from "console";
-
 interface TagListProps {
   items: string[];
-  isColor?: boolean
+  isColor?: boolean;
 }
 
 const getRandomHslColor = () => {
@@ -10,7 +8,7 @@ const getRandomHslColor = () => {
   const saturation = 60;
   const lightness = 90;
   console.log("render");
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`; 
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
 export const TagList = ({ items, isColor = false }: TagListProps) => {
@@ -20,7 +18,9 @@ export const TagList = ({ items, isColor = false }: TagListProps) => {
         return (
           <span
             key={i}
-            style={isColor ? { background: getRandomHslColor(), color: "#333" }: {}}
+            style={
+              isColor ? { background: getRandomHslColor(), color: "#333" } : {}
+            }
             className="inline-block px-3 py-1 rounded-full text-sm bg-gray-100 text-blue-700"
           >
             {item}

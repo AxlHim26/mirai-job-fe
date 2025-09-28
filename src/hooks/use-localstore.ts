@@ -8,8 +8,7 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
       const item = localStorage.getItem(key);
       if (!item) return initialValue;
       return typeof initialValue === "string" ? (item as T) : JSON.parse(item);
-    } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
+    } catch {
       return initialValue;
     }
   };
@@ -27,8 +26,8 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
           : JSON.stringify(valueToStore);
 
       localStorage.setItem(key, valueForStorage);
-    } catch (error) {
-      console.warn(`Error setting localStorage key “${key}”:`, error);
+    } catch {
+      return initialValue;
     }
   };
 
@@ -36,8 +35,8 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
     try {
       localStorage.removeItem(key);
       setStoredValue(initialValue);
-    } catch (error) {
-      console.warn(`Error removing localStorage key “${key}”:`, error);
+    } catch {
+      return initialValue;
     }
   };
 
@@ -50,5 +49,5 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  return [storedValue, setValue, remove] as const;
+  return [setValue, remove] as const;
 };

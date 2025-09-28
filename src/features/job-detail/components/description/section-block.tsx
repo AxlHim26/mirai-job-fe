@@ -6,8 +6,6 @@ interface SectionBlockProps {
   isList?: boolean;
 }
 
-
-
 export const SectionBlock = ({
   title,
   items,
@@ -37,5 +35,3 @@ export const SectionBlock = ({
     )}
   </section>
 );
-
-

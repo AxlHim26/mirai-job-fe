@@ -1,18 +1,14 @@
 import { create } from "zustand";
-import { api } from "@/lib/api-client";
-import { Message } from "@/types/message";
+import { MessageResponse, MessageState } from "@/types/chat";
+import { getMessages } from "@/features/chat/api";
 
-interface MessageState {
-  messages: Record<number, Message[]>;
-  loading: boolean;
-  hasMore: Record<number, boolean>;
-  page: Record<number, number>;
+interface MessageStoreState extends MessageState {
   fetchMessages: (conversationId: number, append?: boolean) => Promise<void>;
-  addMessages: (conversationId: number, messages: Message[]) => void;
+  addMessages: (conversationId: number, messages: MessageResponse[]) => void;
   clearMessages: (conversationId: number) => void;
 }
 
-export const useMessageStore = create<MessageState>((set, get) => ({
+export const useMessageStore = create<MessageStoreState>((set, get) => ({
   messages: {},
   loading: false,
   hasMore: {},
@@ -24,11 +20,8 @@ export const useMessageStore = create<MessageState>((set, get) => ({
 
     set({ loading: true });
     try {
-      const res = await api.get(`/messages/conversation/${conversationId}`, {
-        params: { page: nextPage, size: 20 },
-      });
-
-      const fetchedMessages: Message[] = res.data || [];
+      const res = await getMessages(conversationId, nextPage, 20);
+      const fetchedMessages: MessageResponse[] = res.data?.messages || [];
       const existingMessages = get().messages[conversationId] || [];
 
       set((state) => ({
@@ -44,12 +37,12 @@ export const useMessageStore = create<MessageState>((set, get) => ({
         },
         hasMore: {
           ...state.hasMore,
-          [conversationId]: fetchedMessages.length > 0,
+          [conversationId]: res.data?.hasMore || false,
         },
         loading: false,
       }));
     } catch (err) {
-      console.error(err);
+      console.error("Failed to fetch messages:", err);
       set({ loading: false });
     }
   },

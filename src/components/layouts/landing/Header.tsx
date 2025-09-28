@@ -1,16 +1,21 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Link } from "react-router-dom";
 import { DEFAULT_PATH } from "@/lib/redirect";
+import { useNavigate } from "react-router-dom";
 
 export const LandingHeader = () => {
   const isPreviousLoggedIn =
     localStorage.getItem("previousLoggedIn") === "true";
+  const navigate = useNavigate();
 
   return (
     <>
       <div className="flex justify-between items-center py-0 px-[124px] w-full max-w-[2000px]">
         <div className="flex items-center gap-12 self-stretch">
-          <div className="flex items-center gap-2 self-stretch cursor-pointer" onClick={() => navigate('/')}>
+          <div
+            className="flex items-center gap-2 self-stretch cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             <LocalIcon
               iconName="Logo"
               width={40}

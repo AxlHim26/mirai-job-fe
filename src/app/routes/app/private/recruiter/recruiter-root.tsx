@@ -1,6 +1,7 @@
 import { Authorization } from "@/lib/authorization";
-import { ROLES } from "@/hooks";
+import { ROLES } from "@/consts";
 import { Outlet } from "react-router-dom";
+import { AppMain } from "@/components/layouts";
 
 const RecruiterRoute = () => {
   return (
@@ -13,7 +14,9 @@ const RecruiterRoute = () => {
       }
     >
       <>
-        <Outlet />
+        <AppMain>
+          <Outlet />
+        </AppMain>
       </>
     </Authorization>
   );
