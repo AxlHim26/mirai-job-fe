@@ -35,7 +35,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       pages.push(...middlePages);
 
       if (currentPage < totalPages - 2) pages.push("...");
-      pages.push(totalPages); // always show last page
+      pages.push(totalPages);
     }
 
     return pages;

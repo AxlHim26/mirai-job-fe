@@ -10,7 +10,7 @@ export const LandingHeader = () => {
     <>
       <div className="flex justify-between items-center py-0 px-[124px] w-full max-w-[2000px]">
         <div className="flex items-center gap-12 self-stretch">
-          <div className="flex items-center gap-2 self-stretch">
+          <div className="flex items-center gap-2 self-stretch cursor-pointer" onClick={() => navigate('/')}>
             <LocalIcon
               iconName="Logo"
               width={40}
