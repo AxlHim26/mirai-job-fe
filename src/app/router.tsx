@@ -6,6 +6,7 @@ import { paths } from "@/config/paths";
 /**
  * convert module to inject loader, action if have
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const convert = (queryClient: QueryClient) => (module: any) => {
   const { clientLoader, clientAction, default: Component } = module;
   return {
@@ -35,16 +36,56 @@ export const createRouter = (queryClient: QueryClient) => {
         }),
       children: [
         {
+          path: "search-results",
+          lazy: () =>
+            import("./routes/app/public/search-results").then(withClient),
+        },
+        {
           path: paths.app.candidate.path, //layout for candidate
           lazy: () =>
-            import("./routes/app/private/candidate/candidate").then(withClient),
-          // Nested routes for candidate
+            import("./routes/app/private/candidate/candidate-root").then(
+              withClient
+            ),
+          children: [
+            {
+              path: "",
+              lazy: () =>
+                import(
+                  "./routes/app/private/candidate/dashboard-candidate"
+                ).then(withClient),
+            },
+            {
+              path: "message",
+              lazy: () =>
+                import("./routes/app/private/candidate/dashboard-message").then(
+                  withClient
+                ),
+            },
+          ],
         },
+        //app router
         {
           path: paths.app.recruiter.path, //layout for recruiter
           lazy: () =>
-            import("./routes/app/private/recruiter/recruiter").then(withClient),
-          // Nested routes for recruiter
+            import("./routes/app/private/recruiter/recruiter-root").then(
+              withClient
+            ),
+          children: [
+            {
+              path: "",
+              lazy: () =>
+                import(
+                  "./routes/app/private/recruiter/dashboard-recruiter"
+                ).then(withClient),
+            },
+            {
+              path: "message",
+              lazy: () =>
+                import("./routes/app/private/recruiter/dashboard-message").then(
+                  withClient
+                ),
+            },
+          ],
         },
       ],
     },
