@@ -1,6 +1,6 @@
-import { LocalIcon } from "@/assets/icons/local-icon"
-import { LocalImage } from "@/assets/images/local-image"
-import FooterColumn from "../../ui/column/FooterColumn";
+import { LocalIcon } from "@/assets/icons/local-icon";
+import { LocalImage } from "@/assets/images/local-image";
+import FooterColumn from "../../ui/column/footer-column";
 
 export const LandingFooter = () => {
   return (
@@ -24,20 +24,20 @@ export const LandingFooter = () => {
           <FooterColumn
             title="About"
             items={[
-              { name: 'Companies', link: '/companies' },
-              { name: 'Pricing', link: '/pricing' },
-              { name: 'Terms', link: '/terms' },
-              { name: 'Advice', link: '/advice' },
-              { name: 'Privacy Policy', link: '/privacy-policy' }
+              { name: "Companies", link: "/companies" },
+              { name: "Pricing", link: "/pricing" },
+              { name: "Terms", link: "/terms" },
+              { name: "Advice", link: "/advice" },
+              { name: "Privacy Policy", link: "/privacy-policy" },
             ]}
           />
           <FooterColumn
             title="Resources"
             items={[
-              { name: 'Help Docs', link: '/help-docs' },
-              { name: 'Guide', link: '/guide' },
-              { name: 'Updates', link: '/updates' },
-              { name: 'Contact Us', link: '/contact-us' }
+              { name: "Help Docs", link: "/help-docs" },
+              { name: "Guide", link: "/guide" },
+              { name: "Updates", link: "/updates" },
+              { name: "Contact Us", link: "/contact-us" },
             ]}
           />
         </div>
@@ -71,5 +71,5 @@ export const LandingFooter = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,13 +1,11 @@
-
 import { SectionBlock } from "./section-block";
 
-
 interface JobDescriptionProps {
-    description: string;
-    responsibilities: string[];
-    whoYouAre: string[];
-    niceToHave: string[];
-  }
+  description: string;
+  responsibilities: string[];
+  whoYouAre: string[];
+  niceToHave: string[];
+}
 
 export const JobDescriptionContent = ({
   description,

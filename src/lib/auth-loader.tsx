@@ -22,6 +22,7 @@ export const AuthLoader = ({
         const res = await refreshTokenQuery.refetch();
         const token = res.data?.data.token;
         if (token) {
+          console.log("AuthLoader: set access token", token);
           setAccessToken(token);
         } else {
           setReady(true);
@@ -29,6 +30,7 @@ export const AuthLoader = ({
         }
         const userRes = await userQuery.refetch();
         if (userRes.data?.data) {
+          console.log("AuthLoader: set user", userRes.data.data);
           setUser(userRes.data.data);
         } else {
           setReady(true);

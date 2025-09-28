@@ -1,10 +1,5 @@
 import { useAuthStore } from "@/stores/auth-store";
-
-export enum ROLES {
-  ROLE_RECRUITER = "ROLE_RECRUITER",
-  ROLE_CANDIDATE = "ROLE_CANDIDATE",
-  ROLE_ADMIN = "ROLE_ADMIN",
-}
+import { ROLES } from "@/consts";
 
 export type RoleTypes = keyof typeof ROLES;
 
