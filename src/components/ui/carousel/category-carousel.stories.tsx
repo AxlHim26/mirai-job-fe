@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import HorizontalCategoryCarousel from "./CategoryCarousel";
+import HorizontalCategoryCarousel from "./category-carousel";
 
 const meta: Meta<typeof HorizontalCategoryCarousel> = {
-  title: "Components/CategoryCarousel",
+  title: "UI/CategoryCarousel",
   component: HorizontalCategoryCarousel,
   parameters: {
     docs: {
       description: {
-        component: "A carousel displays a horizontal list of categories with left/right scroll buttons. Each category is a selectable card.",
+        component:
+          "A carousel displays a horizontal list of categories with left/right scroll buttons. Each category is a selectable card.",
       },
     },
   },
