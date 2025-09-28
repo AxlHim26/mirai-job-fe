@@ -1,4 +1,5 @@
-import { ROLES, useAuthorization } from "@/hooks";
+import { useAuthorization } from "@/hooks";
+import { ROLES } from "@/consts";
 
 type AuthorizationProps = {
   allowedRoles: ROLES[];
