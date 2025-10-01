@@ -68,7 +68,7 @@ export const createRouter = (queryClient: QueryClient) => {
         {
           path: 'recruiter', // layout for recruiter
           lazy: () =>
-            import('./routes/app/private/recruiter/RecruiterRoute').then(withClient),
+            import('./routes/app/private/recruiter/recruiter-root').then(withClient),
         },
         {
           path: 'dashboard',
