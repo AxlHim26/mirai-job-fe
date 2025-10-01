@@ -66,7 +66,6 @@ export const createRouter = (queryClient: QueryClient) => {
           lazy: () => import("./routes/auth/login").then(withClient),
         },
         {
-        {
           path: 'recruiter', // layout for recruiter
           lazy: () =>
             import('./routes/app/private/recruiter/recruiter').then(withClient),
@@ -93,8 +92,6 @@ export const createRouter = (queryClient: QueryClient) => {
                 import("./routes/auth/register").then(withClient),
             }
           ]
-        },
-
         },
       ],
     },
