@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui";
 import { RegisterForm } from "@/features/auth";
 import { useState } from "react";
 
@@ -19,22 +18,22 @@ const RegisterRoute = () => {
     <div className="flex flex-col items-center w-[408px]">
       <div className="flex mb-6">
         {roles.map((role) => (
-          <Button
+          <button
             key={role.value}
             onClick={() => setRoleName(role.value)}
             className={`${baseClass} ${roleName === role.value ? activeClass : ""}`}
           >
             {role.label}
-          </Button>
+          </button>
         ))}
       </div>
       <h1 className="text-2xl font-bold text-[#202430] mb-6">
         Get more opportunities
       </h1>
-      <Button className="flex items-center justify-center gap-2 w-full border border-[#D6D6F2] text-[#4640DE] font-semibold py-2 px-6 rounded-md hover:bg-[#f4f4ff] transition-colors duration-200 mb-6">
+      <button className="flex items-center justify-center gap-2 w-full border border-[#D6D6F2] text-[#4640DE] font-semibold py-2 px-6 rounded-md hover:bg-[#f4f4ff] transition-colors duration-200 mb-6">
         <span className="text-xl">+</span>
         <span>Sign Up with Google</span>
-      </Button>
+      </button>
       <div className="flex items-center w-full text-gray-400 text-sm mb-6">
         <div className="flex-1 h-px bg-gray-300" />
         <span className="px-4">Or sign up with email</span>
