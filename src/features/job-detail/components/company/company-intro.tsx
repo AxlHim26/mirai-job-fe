@@ -15,7 +15,7 @@ export const CompanyIntro = ({
   <div className="md:w-1/2 mb-8 md:mb-0">
     <div className="flex items-center mb-6">
       <LocalImage
-        imageName={logo}
+        imageName={logo as keyof typeof LocalImage}
         alt="Stripe logo"
         className="w-20 h-20 object-contain mr-8"
       />

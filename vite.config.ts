@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
-import path from 'path';
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import svgr from "vite-plugin-svgr";
+import path from "path";
 
 export default defineConfig({
-  base: './',
+  base: "./",
   plugins: [react(), svgr()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, 'src'),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   server: {
@@ -17,13 +17,28 @@ export default defineConfig({
   preview: {
     port: 3000,
   },
-  optimizeDeps: { exclude: ['fsevents'] },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/testing/setup-tests.ts",
+    exclude: ["**/node_modules/**"],
+    coverage: {
+      include: ["src/**"],
+    },
+    css: true,
+  },
+  optimizeDeps: {
+    exclude: ["fsevents"],
+  },
   build: {
     rollupOptions: {
-      external: ['fs/promises'],
+      external: ["fs/promises"],
       output: {
         experimentalMinChunkSize: 3500,
       },
     },
+  },
+  define: {
+    global: "globalThis",
   },
 });

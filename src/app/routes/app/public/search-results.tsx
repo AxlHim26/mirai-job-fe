@@ -1,13 +1,13 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { LandingFooter, LandingHeader } from "@/components/layouts/landing";
 import { Hero } from "@/components/sections/landing";
-import CompanyCard from "@/components/ui/card/CompanyCard";
+import CompanyCard from "@/components/ui/card/company-card";
 import { CheckBox } from "@/components/ui/checkbox/checkbox";
 import { Pagination } from "@/components/ui/pagination/pagination";
 import {
   mockCompanyData,
   mockIndustryData,
-} from "@/features/search-results/api/search-results.mock";
+} from "@/features/search/api/search-results.mock";
 import { useState } from "react";
 
 const SearchResultsRoute = () => {

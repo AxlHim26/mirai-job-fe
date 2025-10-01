@@ -1,20 +1,20 @@
-import Axios, { InternalAxiosRequestConfig } from 'axios';
-
-import { env } from '@/config/env';
-import { paths } from '@/config/paths';
+import Axios, { InternalAxiosRequestConfig } from "axios";
+import { useAuthStore } from "@/stores/auth-store";
+import { paths } from "@/config/paths";
+import { useToastStore } from "@/stores/toast-store";
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
-  if (config.headers) {
-    config.headers.Accept = 'application/json';
+  const token = useAuthStore.getState().accessToken;
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
-
-  config.withCredentials = true;
+  config.headers["Accept"] = "application/json";
   return config;
 }
 
-//i need fix it
 export const api = Axios.create({
   baseURL: "http://localhost:8080/api/",
+  withCredentials: true,
 });
 
 api.interceptors.request.use(authRequestInterceptor);
@@ -24,15 +24,20 @@ api.interceptors.response.use(
   },
   (error) => {
     const message = error.response?.data?.message || error.message;
-    console.log(message);
 
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams();
       const redirectTo =
-        searchParams.get('redirectTo') || window.location.pathname;
+        searchParams.get("redirectTo") || window.location.pathname;
       window.location.href = paths.auth.login.getHref(redirectTo);
+
+      useToastStore.getState().addToast({
+        title: "Unauthorized, Token Is Expired",
+        message,
+        type: "error",
+      });
     }
 
     return Promise.reject(error);
-  },
+  }
 );
