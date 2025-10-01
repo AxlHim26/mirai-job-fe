@@ -66,32 +66,8 @@ export const createRouter = (queryClient: QueryClient) => {
           lazy: () => import("./routes/auth/login").then(withClient),
         },
         {
-          path: 'recruiter', // layout for recruiter
-          lazy: () =>
-            import('./routes/app/private/recruiter/recruiter-root').then(withClient),
-        },
-        {
-          path: 'dashboard',
-          lazy: () =>
-            import('./routes/app/public/dashboard').then(withClient),
-        },
-        // authentication routes
-        {
-          path: 'auth',
-          lazy: () =>
-            import('./routes/auth/auth-root').then(withClient),
-          children: [
-            {
-              path: "login",
-              lazy: () =>
-                import('./routes/auth/login').then(withClient),
-            },
-            {
-              path: paths.auth.register.path,
-              lazy: () =>
-                import("./routes/auth/register").then(withClient),
-            }
-          ]
+          path: paths.auth.register.path,
+          lazy: () => import("./routes/auth/register").then(withClient),
         },
       ],
     },
