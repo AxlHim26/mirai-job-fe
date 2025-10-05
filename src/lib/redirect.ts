@@ -1,18 +1,7 @@
 import { RoleTypes } from "@/hooks";
-import { paths } from "@/config/paths";
 import { NavigateFunction } from "react-router-dom";
-
-export const DEFAULT_PATH: Record<RoleTypes, string> = {
-  ROLE_CANDIDATE: paths.app.candidate.path,
-  ROLE_RECRUITER: paths.app.recruiter.path,
-  ROLE_ADMIN: paths.app.admin.path,
-};
-
-const ROLE_SCOPE: Record<RoleTypes, string[]> = {
-  ROLE_CANDIDATE: ["app/candidate"],
-  ROLE_RECRUITER: ["app/recruiter"],
-  ROLE_ADMIN: ["app/admin"],
-};
+import { ROLE_SCOPE } from "@/consts/role";
+import { DEFAULT_PATH } from "@/consts/default-path";
 
 const isValidRedirect = (
   redirectTo: string | undefined,
