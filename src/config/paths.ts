@@ -47,10 +47,6 @@ export const paths = {
       path: "/app/recruiter",
       getHref: () => "/app/recruiter",
     },
-    applicant: {
-      path: "/app/applicant",
-      getHref: () => "/app/applicant",
-    },
     admin: {
       path: "/app/admin",
       getHref: () => "/app/admin",
