@@ -1,6 +1,6 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Link } from "react-router-dom";
-import { DEFAULT_PATH } from "@/lib/redirect";
+import { DEFAULT_PATH } from "@/consts/default-path";
 import { useNavigate } from "react-router-dom";
 
 export const LandingHeader = () => {
