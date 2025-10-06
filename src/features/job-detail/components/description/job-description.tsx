@@ -1,8 +1,6 @@
 import { JobDetailsSidebar } from "./job-description-sidebar";
 import { JobDescriptionContent } from "./job-description-content";
 
-
-
 export interface JobPageContentProps {
   description: string;
   responsibilities: string[];
@@ -17,9 +15,6 @@ export interface JobPageContentProps {
   categories: string[];
   requiredSkills: string[];
 }
-
-
-
 
 export const JobPageContent = (props: JobPageContentProps) => {
   const {

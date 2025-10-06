@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
 const tabs = [
-  { name: "Overview", path: "/app/recruiter/setting" },
-  { name: "Social Links", path: "/app/recruiter/setting/social" },
-  { name: "Team", path: "/app/recruiter/setting/team" },
+  { name: "Overview", path: "/app/recruiter/settings" },
+  { name: "Social Links", path: "/app/recruiter/settings/social" },
+  { name: "Team", path: "/app/recruiter/settings/team" },
 ];
 
 export const SettingTabNav = () => {
@@ -13,7 +13,7 @@ export const SettingTabNav = () => {
         <NavLink
           key={tab.name}
           to={tab.path}
-          end={tab.path === "/app/recruiter/setting"}
+          end={tab.path === "/app/recruiter/settings"}
           className={({ isActive }) =>
             `pb-2 ${
               isActive

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { QueryClient } from "@tanstack/react-query";
 import { paths } from "@/config/paths";
-// import { paths } from '@/config/paths';
 
 /**
  * convert module to inject loader, action if have
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const convert = (queryClient: QueryClient) => (module: any) => {
   const { clientLoader, clientAction, default: Component } = module;
   return {
@@ -22,10 +22,12 @@ export const createRouter = (queryClient: QueryClient) => {
   const withClient = convert(queryClient);
 
   return createBrowserRouter([
+    //landing router
     {
       path: paths.home.path,
       lazy: () => import("./routes/app/public/landing").then(withClient),
     },
+    //app router
     {
       path: paths.app.root.path,
       lazy: () =>
@@ -34,20 +36,27 @@ export const createRouter = (queryClient: QueryClient) => {
           return { Component: AppRouterRoot };
         }),
       children: [
+        // candidate router for app
         {
           path: paths.app.candidate.path, //layout for candidate
           lazy: () =>
-            import("./routes/app/private/candidate/candidate").then(withClient),
-          // Nested routes for candidate
+            import("./routes/app/private/candidate/candidate-root").then(
+              withClient
+            ),
+          children: [...candidateRouterChildren(withClient)],
         },
+        //recruiter router for app
         {
           path: paths.app.recruiter.path, //layout for recruiter
           lazy: () =>
-            import("./routes/app/private/recruiter/recruiter").then(withClient),
-          // Nested routes for recruiter
+            import("./routes/app/private/recruiter/recruiter-root").then(
+              withClient
+            ),
+          children: [...recruiterRouterChildren(withClient)],
         },
       ],
     },
+    //auth router
     {
       path: paths.auth.path,
       lazy: () => import("./routes/auth/auth-root").then(withClient),
@@ -62,9 +71,134 @@ export const createRouter = (queryClient: QueryClient) => {
         },
       ],
     },
+    //not found router
     {
       path: paths.notFound.path,
       lazy: () => import("./routes/auth/not-found").then(withClient),
     },
   ]);
+};
+
+/**
+ * common router children
+ * @param withClient
+ * @returns
+ */
+const commonRouterChildren = (withClient: ReturnType<typeof convert>) => {
+  return [
+    {
+      path: paths.common.messages.path,
+      lazy: () =>
+        import("./routes/app/private/chat/chat-root").then(withClient),
+    },
+  ];
+};
+
+/**
+ * recruiter router children
+ * @param withClient
+ * @returns
+ */
+const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
+  return [
+    {
+      path: paths.app.recruiter.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/dashboard-recruiter").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.recruiter.settings.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/company-setting").then(
+          (mod) => ({
+            Component: mod.CompanySettingsPage,
+          })
+        ),
+      children: [
+        {
+          index: true,
+          lazy: () =>
+            import(
+              "@/features/settings/recruiter/components/overview-form"
+            ).then((mod) => ({
+              Component: mod.OverviewForm,
+            })),
+        },
+        {
+          path: paths.recruiter.settings.social.path,
+          lazy: () =>
+            import(
+              "@/features/settings/recruiter/components/social-links-form"
+            ).then((mod) => ({
+              Component: mod.SocialLinkForm,
+            })),
+        },
+        {
+          path: paths.recruiter.settings.team.path,
+          lazy: () =>
+            import("@/features/settings/recruiter/components/team").then(
+              (mod) => ({
+                Component: mod.Team,
+              })
+            ),
+        },
+      ],
+    },
+    ...commonRouterChildren(withClient),
+  ];
+};
+
+/**
+ * candidate router children
+ * @param withClient
+ * @returns
+ */
+const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
+  return [
+    {
+      path: paths.app.candidate.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/dashboard-candidate").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.candidate.settings.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/settings").then(withClient),
+      children: [
+        {
+          index: true,
+          lazy: () =>
+            import(
+              "@/features/settings/candidate/components/profile-form"
+            ).then((mod) => ({
+              Component: mod.ProfileForm,
+            })),
+        },
+        {
+          path: paths.candidate.settings.loginDetail.path,
+          lazy: () =>
+            import(
+              "@/components/sections/settings/candidate/login-detail-container"
+            ).then((mod) => ({
+              Component: mod.LoginDetailContainer,
+            })),
+        },
+        {
+          path: paths.candidate.settings.notifications.path,
+          lazy: () =>
+            import(
+              "@/features/settings/candidate/components/notifications"
+            ).then((mod) => ({
+              Component: mod.Notifications,
+            })),
+        },
+      ],
+    },
+
+    ...commonRouterChildren(withClient),
+  ];
 };
