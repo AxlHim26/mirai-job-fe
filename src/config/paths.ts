@@ -101,6 +101,10 @@ export const paths = {
       path: "profile",
       getHref: () => "/app/candidate/profile",
     },
+    job_desc: {
+      path: "job-desc",
+      getHref: () => "/app/candidate/job-desc",
+    },
   },
 
   notFound: {

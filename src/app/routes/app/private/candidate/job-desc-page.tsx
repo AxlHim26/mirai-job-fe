@@ -26,7 +26,7 @@ const JobDescPage = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen overflow-y-auto">
       <JobHeader
         jobName={job.jobName}
         jobType={job.jobType}
@@ -42,7 +42,7 @@ const JobDescPage = () => {
         companyDescription={job.company.description}
         companyGalleryImages={job.company.galleryImages}
       />
-    </>
+    </div>
   );
 };
 
