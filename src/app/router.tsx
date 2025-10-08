@@ -150,6 +150,13 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           withClient
         ),
     },
+    {
+      path: paths.candidate.browse.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/browse-companies-candidate"
+        ).then(withClient),
+    },
     ...commonRouterChildren(withClient),
   ];
 };
