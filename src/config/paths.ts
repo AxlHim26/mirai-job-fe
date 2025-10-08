@@ -2,6 +2,20 @@ export const paths = {
   home: {
     path: "/",
     getHref: () => "/",
+    children: {
+      searchResults: {
+        path: "search-results",
+        getHref: () => "/search-results",
+      },
+      findJobs: {
+        path: "find-jobs",
+        getHref: () => "/find-jobs",
+      },
+      browseCompanies: {
+        path: "browse-companies",
+        getHref: () => "/browse-companies",
+      },
+    },
   },
 
   common: {
