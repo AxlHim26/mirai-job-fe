@@ -27,6 +27,19 @@ export const createRouter = (queryClient: QueryClient) => {
       path: paths.home.path,
       lazy: () => import("./routes/app/public/landing").then(withClient),
     },
+    {
+      path: paths.home.children.browseCompanies.getHref(),
+      lazy: () =>
+        import("./routes/app/public/browse-companies").then(withClient),
+    },
+    {
+      path: paths.home.children.findJobs.getHref(),
+      lazy: () => import("./routes/app/public/find-jobs").then(withClient),
+    },
+    {
+      path: paths.home.children.searchResults.getHref(),
+      lazy: () => import("./routes/app/public/search-results").then(withClient),
+    },
     //app router
     {
       path: paths.app.root.path,
