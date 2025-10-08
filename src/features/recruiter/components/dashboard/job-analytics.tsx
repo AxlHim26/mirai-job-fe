@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const JobAnalyticsDashboard = () => {
+export const JobAnalyticsDashboard = () => {
   const [timeRange] = useState("Last 7 days");
 
   const viewsData = [
@@ -269,5 +269,3 @@ const JobAnalyticsDashboard = () => {
     </div>
   );
 };
-
-export default JobAnalyticsDashboard;

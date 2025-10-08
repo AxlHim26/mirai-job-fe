@@ -1,7 +1,7 @@
-import { DashboardCompanyAnalytics } from "@/features/dashboard-company-analytics";
+import { JobAnalyticsDashboard } from "@/features/recruiter";
 
 const DashboardRecruiterRoute = () => {
-  return <DashboardCompanyAnalytics />;
+  return <JobAnalyticsDashboard />;
 };
 
 export default DashboardRecruiterRoute;

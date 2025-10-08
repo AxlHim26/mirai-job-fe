@@ -54,15 +54,6 @@ export const createRouter = (queryClient: QueryClient) => {
             ),
           children: [...recruiterRouterChildren(withClient)],
         },
-        //applicant router for app
-        // {
-        //   path: paths.app.applicant.path, //layout for applicant
-        //   lazy: () =>
-        //     import("./routes/app/private/applicant/applicant-root").then(
-        //       withClient
-        //     ),
-        //   children: [...applicantRouterChildren(withClient)],
-        // },
       ],
     },
     //auth router
@@ -138,21 +129,3 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
     ...commonRouterChildren(withClient),
   ];
 };
-
-/**
- * applicant router children
- * @param withClient
- * @returns
- */
-// const applicantRouterChildren = (withClient: ReturnType<typeof convert>) => {
-//   return [
-//     {
-//       path: paths.app.applicant.path,
-//       lazy: () =>
-//         import("./routes/app/private/applicant/dashboard-applicant").then(
-//           withClient
-//         ),
-//     },
-//     ...commonRouterChildren(withClient),
-//   ];
-// };
