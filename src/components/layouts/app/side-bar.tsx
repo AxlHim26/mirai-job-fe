@@ -50,6 +50,21 @@ export const AppSideBar = () => {
           icons={SETTINGSIDEBARICON}
         />
       </div>
+      <div className="p-4 border-t border-gray-200">
+        <div className="flex items-center gap-3">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop"
+            alt="User"
+            className="w-10 h-10 rounded-full object-cover"
+          />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-gray-900 truncate">
+              Jake Gyll
+            </p>
+            <p className="text-xs text-gray-500 truncate">jakagy@email.com</p>
+          </div>
+        </div>
+      </div>
     </aside>
   );
 };
