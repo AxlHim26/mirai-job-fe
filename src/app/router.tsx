@@ -40,6 +40,10 @@ export const createRouter = (queryClient: QueryClient) => {
       path: paths.home.children.searchResults.getHref(),
       lazy: () => import("./routes/app/public/search-results").then(withClient),
     },
+    {
+      path: paths.home.children.jobDesc.getHref(),
+      lazy: () => import("./routes/app/public/job-desc-page").then(withClient),
+    },
     //app router
     {
       path: paths.app.root.path,
@@ -147,11 +151,6 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         import("./routes/app/private/candidate/dashboard-candidate").then(
           withClient
         ),
-    },
-    {
-      path: paths.candidate.job_desc.path,
-      lazy: () =>
-        import("./routes/app/private/candidate/job-desc-page").then(withClient),
     },
     {
       path: paths.candidate.profile.path,
