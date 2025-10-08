@@ -136,7 +136,19 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         ),
     },
     {
-      path: paths.candidate.profile.path, // "profile" → /app/candidate/profile
+      path: paths.candidate.browse.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/browse-companies").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.candidate.job_desc.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/job-desc-page").then(withClient),
+    },
+    {
+      path: paths.candidate.profile.path,
       lazy: () =>
         import("./routes/app/private/candidate/profile-candidate").then(
           withClient
