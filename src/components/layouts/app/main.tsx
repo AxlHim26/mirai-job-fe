@@ -20,7 +20,7 @@ export const AppMain: React.FC<{ children: React.ReactNode }> = ({
         ) : (
           <RecruiterHeader />
         )}
-        {children}
+        <div className="flex-1 overflow-auto">{children}</div>
       </div>
     </main>
   );

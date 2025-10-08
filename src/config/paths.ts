@@ -65,14 +65,6 @@ export const paths = {
       path: "/app/recruiter",
       getHref: () => "/app/recruiter",
     },
-    applicant: {
-      path: "/app/applicant",
-      getHref: () => "/app/applicant",
-    },
-    company: {
-      path: "/app/company",
-      getHref: () => "/app/company",
-    },
     admin: {
       path: "/app/admin",
       getHref: () => "/app/admin",
