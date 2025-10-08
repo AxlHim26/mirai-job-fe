@@ -15,6 +15,10 @@ export const paths = {
         path: "browse-companies",
         getHref: () => "/browse-companies",
       },
+      jobDesc: {
+        path: "job-desc",
+        getHref: () => "/job-desc",
+      },
     },
   },
 
@@ -114,10 +118,6 @@ export const paths = {
     profile: {
       path: "profile",
       getHref: () => "/app/candidate/profile",
-    },
-    job_desc: {
-      path: "job-desc",
-      getHref: () => "/app/candidate/job-desc",
     },
   },
 
