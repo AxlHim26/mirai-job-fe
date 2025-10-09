@@ -1,14 +1,17 @@
-
-
-export const uploadToCloudinary = async (file: File): Promise<{ url: string, type: "image" | "video" | "raw" }> => {
+export const uploadToCloudinary = async (
+  file: File
+): Promise<{ url: string; type: "image" | "video" | "raw" }> => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", "multiLibrary");
 
-  const res = await fetch("https://api.cloudinary.com/v1_1/multi-library/auto/upload", {
-    method: "POST",
-    body: formData,
-  });
+  const res = await fetch(
+    "https://api.cloudinary.com/v1_1/multi-library/auto/upload",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
 
   if (!res.ok) throw new Error("Upload thất bại");
 
@@ -21,7 +24,7 @@ export const uploadToCloudinary = async (file: File): Promise<{ url: string, typ
 };
 
 export const getFileType = (url: string): "image" | "video" | "raw" => {
-  const extension = url.split('.').pop()?.toLowerCase();
+  const extension = url.split(".").pop()?.toLowerCase();
   if (!extension) return "raw";
 
   const imageTypes = ["jpg", "jpeg", "png", "gif", "webp"];

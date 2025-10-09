@@ -88,6 +88,23 @@ export const paths = {
       path: "posting",
       getHref: () => "/app/recruiter/posting",
     },
+
+    settings: {
+      path: "settings",
+      getHref: () => "/app/recruiter/settings",
+      overview: {
+        path: "",
+        getHref: () => "/app/recruiter/settings",
+      },
+      social: {
+        path: "social",
+        getHref: () => "/app/recruiter/settings/social",
+      },
+      team: {
+        path: "team",
+        getHref: () => "/app/recruiter/settings/team",
+      },
+    },
   },
 
   candidate: {
@@ -114,6 +131,24 @@ export const paths = {
     profile: {
       path: "profile",
       getHref: () => "/app/candidate/profile",
+    },
+    settings: {
+      path: "settings",
+      getHref: () => "/app/candidate/settings",
+
+      profile: {
+        path: "",
+        getHref: () => "/app/candidate/settings",
+      },
+
+      loginDetail: {
+        path: "login-detail",
+        getHref: () => "/app/candidate/settings/login-detail",
+      },
+      notifications: {
+        path: "notifications",
+        getHref: () => "/app/candidate/settings/notifications",
+      },
     },
   },
 
