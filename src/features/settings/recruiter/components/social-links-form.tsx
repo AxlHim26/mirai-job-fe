@@ -4,7 +4,7 @@ import { SectionTitle } from "@/components/sections/settings";
 import { socialLinkSchema, useSocialLinks, useUpdateSocialLinks } from "../api";
 import z from "zod";
 
-export const SocialLinkForm = () => {
+const SocialLinkForm = () => {
   const { data, isLoading } = useSocialLinks();
   const { mutate, isPending } = useUpdateSocialLinks();
 
@@ -73,3 +73,5 @@ export const SocialLinkForm = () => {
     </AuthForm>
   );
 };
+
+export default SocialLinkForm;

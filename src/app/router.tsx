@@ -135,21 +135,21 @@ const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
         {
           index: true,
           lazy: () =>
-            import("./routes/app/private/recruiter/overview-settings").then(
-              withClient
-            ),
+            import(
+              "@/features/settings/recruiter/components/overview-form"
+            ).then(withClient),
         },
         {
           path: paths.recruiter.settings.social.path,
           lazy: () =>
-            import("./routes/app/private/recruiter/social-settings").then(
-              withClient
-            ),
+            import(
+              "@/features/settings/recruiter/components/social-links-form"
+            ).then(withClient),
         },
         {
           path: paths.recruiter.settings.team.path,
           lazy: () =>
-            import("./routes/app/private/recruiter/team-settings").then(
+            import("@/features/settings/recruiter/components/team").then(
               withClient
             ),
         },
@@ -188,22 +188,22 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         {
           index: true,
           lazy: () =>
-            import("./routes/app/private/candidate/profile-settings").then(
-              withClient
-            ),
+            import(
+              "@/features/settings/candidate/components/profile-form"
+            ).then(withClient),
         },
         {
           path: paths.candidate.settings.loginDetail.path,
           lazy: () =>
-            import("./routes/app/private/candidate/login-detail-settings").then(
-              withClient
-            ),
+            import(
+              "@/features/settings/candidate/components/login-detail-container"
+            ).then(withClient),
         },
         {
           path: paths.candidate.settings.notifications.path,
           lazy: () =>
             import(
-              "./routes/app/private/candidate/notifications-settings"
+              "@/features/settings/candidate/components/notifications"
             ).then(withClient),
         },
       ],
