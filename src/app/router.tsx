@@ -209,6 +209,35 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           withClient
         ),
     },
+    {
+      path: paths.candidate.settings.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/settings").then(withClient),
+      children: [
+        {
+          index: true,
+          lazy: () =>
+            import(
+              "@/features/settings/candidate/components/profile-form"
+            ).then(withClient),
+        },
+        {
+          path: paths.candidate.settings.loginDetail.path,
+          lazy: () =>
+            import(
+              "@/features/settings/candidate/components/login-detail-container"
+            ).then(withClient),
+        },
+        {
+          path: paths.candidate.settings.notifications.path,
+          lazy: () =>
+            import(
+              "@/features/settings/candidate/components/notifications"
+            ).then(withClient),
+        },
+      ],
+    },
+
     ...commonRouterChildren(withClient),
   ];
 };
