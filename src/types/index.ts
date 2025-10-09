@@ -5,3 +5,5 @@ export * from "./common";
 export * from "./message";
 export * from "./rest-response";
 export * from "./user";
+export * from "./recruiter";
+export * from "./social-link";

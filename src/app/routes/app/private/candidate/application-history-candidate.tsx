@@ -5,7 +5,7 @@ import { ApplicationHeader } from "@/features/application-history/header";
 import { ApplicationTables } from "@/features/application-history/tables";
 import { ApplicationTabs } from "@/features/application-history/tabs";
 
-export const ApplicationHistoryCandidate = () => {
+const ApplicationHistoryCandidate = () => {
   return (
     <div className="min-h-screen bg-gray-50 ">
       <div className="max-w-7xl mx-auto">

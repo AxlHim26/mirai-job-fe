@@ -18,7 +18,11 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   return (
     <li className="flex items-center justify-between hover:bg-[#E9EBFD] px-[16px] py-3 rounded">
       <div className="flex items-center gap-[16px]">
-        <LocalIcon iconName={icon} height={24} width={24} />
+        <LocalIcon
+          iconName={icon}
+          height={24}
+          width={24}
+        />
         <a
           href={href}
           className="text-[#7C8493] text-[16px] font-medium hover:text-indigo-600"
@@ -27,7 +31,10 @@ export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
         </a>
       </div>
       {notificationCount > 0 && (
-        <NotificationBadge number={notificationCount} size={24} />
+        <NotificationBadge
+          number={notificationCount}
+          size={24}
+        />
       )}
     </li>
   );
