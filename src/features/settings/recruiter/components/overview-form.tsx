@@ -33,7 +33,7 @@ const monthNames = [
   "December",
 ];
 
-export const OverviewForm = () => {
+const OverviewForm = () => {
   const { data, isLoading } = useRecruiterSettings();
   const { mutate, isPending } = useUpdateRecruiterSettings();
 
@@ -274,3 +274,5 @@ export const OverviewForm = () => {
     </>
   );
 };
+
+export default OverviewForm;

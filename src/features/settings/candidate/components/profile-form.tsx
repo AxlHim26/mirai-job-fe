@@ -13,7 +13,7 @@ import { TypeAccountRadio } from "@/components/sections/settings/candidate/type-
 const inputClass =
   "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-black-500 focus:outline-none focus:ring-1 focus:ring-black-500";
 
-export const ProfileForm = () => {
+const ProfileForm = () => {
   const { data, isLoading } = useProfileSettings();
   const { mutate, isPending } = useUpdateProfileSettings();
 
@@ -175,3 +175,5 @@ export const ProfileForm = () => {
     </>
   );
 };
+
+export default ProfileForm;
