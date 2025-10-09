@@ -171,6 +171,13 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           "./routes/app/private/candidate/application-history-candidate"
         ).then(withClient),
     },
+    {
+      path: paths.candidate.help.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/help-center-candidate").then(
+          withClient
+        ),
+    },
     ...commonRouterChildren(withClient),
   ];
 };
