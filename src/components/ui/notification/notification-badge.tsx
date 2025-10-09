@@ -1,5 +1,5 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from "react";
+import classNames from "classnames";
 
 type NotificationBadgeProps = {
   number: number;
@@ -17,7 +17,7 @@ export const NotificationBadge: React.FC<NotificationBadgeProps> = ({
   return (
     <div
       className={classNames(
-        'flex items-center justify-center rounded-full bg-indigo-600 text-white font-medium',
+        "flex items-center justify-center rounded-full bg-indigo-600 text-white font-medium",
         className
       )}
       style={{

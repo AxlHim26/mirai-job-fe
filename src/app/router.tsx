@@ -125,6 +125,36 @@ const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
           withClient
         ),
     },
+    {
+      path: paths.recruiter.settings.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/company-setting").then(
+          withClient
+        ),
+      children: [
+        {
+          index: true,
+          lazy: () =>
+            import(
+              "@/features/settings/recruiter/components/overview-form"
+            ).then(withClient),
+        },
+        {
+          path: paths.recruiter.settings.social.path,
+          lazy: () =>
+            import(
+              "@/features/settings/recruiter/components/social-links-form"
+            ).then(withClient),
+        },
+        {
+          path: paths.recruiter.settings.team.path,
+          lazy: () =>
+            import("@/features/settings/recruiter/components/team").then(
+              withClient
+            ),
+        },
+      ],
+    },
     ...commonRouterChildren(withClient),
   ];
 };
@@ -171,6 +201,7 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           "./routes/app/private/candidate/application-history-candidate"
         ).then(withClient),
     },
+
     {
       path: paths.candidate.help.path,
       lazy: () =>
