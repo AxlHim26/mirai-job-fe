@@ -181,34 +181,34 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         ),
     },
     {
-      path: paths.candidate.settings.path,
+      path: paths.candidate.browse.path,
       lazy: () =>
-        import("./routes/app/private/candidate/settings").then(withClient),
-      children: [
-        {
-          index: true,
-          lazy: () =>
-            import(
-              "@/features/settings/candidate/components/profile-form"
-            ).then(withClient),
-        },
-        {
-          path: paths.candidate.settings.loginDetail.path,
-          lazy: () =>
-            import(
-              "@/features/settings/candidate/components/login-detail-container"
-            ).then(withClient),
-        },
-        {
-          path: paths.candidate.settings.notifications.path,
-          lazy: () =>
-            import(
-              "@/features/settings/candidate/components/notifications"
-            ).then(withClient),
-        },
-      ],
+        import(
+          "./routes/app/private/candidate/browse-companies-candidate"
+        ).then(withClient),
+    },
+    {
+      path: paths.candidate.dashboard.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/dashboard-applicant-candidate"
+        ).then(withClient),
+    },
+    {
+      path: paths.candidate.applications.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/application-history-candidate"
+        ).then(withClient),
     },
 
+    {
+      path: paths.candidate.help.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/help-center-candidate").then(
+          withClient
+        ),
+    },
     ...commonRouterChildren(withClient),
   ];
 };
