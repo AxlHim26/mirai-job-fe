@@ -209,6 +209,15 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           withClient
         ),
     },
+
+    {
+      path: paths.candidate.search.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/job-desc-candidate").then(
+          withClient
+        ),
+    },
+
     {
       path: paths.candidate.settings.path,
       lazy: () =>
