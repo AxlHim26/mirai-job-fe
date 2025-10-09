@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const tabs = [
   { name: "My Profile", path: "/app/candidate/settings" },
-  { name: "Login Detail", path: "/app/candidate/settings/loginDetail" },
+  { name: "Login Detail", path: "/app/candidate/settings/login-detail" },
   { name: "Notifications", path: "/app/candidate/settings/notifications" },
 ];
 

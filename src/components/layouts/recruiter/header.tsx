@@ -1,22 +1,24 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Button } from "@/components/ui";
-// import { useAuthStore } from "@/stores"
+import { useAuthStore } from "@/stores";
 
 export const RecruiterHeader = () => {
-  // const { user } = useAuthStore();
+  const { user } = useAuthStore();
   return (
     <header className="flex items-center justify-between px-8 py-8">
       <div className="flex items-center gap-4">
         <figure>
           <img
-            src="./logo.png"
+            src={user?.avatar || "/default-avatar.png"}
             alt="avatar"
             className="h-8 w-8"
           />
         </figure>
         <div className="flex flex-col">
           <span className="text-[16px] leading-[25.6px]">Company</span>
-          <span className="text-[20px] font-semibold leading-[24px]">KMS</span>
+          <span className="text-[20px] font-semibold leading-[24px]">
+            {user?.fullName}
+          </span>
         </div>
       </div>
       <div className="flex items-center gap-8">

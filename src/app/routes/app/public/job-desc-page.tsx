@@ -6,6 +6,7 @@ import {
   CompanyAboutSection,
 } from "@/features/job-detail/components";
 import { mockJobDetail } from "@/features/job-detail/api/job.mock";
+import { LandingFooter, LandingHeader } from "@/components/layouts";
 
 const JobDescPage = () => {
   const job = mockJobDetail;
@@ -26,7 +27,8 @@ const JobDescPage = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen overflow-y-auto">
+      <LandingHeader />
       <JobHeader
         jobName={job.jobName}
         jobType={job.jobType}
@@ -42,7 +44,8 @@ const JobDescPage = () => {
         companyDescription={job.company.description}
         companyGalleryImages={job.company.galleryImages}
       />
-    </>
+      <LandingFooter />
+    </div>
   );
 };
 
