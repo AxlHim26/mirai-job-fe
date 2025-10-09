@@ -1,4 +1,5 @@
-import { Form, Input, Select, Button, Spinner } from "@/components/ui";
+import { Input, Select, Button, Spinner } from "@/components/ui";
+import { AuthForm } from "@/features/auth/form-auth";
 import { SectionTitle, LogoSection } from "@/components/sections/settings";
 import {
   profileSchema,
@@ -56,7 +57,7 @@ export const ProfileForm = () => {
         <LogoSection />
       </div>
 
-      <Form
+      <AuthForm
         schema={profileSchema}
         option={{ defaultValues: getParsedDefault() }}
         onSubmit={onSubmit}
@@ -170,7 +171,7 @@ export const ProfileForm = () => {
             </div>
           </>
         )}
-      </Form>
+      </AuthForm>
     </>
   );
 };

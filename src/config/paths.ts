@@ -2,6 +2,24 @@ export const paths = {
   home: {
     path: "/",
     getHref: () => "/",
+    children: {
+      searchResults: {
+        path: "search-results",
+        getHref: () => "/search-results",
+      },
+      findJobs: {
+        path: "find-jobs",
+        getHref: () => "/find-jobs",
+      },
+      browseCompanies: {
+        path: "browse-companies",
+        getHref: () => "/browse-companies",
+      },
+      jobDesc: {
+        path: "job-desc",
+        getHref: () => "/job-desc",
+      },
+    },
   },
 
   common: {
@@ -120,8 +138,8 @@ export const paths = {
       },
 
       loginDetail: {
-        path: "loginDetail",
-        getHref: () => "/app/candidate/settings/loginDetail",
+        path: "login-detail",
+        getHref: () => "/app/candidate/settings/login-detail",
       },
       notifications: {
         path: "notifications",

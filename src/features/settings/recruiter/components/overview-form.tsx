@@ -9,14 +9,8 @@ import {
   TagInput,
 } from "@/components/sections/settings";
 import { RecruiterResponse } from "@/types";
-import {
-  Form,
-  Input,
-  Select,
-  Spinner,
-  Textarea,
-  Button,
-} from "@/components/ui";
+import { Input, Select, Spinner, Textarea, Button } from "@/components/ui";
+import { AuthForm } from "@/features/auth/form-auth";
 import z from "zod";
 import { FieldError } from "react-hook-form";
 
@@ -44,19 +38,35 @@ export const OverviewForm = () => {
   const { mutate, isPending } = useUpdateRecruiterSettings();
 
   const getParsedDefault = (): z.infer<typeof companySettingsSchema> => {
-    if (!data) return companySettingsSchema.parse({});
+    if (!data) {
+      return {
+        name: "",
+        website: "",
+        location: [],
+        employee: "",
+        industry: "",
+        foundedDate: { day: "", month: "", year: "" },
+        techStack: [],
+        description: "",
+        benefit: "",
+      };
+    }
+
     const [year, month, day] = data.foundedDate?.split("-") ?? ["", "", ""];
     return {
-      ...data,
+      name: data.name ?? "",
+      website: data.website ?? "",
+      location: Array.isArray(data.location) ? data.location : [],
+      employee: data.employee ?? "",
+      industry: data.industry ?? "",
       foundedDate: {
         day: day || "",
-        month: monthNames[+month - 1] || "",
+        month: month ? monthNames[+month - 1] || "" : "",
         year: year || "",
       },
+      techStack: Array.isArray(data.techStack) ? data.techStack : [],
       description: data.description ?? "",
       benefit: data.benefit ?? "",
-      name: data.name ?? "",
-      website: "",
     };
   };
 
@@ -90,7 +100,7 @@ export const OverviewForm = () => {
         <LogoSection />
       </div>
 
-      <Form
+      <AuthForm
         schema={companySettingsSchema}
         option={{ defaultValues: getParsedDefault() }}
         onSubmit={onSubmit}
@@ -260,7 +270,7 @@ export const OverviewForm = () => {
             </>
           );
         }}
-      </Form>
+      </AuthForm>
     </>
   );
 };

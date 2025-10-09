@@ -1,4 +1,5 @@
-import { Button, Form, Input, Spinner } from "@/components/ui";
+import { Button, Input, Spinner } from "@/components/ui";
+import { AuthForm } from "@/features/auth/form-auth";
 import { SectionTitle } from "@/components/sections/settings";
 import { socialLinkSchema, useSocialLinks, useUpdateSocialLinks } from "../api";
 import z from "zod";
@@ -14,7 +15,7 @@ export const SocialLinkForm = () => {
   if (isLoading) return <p>Loading social links...</p>;
 
   return (
-    <Form
+    <AuthForm
       schema={socialLinkSchema}
       option={{ defaultValues: data }}
       onSubmit={onSubmit}
@@ -69,6 +70,6 @@ export const SocialLinkForm = () => {
           </div>
         </>
       )}
-    </Form>
+    </AuthForm>
   );
 };

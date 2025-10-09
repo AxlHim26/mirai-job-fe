@@ -1,5 +1,6 @@
 import { SectionTitle } from "@/components/sections/settings";
-import { Form, Input, Button, Spinner } from "@/components/ui";
+import { Input, Button, Spinner } from "@/components/ui";
+import { AuthForm } from "@/features/auth/form-auth";
 import {
   changePasswordSchema,
   useChangePassword,
@@ -22,7 +23,7 @@ export const ChangePasswordForm = () => {
   };
 
   return (
-    <Form
+    <AuthForm
       schema={changePasswordSchema}
       option={{ defaultValues: defaults }}
       onSubmit={onSubmit}
@@ -85,6 +86,6 @@ export const ChangePasswordForm = () => {
           </div>
         </>
       )}
-    </Form>
+    </AuthForm>
   );
 };

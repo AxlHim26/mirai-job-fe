@@ -1,5 +1,6 @@
 import { SectionTitle } from "@/components/sections/settings";
-import { Form, Input, Button, Spinner } from "@/components/ui";
+import { Input, Button, Spinner } from "@/components/ui";
+import { AuthForm } from "@/features/auth/form-auth";
 import {
   updateEmailSchema,
   useAccount,
@@ -23,7 +24,7 @@ export const UpdateEmailForm = () => {
   if (isLoading) return <p>Loading account...</p>;
 
   return (
-    <Form
+    <AuthForm
       schema={updateEmailSchema}
       option={{ defaultValues: defaults }}
       onSubmit={onSubmit}
@@ -77,6 +78,6 @@ export const UpdateEmailForm = () => {
           </div>
         </>
       )}
-    </Form>
+    </AuthForm>
   );
 };

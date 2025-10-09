@@ -1,6 +1,7 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { companyLogo } from "@/assets/images";
 import { LandingFooter, LandingHeader } from "@/components/layouts/landing";
+import { Hero } from "@/components/sections/landing";
 import CompanyCard from "@/components/ui/card/company-card";
 import CompanyResultCard from "@/components/ui/card/company-result-card";
 import HorizontalCategoryCarousel from "@/components/ui/carousel/category-carousel";
@@ -63,72 +64,78 @@ const BrowseCompaniesRoute = () => {
   ];
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <LandingHeader />
+      <Hero />
 
-      <div className="flex flex-col items-start justify-center gap-6 pt-[72px] px-[124px] w-full ">
-        <div>
-          <h1 className="text-[#25324B] font-semibold text-3xl lg:text-4xl ">
-            Recommended Companies
-          </h1>
-          <h1 className="text-[#7C8493] font-normal text-lg">
-            Based on your profile, company preferences, and recent activity
-          </h1>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
-          {companies.map((company) => (
-            <CompanyCard
-              key={company.id}
-              id={company.id}
-              name={company.name}
-              logo={company.logo}
-              jobsQuantity={company.jobsQuantity}
-              description={company.description}
-              tags={company.tags}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="w-full p-3 px-[124px] pt-8 flex flex-col gap-5">
-        <h1 className="text-[#25324B] font-semibold text-4xl">
-          Companies by Category
-        </h1>
-        <HorizontalCategoryCarousel />
-        <div className="flex items-center gap-4">
-          <LocalIcon
-            iconName="iconWhite"
-            height={35}
-            width={35}
-          />
-          <h1 className="text-[#25324B] font-semibold text-2xl lg:text-4xl">
-            24 Results
-          </h1>
+      {/* Scrollable main content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="flex flex-col items-start justify-center gap-6 pt-[72px] px-[124px] w-full ">
+          <div>
+            <h1 className="text-[#25324B] font-semibold text-3xl lg:text-4xl ">
+              Recommended Companies
+            </h1>
+            <h1 className="text-[#7C8493] font-normal text-lg">
+              Based on your profile, company preferences, and recent activity
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+            {companies.map((company) => (
+              <CompanyCard
+                key={company.id}
+                id={company.id}
+                name={company.name}
+                logo={company.logo}
+                jobsQuantity={company.jobsQuantity}
+                description={company.description}
+                tags={company.tags}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
-          {companies.map((company) => (
-            <CompanyResultCard
-              key={company.id}
-              id={company.id}
-              name={company.name}
-              logo={company.logo}
-              jobsQuantity={company.jobsQuantity}
-            />
-          ))}
-        </div>
-        <div className="text-[#4640DE] flex items-center gap-3 w-full p-5 cursor-pointer">
-          <h1 className="font-semibold text-[16px]">
-            View more Design companies
+        <div className="w-full p-3 px-[124px] pt-8 flex flex-col gap-5">
+          <h1 className="text-[#25324B] font-semibold text-4xl">
+            Companies by Category
           </h1>
-          <LocalIcon
-            iconName="arrowRight"
-            height={25}
-            width={25}
-          />
+          <HorizontalCategoryCarousel />
+          <div className="flex items-center gap-4">
+            <LocalIcon
+              iconName="iconWhite"
+              height={35}
+              width={35}
+            />
+            <h1 className="text-[#25324B] font-semibold text-2xl lg:text-4xl">
+              24 Results
+            </h1>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+            {companies.map((company) => (
+              <CompanyResultCard
+                key={company.id}
+                id={company.id}
+                name={company.name}
+                logo={company.logo}
+                jobsQuantity={company.jobsQuantity}
+              />
+            ))}
+          </div>
+
+          <div className="text-[#4640DE] flex items-center gap-3 w-full p-5 cursor-pointer">
+            <h1 className="font-semibold text-[16px]">
+              View more Design companies
+            </h1>
+            <LocalIcon
+              iconName="arrowRight"
+              height={25}
+              width={25}
+            />
+          </div>
         </div>
       </div>
       <LandingFooter />
-    </>
+    </div>
   );
 };
 

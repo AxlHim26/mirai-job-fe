@@ -27,6 +27,23 @@ export const createRouter = (queryClient: QueryClient) => {
       path: paths.home.path,
       lazy: () => import("./routes/app/public/landing").then(withClient),
     },
+    {
+      path: paths.home.children.browseCompanies.getHref(),
+      lazy: () =>
+        import("./routes/app/public/browse-companies").then(withClient),
+    },
+    {
+      path: paths.home.children.findJobs.getHref(),
+      lazy: () => import("./routes/app/public/find-jobs").then(withClient),
+    },
+    {
+      path: paths.home.children.searchResults.getHref(),
+      lazy: () => import("./routes/app/public/search-results").then(withClient),
+    },
+    {
+      path: paths.home.children.jobDesc.getHref(),
+      lazy: () => import("./routes/app/public/job-desc-page").then(withClient),
+    },
     //app router
     {
       path: paths.app.root.path,
@@ -112,36 +129,28 @@ const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
       path: paths.recruiter.settings.path,
       lazy: () =>
         import("./routes/app/private/recruiter/company-setting").then(
-          (mod) => ({
-            Component: mod.CompanySettingsPage,
-          })
+          withClient
         ),
       children: [
         {
           index: true,
           lazy: () =>
-            import(
-              "@/features/settings/recruiter/components/overview-form"
-            ).then((mod) => ({
-              Component: mod.OverviewForm,
-            })),
+            import("./routes/app/private/recruiter/overview-settings").then(
+              withClient
+            ),
         },
         {
           path: paths.recruiter.settings.social.path,
           lazy: () =>
-            import(
-              "@/features/settings/recruiter/components/social-links-form"
-            ).then((mod) => ({
-              Component: mod.SocialLinkForm,
-            })),
+            import("./routes/app/private/recruiter/social-settings").then(
+              withClient
+            ),
         },
         {
           path: paths.recruiter.settings.team.path,
           lazy: () =>
-            import("@/features/settings/recruiter/components/team").then(
-              (mod) => ({
-                Component: mod.Team,
-              })
+            import("./routes/app/private/recruiter/team-settings").then(
+              withClient
             ),
         },
       ],
@@ -165,6 +174,13 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         ),
     },
     {
+      path: paths.candidate.profile.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/profile-candidate").then(
+          withClient
+        ),
+    },
+    {
       path: paths.candidate.settings.path,
       lazy: () =>
         import("./routes/app/private/candidate/settings").then(withClient),
@@ -172,29 +188,23 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         {
           index: true,
           lazy: () =>
-            import(
-              "@/features/settings/candidate/components/profile-form"
-            ).then((mod) => ({
-              Component: mod.ProfileForm,
-            })),
+            import("./routes/app/private/candidate/profile-settings").then(
+              withClient
+            ),
         },
         {
           path: paths.candidate.settings.loginDetail.path,
           lazy: () =>
-            import(
-              "@/components/sections/settings/candidate/login-detail-container"
-            ).then((mod) => ({
-              Component: mod.LoginDetailContainer,
-            })),
+            import("./routes/app/private/candidate/login-detail-settings").then(
+              withClient
+            ),
         },
         {
           path: paths.candidate.settings.notifications.path,
           lazy: () =>
             import(
-              "@/features/settings/candidate/components/notifications"
-            ).then((mod) => ({
-              Component: mod.Notifications,
-            })),
+              "./routes/app/private/candidate/notifications-settings"
+            ).then(withClient),
         },
       ],
     },
