@@ -41,7 +41,7 @@ export const createRouter = (queryClient: QueryClient) => {
       lazy: () => import("./routes/app/public/search-results").then(withClient),
     },
     {
-      path: paths.home.children.jobDesc.getHref("1"),
+      path: paths.home.children.jobDesc.path,
       lazy: () => import("./routes/app/public/job-desc-page").then(withClient),
     },
     //app router
