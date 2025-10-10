@@ -25,10 +25,6 @@ export const Notifications = () => {
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">
-        Notification Preferences
-      </h2>
-
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium text-gray-900 mb-4">
@@ -146,3 +142,5 @@ export const Notifications = () => {
     </div>
   );
 };
+
+export default Notifications;

@@ -9,3 +9,5 @@ export const LoginDetailContainer = () => {
     </div>
   );
 };
+
+export default LoginDetailContainer;
