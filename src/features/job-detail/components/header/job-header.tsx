@@ -4,9 +4,15 @@ interface JobHeaderProps {
   jobName: string;
   jobType: string;
   location: string;
+  onApply?: () => void;
 }
 
-export const JobHeader = ({ jobName, jobType, location }: JobHeaderProps) => (
+export const JobHeader = ({
+  jobName,
+  jobType,
+  location,
+  onApply,
+}: JobHeaderProps) => (
   <div className="px-32 py-24 bg-gray-100">
     <div className="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
       <div className="flex items-center space-x-5">
@@ -30,7 +36,10 @@ export const JobHeader = ({ jobName, jobType, location }: JobHeaderProps) => (
             height={33}
           />
         </figure>
-        <button className="px-8 py-3 bg-indigo-600 text-white text-lg rounded-md hover:bg-indigo-700 transition-colors">
+        <button
+          onClick={onApply}
+          className="px-8 py-3 bg-indigo-600 text-white text-lg rounded-md hover:bg-indigo-700 transition-colors"
+        >
           Apply
         </button>
       </div>

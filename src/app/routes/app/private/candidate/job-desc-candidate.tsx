@@ -5,10 +5,13 @@ import {
   JobBenefits,
   CompanyAboutSection,
 } from "@/features/job-detail/components";
+import { ApplicationModal } from "@/features/job-detail/components/application-modal";
 import { mockJobDetail } from "@/features/job-detail/api/job.mock";
+import { useState } from "react";
 
 const JobDescPage = () => {
   const job = mockJobDetail;
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
 
   const jobContentData: JobPageContentProps = {
     description: job.description,
@@ -25,12 +28,21 @@ const JobDescPage = () => {
     requiredSkills: job.requiredSkills,
   };
 
+  const handleApply = () => {
+    setIsApplicationModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsApplicationModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen overflow-y-auto">
       <JobHeader
         jobName={job.jobName}
         jobType={job.jobType}
         location={job.location}
+        onApply={handleApply}
       />
 
       <JobPageContent {...jobContentData} />
@@ -41,6 +53,15 @@ const JobDescPage = () => {
         companyLogoSrc={job.company.logoSrc}
         companyDescription={job.company.description}
         companyGalleryImages={job.company.galleryImages}
+      />
+
+      <ApplicationModal
+        isOpen={isApplicationModalOpen}
+        onClose={handleCloseModal}
+        jobName={job.jobName}
+        companyName={job.company.name}
+        location={job.location}
+        jobType={job.jobType}
       />
     </div>
   );
