@@ -1,9 +1,17 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Button } from "@/components/ui";
 import { useAuthStore } from "@/stores";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@/config/paths";
 
 export const RecruiterHeader = () => {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handlePostJob = () => {
+    navigate(paths.recruiter.postJob.getHref());
+  };
+
   return (
     <header className="flex items-center justify-between px-8 py-8">
       <div className="flex items-center gap-4">
@@ -26,6 +34,7 @@ export const RecruiterHeader = () => {
           <LocalIcon iconName="NotificationIcon" />
         </figure>
         <Button
+          onClick={handlePostJob}
           className="text-[16px] font-bold leading-[25.6px] px-[24px] py-[12px]"
           startIcon={<LocalIcon iconName="plus_icon" />}
         >
