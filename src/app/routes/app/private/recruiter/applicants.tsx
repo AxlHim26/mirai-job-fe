@@ -1,7 +1,7 @@
-import { ApplicantPage } from "@/features/recruiter/components/applicant";
+import { ApplicantInterfacePage } from "@/features/recruiter/components/applicant-interface";
 
 const ApplicantsRoute = () => {
-  return <ApplicantPage />;
+  return <ApplicantInterfacePage />;
 };
 
 export default ApplicantsRoute;
