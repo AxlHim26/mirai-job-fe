@@ -41,7 +41,7 @@ export const createRouter = (queryClient: QueryClient) => {
       lazy: () => import("./routes/app/public/search-results").then(withClient),
     },
     {
-      path: paths.home.children.jobDesc.getHref(),
+      path: paths.home.children.jobDesc.getHref("1"),
       lazy: () => import("./routes/app/public/job-desc-page").then(withClient),
     },
     //app router
@@ -229,6 +229,20 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         import(
           "./routes/app/private/candidate/application-history-candidate"
         ).then(withClient),
+    },
+    {
+      path: paths.candidate.findJobs.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/find-jobs-candidate").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.candidate.jobDetail.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/job-desc-candidate").then(
+          withClient
+        ),
     },
     {
       path: paths.candidate.jobDesc.path,

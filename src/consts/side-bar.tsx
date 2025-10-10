@@ -60,7 +60,7 @@ export const CANDIDATESIDEBARTITLE: SideBarTitle[] = [
   },
   {
     title: "Find Jobs",
-    path: paths.candidate.search.path,
+    path: paths.candidate.findJobs.path,
   },
   {
     title: "Browse Companies",
