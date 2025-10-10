@@ -9,24 +9,40 @@ import { ApplicationModal } from "@/features/job-detail/components/application-m
 import { mockJobDetail } from "@/features/job-detail/api/job.mock";
 import { LandingFooter, LandingHeader } from "@/components/layouts";
 import { useState } from "react";
+import { usePublicJobById } from "@/features/public/api/jobs";
+import { useParams } from "react-router-dom";
 
 const JobDescPage = () => {
-  const job = mockJobDetail;
+  const { jobId } = useParams<{ jobId: string }>();
+  const { data: publicJob, isLoading, error } = usePublicJobById(jobId || "");
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
 
+  // Check if we have publicJob data
+  const isPublicJob = !!publicJob;
+
   const jobContentData: JobPageContentProps = {
-    description: job.description,
-    responsibilities: job.responsibilities,
-    whoYouAre: job.whoYouAre,
-    niceToHave: job.niceToHave,
-    appliedCount: job.appliedCount,
-    capacity: job.capacity,
-    applyBefore: job.applyBefore,
-    jobPostedOn: job.jobPostedOn,
-    jobType: job.jobType,
-    salary: job.salary,
-    categories: job.categories,
-    requiredSkills: job.requiredSkills,
+    description: isPublicJob
+      ? publicJob.description
+      : mockJobDetail.description,
+    responsibilities: isPublicJob
+      ? publicJob.responsibilities
+      : mockJobDetail.responsibilities,
+    whoYouAre: isPublicJob ? publicJob.whoYouAre : mockJobDetail.whoYouAre,
+    niceToHave: isPublicJob ? publicJob.niceToHave : mockJobDetail.niceToHave,
+    appliedCount: isPublicJob
+      ? publicJob.applicants
+      : mockJobDetail.appliedCount,
+    capacity: isPublicJob ? publicJob.capacity : mockJobDetail.capacity,
+    applyBefore: isPublicJob
+      ? publicJob.applyBefore
+      : mockJobDetail.applyBefore,
+    jobPostedOn: isPublicJob ? publicJob.datePosted : mockJobDetail.jobPostedOn,
+    jobType: isPublicJob ? publicJob.jobType : mockJobDetail.jobType,
+    salary: isPublicJob ? publicJob.salaryRange : mockJobDetail.salary,
+    categories: isPublicJob ? publicJob.categories : mockJobDetail.categories,
+    requiredSkills: isPublicJob
+      ? publicJob.requiredSkills
+      : mockJobDetail.requiredSkills,
   };
 
   const handleApply = () => {
@@ -37,34 +53,86 @@ const JobDescPage = () => {
     setIsApplicationModalOpen(false);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg font-medium text-gray-900 mb-2">
+            Loading job details...
+          </div>
+          <div className="text-sm text-gray-500">
+            Please wait while we fetch the job information.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg font-medium text-red-600 mb-2">
+            Error loading job
+          </div>
+          <div className="text-sm text-gray-500">
+            The job you're looking for could not be found.
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen overflow-y-auto">
       <LandingHeader />
       <JobHeader
-        jobName={job.jobName}
-        jobType={job.jobType}
-        location={job.location}
+        jobName={isPublicJob ? publicJob.jobTitle : mockJobDetail.jobName}
+        jobType={isPublicJob ? publicJob.jobType : mockJobDetail.jobType}
+        location={isPublicJob ? publicJob.location : mockJobDetail.location}
+        companyName={
+          isPublicJob ? publicJob.companyName : mockJobDetail.company.name
+        }
+        companyLogo={
+          isPublicJob ? publicJob.companyLogo : mockJobDetail.company.logoSrc
+        }
         onApply={handleApply}
       />
 
       <JobPageContent {...jobContentData} />
 
-      <JobBenefits benefits={job.benefits} />
+      <JobBenefits
+        benefits={isPublicJob ? publicJob.benefits : mockJobDetail.benefits}
+      />
       <CompanyAboutSection
-        companyName={job.company.name}
-        companyLogoSrc={job.company.logoSrc}
-        companyDescription={job.company.description}
-        companyGalleryImages={job.company.galleryImages}
+        companyName={
+          isPublicJob ? publicJob.companyName : mockJobDetail.company.name
+        }
+        companyLogoSrc={
+          isPublicJob ? publicJob.companyLogo : mockJobDetail.company.logoSrc
+        }
+        companyDescription={
+          isPublicJob
+            ? publicJob.companyDescription
+            : mockJobDetail.company.description
+        }
+        companyGalleryImages={
+          isPublicJob
+            ? publicJob.companyGalleryImages
+            : mockJobDetail.company.galleryImages
+        }
       />
       <LandingFooter />
 
       <ApplicationModal
         isOpen={isApplicationModalOpen}
         onClose={handleCloseModal}
-        jobName={job.jobName}
-        companyName={job.company.name}
-        location={job.location}
-        jobType={job.jobType}
+        jobName={isPublicJob ? publicJob.jobTitle : mockJobDetail.jobName}
+        companyName={
+          isPublicJob ? publicJob.companyName : mockJobDetail.company.name
+        }
+        location={isPublicJob ? publicJob.location : mockJobDetail.location}
+        jobType={isPublicJob ? publicJob.jobType : mockJobDetail.jobType}
       />
     </div>
   );
