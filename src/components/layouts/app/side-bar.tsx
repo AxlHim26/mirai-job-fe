@@ -1,5 +1,6 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { useAuthStore } from "@/stores";
+import { Button } from "@/components/ui";
 import { Link } from "react-router-dom";
 import { ROLES } from "@/consts";
 import { NavigateSideBar } from "@/components/ui/navigate/navigate-sb";
@@ -63,6 +64,13 @@ export const AppSideBar = () => {
             </p>
             <p className="text-xs text-gray-500 truncate">jakagy@email.com</p>
           </div>
+          <Button
+            variant="outlined"
+            size="sm"
+            onClick={() => useAuthStore.getState().logout()}
+          >
+            Log out
+          </Button>
         </div>
       </div>
     </aside>
