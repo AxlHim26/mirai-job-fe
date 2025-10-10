@@ -124,6 +124,10 @@ export const paths = {
       path: "browse",
       getHref: () => "/app/candidate/browse",
     },
+    jobDesc: {
+      path: "job-desc",
+      getHref: () => "/app/candidate/job-desc",
+    },
     help: {
       path: "help",
       getHref: () => "/app/candidate/help",
