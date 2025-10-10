@@ -8,17 +8,31 @@ const buttonVariants = cva(
     variants: {
       variant: {
         filled:
-          "border border-transparent bg-[#0A65CC] text-white hover:bg-black/90",
+          "border border-transparent bg-[#0A65CC] text-white hover:bg-[#0956A8] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
         outlined:
-          "border border-primary bg-white text-primary hover:bg-black/10",
+          "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
         ghost:
-          "hover:bg-black/10 border-[1px] border-[#CCCCF5] text-[#4640DE] text-[16px] font-bold leading-[25.6px]",
+          "hover:bg-gray-100 border-[1px] border-[#CCCCF5] text-[#4640DE] text-[16px] font-bold leading-[25.6px] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+        danger:
+          "border border-transparent bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2",
+        success:
+          "border border-transparent bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2",
+        icon: "text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors",
+        link: "text-blue-600 hover:text-blue-800 underline-offset-4 hover:underline bg-transparent p-0 h-auto",
+        toggle:
+          "border border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+        toggleActive:
+          "border border-blue-200 bg-blue-50 text-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
       },
       size: {
+        xs: "h-6 px-2 text-xs",
         sm: "h-8 px-3 text-sm",
         md: "h-10 px-4 py-2",
         lg: "h-12 px-8",
+        xl: "h-14 px-10 text-lg",
         icon: "size-9",
+        iconSm: "size-8",
+        iconLg: "size-10",
       },
     },
     defaultVariants: {
