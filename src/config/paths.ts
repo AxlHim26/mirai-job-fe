@@ -113,6 +113,10 @@ export const paths = {
         getHref: () => "/app/recruiter/settings/team",
       },
     },
+    help: {
+      path: "help",
+      getHref: () => "/app/recruiter/help",
+    },
   },
 
   candidate: {

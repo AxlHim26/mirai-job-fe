@@ -44,7 +44,7 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ profile }) => {
         </div>
       </div>
 
-      {/* Team Members Grid */}
+      {/* Team Members Grid - Always show mock data */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         {profile.teamMembers.map((member) => (
           <div

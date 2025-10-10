@@ -4,18 +4,18 @@ import { OverlayLayout } from "./overlay-layout";
 import { useOverlayStore } from "@/stores/overlay-store";
 
 export const OverlayContainer = () => {
-    const { component, dismiss } = useOverlayStore();
-    const { pathname } = useLocation();
+  const { component, dismiss } = useOverlayStore();
+  const { pathname } = useLocation();
 
-    useEffect(() => {
-        if (component) {
-            dismiss();
-        }
-    }, [pathname]);
-
-    if (!component) {
-        return <></>;
+  useEffect(() => {
+    if (component) {
+      dismiss();
     }
+  }, [pathname, component, dismiss]);
 
-    return <OverlayLayout onDismiss={dismiss}>{component}</OverlayLayout>
-}
+  if (!component) {
+    return <></>;
+  }
+
+  return <OverlayLayout onDismiss={dismiss}>{component}</OverlayLayout>;
+};

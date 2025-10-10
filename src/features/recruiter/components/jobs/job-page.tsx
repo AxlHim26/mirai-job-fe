@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchJobs } from "../../api/job/job";
+import { fetchJobs } from "../../api/jobs/job";
 import { JobTable } from "./job-table";
 import { JobFiltersComponent } from "./job-filters";
 import { JobStats } from "./job-stats";
