@@ -32,19 +32,19 @@ export const ApplicantInterfacePage: React.FC = () => {
 
   // Filter applicants based on active tab and search query
   const filteredApplicants = useMemo(() => {
-    if (!applicantResponse?.data?.applicants) return [];
+    if (!applicantResponse?.applicants) return [];
 
-    let filtered = applicantResponse.data.applicants;
+    let filtered = applicantResponse.applicants;
 
     // Filter by status tab
     if (activeTab !== "All") {
-      filtered = filtered.filter((app) => app.status === activeTab);
+      filtered = filtered.filter((app: Applicant) => app.status === activeTab);
     }
 
     // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(
-        (app) =>
+        (app: Applicant) =>
           app.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
           app.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
           app.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())
@@ -52,7 +52,7 @@ export const ApplicantInterfacePage: React.FC = () => {
     }
 
     return filtered;
-  }, [applicantResponse?.data?.applicants, activeTab, searchQuery]);
+  }, [applicantResponse?.applicants, activeTab, searchQuery]);
 
   const handleApplicantClick = (applicant: Applicant) => {
     navigate(paths.recruiter.applicantDetail.getHref(applicant.id.toString()));
@@ -75,7 +75,7 @@ export const ApplicantInterfacePage: React.FC = () => {
   const handleDateRangeChange = (startDate: string, endDate: string) => {
     setFilters((prev) => ({
       ...prev,
-      dateRange: { startDate, endDate },
+      dateRange: { start: startDate, end: endDate },
     }));
     setCurrentPage(1);
   };
@@ -131,7 +131,7 @@ export const ApplicantInterfacePage: React.FC = () => {
           <ApplicantTabs
             activeTab={activeTab}
             onTabChange={handleTabChange}
-            applicants={applicantResponse?.data?.applicants || []}
+            applicants={applicantResponse?.applicants || []}
           />
 
           <ApplicantTable
