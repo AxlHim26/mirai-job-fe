@@ -1,6 +1,7 @@
 import { MoreVertical, ChevronUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { sortApplications, getApplicationsByStatus } from "./mock-data";
+import { Button } from "@/components/ui";
 
 type SortField = "company" | "dateApplied" | "status" | "role";
 type SortOrder = "asc" | "desc";
@@ -40,6 +41,7 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
       <ChevronDown className="w-4 h-4 text-gray-600" />
     );
   };
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full">
@@ -136,9 +138,12 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right">
-                <button className="text-gray-400 hover:text-gray-600">
+                <Button
+                  variant="icon"
+                  size="iconSm"
+                >
                   <MoreVertical className="w-5 h-5" />
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
