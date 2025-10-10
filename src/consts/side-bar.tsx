@@ -22,6 +22,17 @@ export const SETTINGSIDEBARTITLE: SideBarTitle[] = [
   },
 ];
 
+export const RECRUITERSETTINGSIDEBARTITLE: SideBarTitle[] = [
+  {
+    title: "Settings",
+    path: paths.recruiter.settings.path,
+  },
+  {
+    title: "Help Center",
+    path: paths.recruiter.help.path,
+  },
+];
+
 export const RECRUITERSIDEBARTITLE: SideBarTitle[] = [
   {
     title: "Dashboard",
@@ -73,6 +84,17 @@ export const CANDIDATESIDEBARTITLE: SideBarTitle[] = [
 ];
 
 export const SETTINGSIDEBARICON: SideBarIcon[] = [
+  {
+    active: <LocalIcon iconName="setting_active" />,
+    inactive: <LocalIcon iconName="setting_inactive" />,
+  },
+  {
+    active: <LocalIcon iconName="help_active" />,
+    inactive: <LocalIcon iconName="help_inactive" />,
+  },
+];
+
+export const RECRUITERSETTINGSIDEBARICON: SideBarIcon[] = [
   {
     active: <LocalIcon iconName="setting_active" />,
     inactive: <LocalIcon iconName="setting_inactive" />,

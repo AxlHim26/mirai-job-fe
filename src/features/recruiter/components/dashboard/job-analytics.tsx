@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Eye, Users, ChevronDown, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Eye, Users, ChevronDown } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -47,41 +46,6 @@ export const JobAnalyticsDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-6">
-        {/* Job Title Section */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-4">
-            <button className="p-2 hover:bg-gray-100 rounded-lg">
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Social Media Assistant
-              </h1>
-              <p className="text-gray-600">Design • Full-Time • 4 / 11 Hired</p>
-            </div>
-          </div>
-          <Button
-            variant="outlined"
-            className="rounded-lg"
-          >
-            More Action
-            <ChevronDown className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex space-x-6 mb-6 border-b border-gray-200">
-          <button className="pb-3 text-gray-600 hover:text-gray-900">
-            Applicants
-          </button>
-          <button className="pb-3 text-gray-600 hover:text-gray-900">
-            Job Details
-          </button>
-          <button className="pb-3 text-blue-600 border-b-2 border-blue-600 font-medium">
-            Analytics
-          </button>
-        </div>
-
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Total Views */}

@@ -46,7 +46,7 @@ export const WorkingSection: React.FC<WorkingSectionProps> = ({ profile }) => {
         </div>
       </div>
 
-      {/* Images Grid - 3 images: 1 large left, 2 small right */}
+      {/* Images Grid - Always show mock data */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Large Image */}
         <div className="md:col-span-2">

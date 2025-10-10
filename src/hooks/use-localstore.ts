@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export const useLocalStore = <T>(key: string, initialValue: T) => {
-  const readValue = (): T => {
+  const readValue = useCallback((): T => {
     if (typeof window === "undefined") return initialValue;
 
     try {
@@ -11,7 +11,7 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
     } catch {
       return initialValue;
     }
-  };
+  }, [key, initialValue]);
 
   const [storedValue, setStoredValue] = useState<T>(readValue);
   const setValue = (value: T | ((val: T) => T)) => {
@@ -47,7 +47,7 @@ export const useLocalStore = <T>(key: string, initialValue: T) => {
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  }, [readValue]);
 
   return [setValue, remove] as const;
 };

@@ -7,9 +7,9 @@ import { AxiosError } from "axios";
 import { z } from "zod";
 
 export const socialLinkSchema = z.object({
-  facebook: z.string(),
-  twitter: z.string(),
-  linkedin: z.string(),
+  facebookLink: z.string(),
+  twitterLink: z.string(),
+  linkedinLink: z.string(),
 });
 
 export const fetchSocialLinks = () => {
@@ -22,11 +22,7 @@ export const useSocialLinks = () => {
   return useQuery({
     queryKey: ["social-links"],
     queryFn: fetchSocialLinks,
-    select: (res) => ({
-      facebook: res.data.facebookLink,
-      twitter: res.data.twitterLink,
-      linkedin: res.data.linkedinLink,
-    }),
+    select: (res) => res.data,
   });
 };
 
@@ -41,18 +37,7 @@ export const useUpdateSocialLinks = () => {
   const { addToast } = useToastStore();
 
   return useMutation({
-    mutationFn: async (formData: {
-      facebook: string;
-      twitter: string;
-      linkedin: string;
-    }) => {
-      const payload: SocialLink = {
-        facebookLink: formData.facebook,
-        twitterLink: formData.twitter,
-        linkedinLink: formData.linkedin,
-      };
-      return updateSocialLinks(payload);
-    },
+    mutationFn: updateSocialLinks,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["social-links"] });
       addToast({

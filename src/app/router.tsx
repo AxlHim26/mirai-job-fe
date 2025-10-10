@@ -165,24 +165,31 @@ const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
           index: true,
           lazy: () =>
             import(
-              "@/features/settings/recruiter/components/overview-form"
+              "@/features/recruiter/components/setting/components/overview-form"
             ).then(withClient),
         },
         {
           path: paths.recruiter.settings.social.path,
           lazy: () =>
             import(
-              "@/features/settings/recruiter/components/social-links-form"
+              "@/features/recruiter/components/setting/components/social-links-form"
             ).then(withClient),
         },
         {
           path: paths.recruiter.settings.team.path,
           lazy: () =>
-            import("@/features/settings/recruiter/components/team").then(
-              withClient
-            ),
+            import(
+              "@/features/recruiter/components/setting/components/team"
+            ).then(withClient),
         },
       ],
+    },
+    {
+      path: paths.recruiter.help.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/help-center-recruiter").then(
+          withClient
+        ),
     },
     ...commonRouterChildren(withClient),
   ];

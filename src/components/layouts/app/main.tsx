@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/stores";
+import { useAuth } from "@/hooks/use-auth";
 import { AppSideBar } from "./side-bar";
 import { ROLES } from "@/consts";
 import { CandidateHeader } from "../candidate";
@@ -7,9 +7,8 @@ import { RecruiterHeader } from "../recruiter";
 export const AppMain: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const role = useAuthStore((state) =>
-    state.user ? state.user.role.name : "undefined"
-  );
+  const { user } = useAuth();
+  const role = user?.role?.name || "undefined";
 
   return (
     <main className="flex flex-1 h-screen overflow-hidden">

@@ -1,7 +1,7 @@
 import React from "react";
 import { useJobPostingStore } from "@/stores";
 import { Button } from "@/components/ui/button";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postJob } from "@/features/recruiter/api/job-posting";
 import { useToastStore } from "@/stores";
 
@@ -16,6 +16,7 @@ export const JobReviewStep: React.FC<JobReviewStepProps> = ({
 }) => {
   const { data, clearStore, setSubmitting } = useJobPostingStore();
   const { addToast } = useToastStore();
+  const queryClient = useQueryClient();
 
   const postJobMutation = useMutation({
     mutationFn: postJob,
@@ -25,6 +26,8 @@ export const JobReviewStep: React.FC<JobReviewStepProps> = ({
         message: "Job posted successfully!",
         type: "success",
       });
+      // Invalidate jobs query to refetch the job listing
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       clearStore();
       onSuccess();
     },
