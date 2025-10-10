@@ -1,68 +1,45 @@
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, ChevronUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { sortApplications, getApplicationsByStatus } from "./mock-data";
 
-export const ApplicationTables = () => {
-  const applications: Application[] = [
-    {
-      id: 1,
-      company: "Nomad",
-      logo: "🏢",
-      role: "Social Media Assistant",
-      dateApplied: "24 July 2021",
-      status: "In Review",
-      statusColor: "bg-yellow-100 text-yellow-700",
-    },
-    {
-      id: 2,
-      company: "Udacity",
-      logo: "🎓",
-      role: "Social Media Assistant",
-      dateApplied: "20 July 2021",
-      status: "Shortlisted",
-      statusColor: "bg-green-100 text-green-700",
-    },
-    {
-      id: 3,
-      company: "Packer",
-      logo: "📦",
-      role: "Social Media Assistant",
-      dateApplied: "16 July 2021",
-      status: "Offered",
-      statusColor: "bg-blue-100 text-blue-700",
-    },
-    {
-      id: 4,
-      company: "Divvy",
-      logo: "💳",
-      role: "Social Media Assistant",
-      dateApplied: "14 July 2021",
-      status: "Interviewing",
-      statusColor: "bg-orange-100 text-orange-700",
-    },
-    {
-      id: 5,
-      company: "DigitalOcean",
-      logo: "🌊",
-      role: "Social Media Assistant",
-      dateApplied: "10 July 2021",
-      status: "Unsuitable",
-      statusColor: "bg-red-100 text-red-700",
-    },
-  ];
+type SortField = "company" | "dateApplied" | "status" | "role";
+type SortOrder = "asc" | "desc";
 
-  interface Application {
-    id: number;
-    company: string;
-    logo: string;
-    role: string;
-    dateApplied: string;
-    status:
-      | "In Review"
-      | "Shortlisted"
-      | "Offered"
-      | "Interviewing"
-      | "Unsuitable";
-    statusColor: string;
-  }
+type ApplicationTablesProps = {
+  activeTab: string;
+};
+
+export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
+  const [sortField, setSortField] = useState<SortField>("dateApplied");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
+
+  // Filter applications based on active tab
+  const filteredApplications = getApplicationsByStatus(activeTab);
+  const sortedApplications = sortApplications(
+    filteredApplications,
+    sortField,
+    sortOrder
+  );
+
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) {
+      return <ChevronUp className="w-4 h-4 text-gray-400" />;
+    }
+    return sortOrder === "asc" ? (
+      <ChevronUp className="w-4 h-4 text-gray-600" />
+    ) : (
+      <ChevronDown className="w-4 h-4 text-gray-600" />
+    );
+  };
   return (
     <div className="overflow-x-auto">
       <table className="w-full">
@@ -71,23 +48,47 @@ export const ApplicationTables = () => {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">
               #
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Company Name
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort("company")}
+            >
+              <div className="flex items-center gap-1">
+                Company Name
+                {getSortIcon("company")}
+              </div>
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Roles
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort("role")}
+            >
+              <div className="flex items-center gap-1">
+                Roles
+                {getSortIcon("role")}
+              </div>
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Date Applied
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort("dateApplied")}
+            >
+              <div className="flex items-center gap-1">
+                Date Applied
+                {getSortIcon("dateApplied")}
+              </div>
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort("status")}
+            >
+              <div className="flex items-center gap-1">
+                Status
+                {getSortIcon("status")}
+              </div>
             </th>
             <th className="px-6 py-3 w-16"></th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {applications.map((app) => (
+          {sortedApplications.map((app) => (
             <tr
               key={app.id}
               className="hover:bg-gray-50"
@@ -97,16 +98,32 @@ export const ApplicationTables = () => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-lg">
-                    {app.logo}
+                  <img
+                    src={app.logo}
+                    alt={`${app.company} logo`}
+                    className="w-10 h-10 rounded-lg object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://ui-avatars.com/api/?name=${app.company}&background=3b82f6&color=fff&size=40`;
+                    }}
+                  />
+                  <div>
+                    <span className="text-sm font-medium text-gray-900">
+                      {app.company}
+                    </span>
+                    {app.location && (
+                      <p className="text-xs text-gray-500">{app.location}</p>
+                    )}
                   </div>
-                  <span className="text-sm font-medium text-gray-900">
-                    {app.company}
-                  </span>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {app.role}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div>
+                  <span className="text-sm text-gray-900">{app.role}</span>
+                  {app.salary && (
+                    <p className="text-xs text-gray-500">{app.salary}</p>
+                  )}
+                </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 {app.dateApplied}
