@@ -1,11 +1,11 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Button } from "@/components/ui";
-import { useAuthStore } from "@/stores";
+import { useAuth } from "@/hooks/use-auth";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/config/paths";
 
 export const RecruiterHeader = () => {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handlePostJob = () => {

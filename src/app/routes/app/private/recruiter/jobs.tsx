@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 const JobPage = lazy(() =>
-  import("@/features/jobs/components/job/job-page").then((module) => ({
+  import("@/features/recruiter/components/jobs/job-page").then((module) => ({
     default: module.JobPage,
   }))
 );

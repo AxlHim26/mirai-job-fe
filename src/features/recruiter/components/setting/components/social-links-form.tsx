@@ -32,20 +32,22 @@ const SocialLinkForm = () => {
             </div>
 
             <div className="md:col-span-3 space-y-4">
-              {["facebook", "twitter", "linkedin"].map((platform) => (
+              {[
+                { key: "facebookLink", label: "Facebook" },
+                { key: "twitterLink", label: "Twitter" },
+                { key: "linkedinLink", label: "LinkedIn" },
+              ].map(({ key, label }) => (
                 <Input
-                  key={platform}
-                  label={platform.charAt(0).toUpperCase() + platform.slice(1)}
+                  key={key}
+                  label={label}
                   type="text"
                   register={register(
-                    platform as keyof z.infer<typeof socialLinkSchema>,
+                    key as keyof z.infer<typeof socialLinkSchema>,
                     {
-                      required: `${platform.charAt(0).toUpperCase() + platform.slice(1)} handle is required`,
+                      required: `${label} handle is required`,
                     }
                   )}
-                  error={
-                    errors[platform as keyof z.infer<typeof socialLinkSchema>]
-                  }
+                  error={errors[key as keyof z.infer<typeof socialLinkSchema>]}
                   variants="filled"
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />

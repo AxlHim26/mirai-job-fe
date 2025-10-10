@@ -76,6 +76,7 @@ const OverviewForm = () => {
     const formattedDate = `${foundedDate.year}-${String(monthIndex).padStart(2, "0")}-${foundedDate.day.padStart(2, "0")}`;
     const payload: RecruiterResponse = {
       ...formData,
+      avatar: data?.avatar || "",
       foundedDate: formattedDate,
     };
     mutate(payload);
@@ -240,16 +241,26 @@ const OverviewForm = () => {
                     Brief description for your company. URLs are hyperlinked.
                   </p>
                 </div>
-                <Textarea
-                  label="Description"
-                  variants="outlined"
-                  register={register("description", {
-                    required: "Description is required",
-                  })}
-                  error={formState.errors.description}
-                  rows={5}
-                  className={inputClass}
-                />
+                <div className="col-span-12 md:col-span-8 space-y-4">
+                  <Textarea
+                    label="Description"
+                    variants="outlined"
+                    register={register("description", {
+                      required: "Description is required",
+                    })}
+                    error={formState.errors.description}
+                    rows={5}
+                    className={inputClass}
+                  />
+                  <Textarea
+                    label="Benefits"
+                    variants="outlined"
+                    register={register("benefit")}
+                    error={formState.errors.benefit}
+                    rows={3}
+                    className={inputClass}
+                  />
+                </div>
               </div>
 
               <div className="flex justify-end py-6">
