@@ -4,3 +4,4 @@ export * from "./tables";
 export * from "./tabs";
 export * from "./controls";
 export * from "./mock-data";
+export * from "./pagination";

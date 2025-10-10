@@ -1,13 +1,17 @@
 import { Edit2 } from "lucide-react";
+import { Button } from "@/components/ui";
 
 export const ProfileAbout = () => {
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">About Me</h2>
-        <button className="text-gray-400 hover:text-gray-600">
+        <Button
+          variant="icon"
+          size="iconSm"
+        >
           <Edit2 size={18} />
-        </button>
+        </Button>
       </div>
       <p className="text-gray-700 text-sm leading-relaxed">
         I'm a product designer + filmmaker currently working remotely at Twitter

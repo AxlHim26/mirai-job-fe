@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui";
 
 export const ApplicationFeatureBanner = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -34,12 +35,13 @@ export const ApplicationFeatureBanner = () => {
           job.
         </p>
       </div>
-      <button
+      <Button
+        variant="icon"
+        size="iconSm"
         onClick={() => setShowBanner(false)}
-        className="text-gray-400 hover:text-gray-600"
       >
         <X className="w-5 h-5" />
-      </button>
+      </Button>
     </div>
   );
 };

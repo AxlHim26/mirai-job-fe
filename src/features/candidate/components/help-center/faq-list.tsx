@@ -1,4 +1,5 @@
 import { MoreVertical, ThumbsDown, ThumbsUp } from "lucide-react";
+import { Button } from "@/components/ui";
 
 export interface FAQItem {
   id: string;
@@ -24,9 +25,12 @@ export const HelpCenterFAQ = ({ faqs, onFeedback }: HelpCenterFAQProps) => {
             <h2 className="text-lg font-semibold text-gray-900 pr-4">
               {faq.question}
             </h2>
-            <button className="text-gray-400 hover:text-gray-600">
+            <Button
+              variant="icon"
+              size="iconSm"
+            >
               <MoreVertical className="w-5 h-5" />
-            </button>
+            </Button>
           </div>
 
           <p className="text-gray-600 mb-6 leading-relaxed">{faq.answer}</p>
@@ -35,28 +39,22 @@ export const HelpCenterFAQ = ({ faqs, onFeedback }: HelpCenterFAQProps) => {
             <span className="text-sm text-gray-600">
               Was this article helpful?
             </span>
-            <button
+            <Button
+              variant={faq.helpful === true ? "toggleActive" : "toggle"}
+              size="sm"
               onClick={() => onFeedback(faq.id, true)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                faq.helpful === true
-                  ? "bg-blue-50 text-blue-600 border border-blue-200"
-                  : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100"
-              }`}
+              startIcon={<ThumbsUp className="w-4 h-4" />}
             >
-              <ThumbsUp className="w-4 h-4" />
-              <span className="text-sm font-medium">Yes</span>
-            </button>
-            <button
+              Yes
+            </Button>
+            <Button
+              variant={faq.helpful === false ? "danger" : "toggle"}
+              size="sm"
               onClick={() => onFeedback(faq.id, false)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                faq.helpful === false
-                  ? "bg-red-50 text-red-600 border border-red-200"
-                  : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100"
-              }`}
+              startIcon={<ThumbsDown className="w-4 h-4" />}
             >
-              <ThumbsDown className="w-4 h-4" />
-              <span className="text-sm font-medium">No</span>
-            </button>
+              No
+            </Button>
           </div>
         </div>
       ))}
