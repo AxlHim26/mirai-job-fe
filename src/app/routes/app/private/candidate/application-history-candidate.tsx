@@ -4,17 +4,27 @@ import { ApplicationFeatureBanner } from "@/features/application-history/feature
 import { ApplicationHeader } from "@/features/application-history/header";
 import { ApplicationTables } from "@/features/application-history/tables";
 import { ApplicationTabs } from "@/features/application-history/tabs";
+import { useState } from "react";
 
 const ApplicationHistoryCandidate = () => {
+  const [activeTab, setActiveTab] = useState("All");
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 ">
       <div className="max-w-7xl mx-auto">
         <ApplicationHeader />
         <ApplicationFeatureBanner />
-        <ApplicationTabs />
+        <ApplicationTabs
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
         <div className="bg-white rounded-b-lg shadow-sm">
           <ApplicationControls />
-          <ApplicationTables />
+          <ApplicationTables activeTab={activeTab} />
           <div className="flex justify-center mt-4">
             <Pagination
               currentPage={1}
