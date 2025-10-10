@@ -1,0 +1,141 @@
+import { Job, JobResponse } from "@/types";
+
+export const mockJobs: Job[] = [
+  {
+    id: "1",
+    title: "Social Media Assistant",
+    status: "Live",
+    datePosted: "2024-05-20",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 19,
+    needs: { current: 4, total: 11 },
+  },
+  {
+    id: "2",
+    title: "Senior Designer",
+    status: "Live",
+    datePosted: "2024-05-16",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 1234,
+    needs: { current: 0, total: 20 },
+  },
+  {
+    id: "3",
+    title: "Visual Designer",
+    status: "Live",
+    datePosted: "2024-05-15",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 2435,
+    needs: { current: 1, total: 5 },
+  },
+  {
+    id: "4",
+    title: "Data Science",
+    status: "Live",
+    datePosted: "2024-05-13",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 6234,
+    needs: { current: 10, total: 10 },
+  },
+  {
+    id: "5",
+    title: "Kotlin Developer",
+    status: "Live",
+    datePosted: "2024-05-12",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 12,
+    needs: { current: 20, total: 20 },
+  },
+  {
+    id: "6",
+    title: "React Developer",
+    status: "Live",
+    datePosted: "2024-05-11",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 14,
+    needs: { current: 10, total: 10 },
+  },
+  {
+    id: "7",
+    title: "Frontend Developer",
+    status: "Live",
+    datePosted: "2024-05-10",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 89,
+    needs: { current: 5, total: 15 },
+  },
+  {
+    id: "8",
+    title: "Backend Developer",
+    status: "Live",
+    datePosted: "2024-05-09",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 156,
+    needs: { current: 8, total: 12 },
+  },
+  {
+    id: "9",
+    title: "Product Manager",
+    status: "Live",
+    datePosted: "2024-05-08",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 234,
+    needs: { current: 2, total: 8 },
+  },
+  {
+    id: "10",
+    title: "UX Designer",
+    status: "Live",
+    datePosted: "2024-05-07",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 67,
+    needs: { current: 3, total: 6 },
+  },
+  {
+    id: "11",
+    title: "DevOps Engineer",
+    status: "Live",
+    datePosted: "2024-05-06",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 45,
+    needs: { current: 1, total: 3 },
+  },
+  {
+    id: "12",
+    title: "Mobile Developer",
+    status: "Live",
+    datePosted: "2024-05-05",
+    dueDate: "2024-05-24",
+    jobType: "Fulltime",
+    applicants: 78,
+    needs: { current: 4, total: 7 },
+  },
+];
+
+export const mockJobResponse = (
+  page: number = 1,
+  limit: number = 10
+): JobResponse => {
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const jobs = mockJobs.slice(startIndex, endIndex);
+
+  return {
+    jobs,
+    total: mockJobs.length,
+    page,
+    limit,
+    totalPages: Math.ceil(mockJobs.length / limit),
+  };
+};
