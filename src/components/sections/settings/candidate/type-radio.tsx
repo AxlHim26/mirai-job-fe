@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form";
 import z from "zod";
-import { profileSchema } from "@/features/settings/candidate/api/profile";
+import { profileSchema } from "@/features/candidate/components/settings/api/profile";
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
 

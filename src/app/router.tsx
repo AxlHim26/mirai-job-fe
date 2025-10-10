@@ -198,9 +198,9 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
     {
       path: paths.app.candidate.path,
       lazy: () =>
-        import("./routes/app/private/candidate/dashboard-candidate").then(
-          withClient
-        ),
+        import(
+          "./routes/app/private/candidate/dashboard-applicant-candidate"
+        ).then(withClient),
     },
     {
       path: paths.candidate.profile.path,
@@ -263,21 +263,21 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
           index: true,
           lazy: () =>
             import(
-              "@/features/settings/candidate/components/profile-form"
+              "@/features/candidate/components/settings/components/profile-form"
             ).then(withClient),
         },
         {
           path: paths.candidate.settings.loginDetail.path,
           lazy: () =>
             import(
-              "@/features/settings/candidate/components/login-detail-container"
+              "@/features/candidate/components/settings/components/login-detail-container"
             ).then(withClient),
         },
         {
           path: paths.candidate.settings.notifications.path,
           lazy: () =>
             import(
-              "@/features/settings/candidate/components/notifications"
+              "@/features/candidate/components/settings/components/notifications"
             ).then(withClient),
         },
       ],

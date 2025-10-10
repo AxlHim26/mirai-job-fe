@@ -5,7 +5,7 @@ import {
   ProfileLeftSidebar,
   ProfilePortfolio,
   ProfileSkill,
-} from "@/features/candidate-profile";
+} from "@/features/candidate/components/candidate-profile";
 
 const ProfilePage = () => {
   return (

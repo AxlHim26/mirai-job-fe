@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { MessageCircle } from "lucide-react";
-import { HelpCenterHeader } from "@/features/help-center/header";
-import { HelpCenterFAQ, FAQItem } from "@/features/help-center/faq-list";
-import { HelpCenterSidebar } from "@/features/help-center/sidebar";
+import { HelpCenterHeader } from "@/features/candidate/components/help-center/header";
+import {
+  HelpCenterFAQ,
+  FAQItem,
+} from "@/features/candidate/components/help-center/faq-list";
+import { HelpCenterSidebar } from "@/features/candidate/components/help-center/sidebar";
 
 export const HelpCenterCandidate = () => {
   const [searchQuery] = useState("");
