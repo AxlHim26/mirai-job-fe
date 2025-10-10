@@ -210,6 +210,51 @@ const candidateRouterChildren = (withClient: ReturnType<typeof convert>) => {
         ),
     },
     {
+      path: paths.candidate.browse.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/browse-companies-candidate"
+        ).then(withClient),
+    },
+    {
+      path: paths.candidate.dashboard.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/dashboard-applicant-candidate"
+        ).then(withClient),
+    },
+    {
+      path: paths.candidate.applications.path,
+      lazy: () =>
+        import(
+          "./routes/app/private/candidate/application-history-candidate"
+        ).then(withClient),
+    },
+    {
+      path: paths.candidate.jobDesc.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/job-desc-candidate").then(
+          withClient
+        ),
+    },
+
+    {
+      path: paths.candidate.help.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/help-center-candidate").then(
+          withClient
+        ),
+    },
+
+    {
+      path: paths.candidate.search.path,
+      lazy: () =>
+        import("./routes/app/private/candidate/job-desc-candidate").then(
+          withClient
+        ),
+    },
+
+    {
       path: paths.candidate.settings.path,
       lazy: () =>
         import("./routes/app/private/candidate/settings").then(withClient),
