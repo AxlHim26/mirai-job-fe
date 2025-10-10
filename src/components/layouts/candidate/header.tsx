@@ -39,6 +39,8 @@ export const CandidateHeader = () => {
         return "Browse Companies";
       if (pathname.startsWith(paths.candidate.profile.getHref()))
         return "My Public Profile";
+      if (pathname.startsWith(paths.candidate.findJobs.getHref()))
+        return "Find Jobs";
       if (pathname.startsWith(paths.candidate.settings.getHref()))
         return "Settings";
       if (pathname.startsWith(paths.candidate.help.getHref()))
