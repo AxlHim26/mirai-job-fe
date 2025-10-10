@@ -126,6 +126,35 @@ const recruiterRouterChildren = (withClient: ReturnType<typeof convert>) => {
         ),
     },
     {
+      path: paths.recruiter.applicants.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/applicants").then(withClient),
+    },
+    {
+      path: paths.recruiter.applicantDetail.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/applicant-detail").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.recruiter.profile.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/company-profile").then(
+          withClient
+        ),
+    },
+    {
+      path: paths.recruiter.jobPostings.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/jobs").then(withClient),
+    },
+    {
+      path: paths.recruiter.postJob.path,
+      lazy: () =>
+        import("./routes/app/private/recruiter/post-job").then(withClient),
+    },
+    {
       path: paths.recruiter.settings.path,
       lazy: () =>
         import("./routes/app/private/recruiter/company-setting").then(

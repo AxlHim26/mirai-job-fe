@@ -13,6 +13,7 @@ export const NavigateSideBar = ({ titles, icons }: NavigateSideBarProps) => {
         <NavLink
           key={index}
           to={title.path}
+          end
           className={({ isActive }) =>
             `flex items-center text-[16px] font-medium leading-[25.6px]
     hover:bg-[#e6e9f4] gap-4 px-4 py-3 transition
