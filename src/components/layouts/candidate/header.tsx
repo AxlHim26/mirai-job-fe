@@ -1,11 +1,27 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
 import { Button } from "@/components/ui";
+import {
+  NotificationBadge,
+  NotificationPopup,
+  mockNotifications,
+} from "@/components/ui/notification";
 import { paths } from "@/config/paths";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const CandidateHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const handleMarkAllAsRead = () => {
+    // TODO: Implement mark all as read functionality
+    console.log("Mark all as read");
+  };
+
+  const handleCloseNotifications = () => {
+    setShowNotifications(false);
+  };
 
   const title = (() => {
     const pathname = location.pathname;
@@ -46,9 +62,37 @@ export const CandidateHeader = () => {
         >
           Back to Home
         </Button>
-        <figure>
-          <LocalIcon iconName="NotificationIcon" />
-        </figure>
+
+        {/* Notification Button */}
+        <div className="relative">
+          <button
+            onClick={() => setShowNotifications(!showNotifications)}
+            className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <LocalIcon iconName="NotificationIcon" />
+            <NotificationBadge
+              number={3}
+              size={16}
+              className="absolute -top-1 -right-1"
+            />
+          </button>
+
+          {/* Notification Popup */}
+          {showNotifications && (
+            <>
+              {/* Backdrop */}
+              <div
+                className="fixed inset-0 z-40"
+                onClick={handleCloseNotifications}
+              />
+              <NotificationPopup
+                notifications={mockNotifications}
+                onMarkAllAsRead={handleMarkAllAsRead}
+                onClose={handleCloseNotifications}
+              />
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
