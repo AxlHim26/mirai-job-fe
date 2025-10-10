@@ -1,21 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApplicantStatus } from "@/types";
 
 // FE-only mock-backed API for candidate application history
 // Reuses existing mock data generator from the feature folder
 import {
   getApplicationsByStatus,
   sortApplications,
+  type Application,
 } from "@/features/candidate/components/application-history/mock-data";
 
-export type CandidateApplication = {
-  id: string;
-  company: string;
-  jobTitle: string;
-  appliedDate: string;
-  status: ApplicantStatus | "Saved" | "All";
-  location?: string;
-};
+export type CandidateApplication = Application;
 
 export type CandidateApplicationsResponse = {
   applications: CandidateApplication[];
@@ -23,13 +16,13 @@ export type CandidateApplicationsResponse = {
 };
 
 export type CandidateApplicationsFilters = {
-  status?: Exclude<CandidateApplication["status"], "All">;
+  status?: CandidateApplication["status"];
   search?: string;
   dateRange?: { start?: string; end?: string };
 };
 
 export type CandidateApplicationsSort = {
-  field: "appliedDate" | "company" | "jobTitle";
+  field: "dateApplied" | "company" | "role";
   direction: "asc" | "desc";
 };
 
@@ -47,7 +40,7 @@ export const fetchCandidateApplications = async (
         const q = filters.search!.toLowerCase();
         return (
           a.company.toLowerCase().includes(q) ||
-          a.jobTitle.toLowerCase().includes(q)
+          a.role.toLowerCase().includes(q)
         );
       })
     : base;
@@ -56,7 +49,7 @@ export const fetchCandidateApplications = async (
   const ranged =
     filters?.dateRange?.start || filters?.dateRange?.end
       ? searched.filter((a) => {
-          const ts = new Date(a.appliedDate).getTime();
+          const ts = new Date(a.dateApplied).getTime();
           const start = filters?.dateRange?.start
             ? new Date(filters.dateRange.start).getTime()
             : Number.NEGATIVE_INFINITY;
@@ -69,15 +62,7 @@ export const fetchCandidateApplications = async (
 
   // apply sort using existing helper when possible
   const sorted = sort
-    ? sort.field === "appliedDate"
-      ? sortApplications(ranged, sort.direction === "asc")
-      : [...ranged].sort((a, b) => {
-          const av = String(a[sort.field] ?? "").toLowerCase();
-          const bv = String(b[sort.field] ?? "").toLowerCase();
-          if (av < bv) return sort.direction === "asc" ? -1 : 1;
-          if (av > bv) return sort.direction === "asc" ? 1 : -1;
-          return 0;
-        })
+    ? sortApplications(ranged, sort.field, sort.direction)
     : ranged;
 
   const total = sorted.length;
