@@ -80,6 +80,10 @@ export const paths = {
       path: "applicants",
       getHref: () => "/app/recruiter/applicants",
     },
+    applicantDetail: {
+      path: "applicants/:id",
+      getHref: (id: string) => `/app/recruiter/applicants/${id}`,
+    },
     profile: {
       path: "profile",
       getHref: () => "/app/recruiter/profile",
@@ -87,6 +91,10 @@ export const paths = {
     jobPostings: {
       path: "posting",
       getHref: () => "/app/recruiter/posting",
+    },
+    postJob: {
+      path: "post-job",
+      getHref: () => "/app/recruiter/post-job",
     },
 
     settings: {

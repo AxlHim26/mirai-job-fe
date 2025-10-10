@@ -25,7 +25,7 @@ export const SETTINGSIDEBARTITLE: SideBarTitle[] = [
 export const RECRUITERSIDEBARTITLE: SideBarTitle[] = [
   {
     title: "Dashboard",
-    path: paths.recruiter.dashboard.path,
+    path: paths.app.recruiter.path,
   },
   {
     title: "Messages",
@@ -48,7 +48,7 @@ export const RECRUITERSIDEBARTITLE: SideBarTitle[] = [
 export const CANDIDATESIDEBARTITLE: SideBarTitle[] = [
   {
     title: "Dashboard",
-    path: paths.candidate.dashboard.path,
+    path: paths.app.candidate.path,
   },
   {
     title: "Messages",
