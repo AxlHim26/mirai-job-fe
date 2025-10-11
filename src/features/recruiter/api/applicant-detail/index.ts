@@ -1,5 +1,1 @@
-export {
-  fetchApplicantDetail,
-  updateApplicantStage,
-  scheduleInterview,
-} from "./applicant-detail";
+export { fetchApplicantDetail, useApplicantDetail } from "./applicant-detail";

@@ -1,18 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api-client";
 
 export type JobListing = {
   id: string;
-  title: string;
-  company: string;
-  logo: string;
-  location: string;
-  jobType: "Full-time" | "Part-time" | "Contract" | "Internship" | "Remote";
+  jobName: string;
+  jobType: string;
+  description: string;
+  salary: string;
   category: string;
-  salary?: string;
-  appliedCount: number;
+  requireSkill: string;
+  whoAreYou: string;
+  reponsibility: string;
+  niceToHave: string;
   capacity: number;
-  tags: string[];
-  postedDate: string;
+  createdAt: string;
+  expiredDate: string;
+  status: string;
+  // Frontend display fields
+  title?: string;
+  company?: string;
+  logo?: string;
+  location?: string;
+  appliedCount?: number;
+  tags?: string[];
+  postedDate?: string;
 };
 
 export type JobFilters = {
@@ -42,134 +53,152 @@ export type JobListingsResponse = {
   totalPages: number;
 };
 
+// Helper function to create mock job
+const createMockJob = (
+  id: string,
+  jobName: string,
+  jobType: string,
+  category: string,
+  salary: string,
+  company: string,
+  location: string,
+  logo: string,
+  postedDate: string,
+  tags: string[]
+): JobListing => ({
+  id,
+  jobName,
+  jobType,
+  description: `We are looking for a ${jobName} to join our team.`,
+  salary,
+  category,
+  requireSkill: tags.join(", "),
+  whoAreYou: `Experienced ${jobName} professional`,
+  reponsibility: `Manage ${jobName.toLowerCase()} tasks and responsibilities`,
+  niceToHave: "Experience with modern tools and technologies",
+  capacity: 10,
+  createdAt: postedDate,
+  expiredDate: "2024-12-31",
+  status: "published",
+  title: jobName,
+  company,
+  logo,
+  location,
+  appliedCount: Math.floor(Math.random() * 10) + 1,
+  tags,
+  postedDate,
+});
+
 // Mock data for FE-only API
 const mockJobs: JobListing[] = [
-  {
-    id: "1",
-    title: "Social Media Assistant",
-    company: "Nomad",
-    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
-    location: "Paris, France",
-    jobType: "Full-time",
-    category: "Marketing",
-    salary: "$45,000 - $55,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-15",
-  },
-  {
-    id: "2",
-    title: "Brand Designer",
-    company: "Dropbox",
-    logo: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100&h=100&fit=crop&crop=center",
-    location: "Paris, France",
-    jobType: "Full-time",
-    category: "Design",
-    salary: "$50,000 - $60,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Business", "Design"],
-    postedDate: "2024-01-14",
-  },
-  {
-    id: "3",
-    title: "Interactive Developer",
-    company: "Terraform",
-    logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop&crop=center",
-    location: "Berlin, Germany",
-    jobType: "Full-time",
-    category: "Engineering",
-    salary: "$60,000 - $70,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-13",
-  },
-  {
-    id: "4",
-    title: "Email Marketing",
-    company: "Revolut",
-    logo: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center",
-    location: "Madrid, Spain",
-    jobType: "Internship",
-    category: "Marketing",
-    salary: "$30,000 - $40,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-12",
-  },
-  {
-    id: "5",
-    title: "Product Designer",
-    company: "ClassPass",
-    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
-    location: "Berlin, Germany",
-    jobType: "Full-time",
-    category: "Design",
-    salary: "$55,000 - $65,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Business", "Design"],
-    postedDate: "2024-01-11",
-  },
-  {
-    id: "6",
-    title: "Interactive Developer",
-    company: "Canva",
-    logo: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100&h=100&fit=crop&crop=center",
-    location: "Birmingham, UK",
-    jobType: "Full-time",
-    category: "Engineering",
-    salary: "$65,000 - $75,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-10",
-  },
-  {
-    id: "7",
-    title: "Customer Manager",
-    company: "Pitch",
-    logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop&crop=center",
-    location: "Roma, Italy",
-    jobType: "Full-time",
-    category: "Business",
-    salary: "$50,000 - $60,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-09",
-  },
-  {
-    id: "8",
-    title: "Visual Designer",
-    company: "Blinkist",
-    logo: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center",
-    location: "Lyon, France",
-    jobType: "Full-time",
-    category: "Design",
-    salary: "$45,000 - $55,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Business", "Design"],
-    postedDate: "2024-01-08",
-  },
-  {
-    id: "9",
-    title: "Java Developer",
-    company: "GoDaddy",
-    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
-    location: "Oslo, Sweden",
-    jobType: "Part-time",
-    category: "Engineering",
-    salary: "$40,000 - $50,000",
-    appliedCount: 5,
-    capacity: 10,
-    tags: ["Marketing", "Design"],
-    postedDate: "2024-01-07",
-  },
+  createMockJob(
+    "1",
+    "Social Media Assistant",
+    "Full-time",
+    "Marketing",
+    "45000",
+    "Nomad",
+    "Paris, France",
+    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
+    "2024-01-15",
+    ["Marketing", "Design"]
+  ),
+  createMockJob(
+    "2",
+    "Brand Designer",
+    "Full-time",
+    "Design",
+    "55000",
+    "Dropbox",
+    "Paris, France",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100&h=100&fit=crop&crop=center",
+    "2024-01-14",
+    ["Business", "Design"]
+  ),
+  createMockJob(
+    "3",
+    "Interactive Developer",
+    "Full-time",
+    "Engineering",
+    "65000",
+    "Terraform",
+    "Berlin, Germany",
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop&crop=center",
+    "2024-01-13",
+    ["Marketing", "Design"]
+  ),
+  createMockJob(
+    "4",
+    "Email Marketing",
+    "Internship",
+    "Marketing",
+    "35000",
+    "Revolut",
+    "Madrid, Spain",
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center",
+    "2024-01-12",
+    ["Marketing", "Design"]
+  ),
+  createMockJob(
+    "5",
+    "Product Designer",
+    "Full-time",
+    "Design",
+    "60000",
+    "ClassPass",
+    "Berlin, Germany",
+    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
+    "2024-01-11",
+    ["Business", "Design"]
+  ),
+  createMockJob(
+    "6",
+    "Interactive Developer",
+    "Full-time",
+    "Engineering",
+    "70000",
+    "Canva",
+    "Birmingham, UK",
+    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=100&h=100&fit=crop&crop=center",
+    "2024-01-10",
+    ["Marketing", "Design"]
+  ),
+  createMockJob(
+    "7",
+    "Customer Manager",
+    "Full-time",
+    "Business",
+    "55000",
+    "Pitch",
+    "Roma, Italy",
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=100&h=100&fit=crop&crop=center",
+    "2024-01-09",
+    ["Marketing", "Design"]
+  ),
+  createMockJob(
+    "8",
+    "Visual Designer",
+    "Full-time",
+    "Design",
+    "50000",
+    "Blinkist",
+    "Lyon, France",
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=100&h=100&fit=crop&crop=center",
+    "2024-01-08",
+    ["Business", "Design"]
+  ),
+  createMockJob(
+    "9",
+    "Java Developer",
+    "Part-time",
+    "Engineering",
+    "45000",
+    "GoDaddy",
+    "Oslo, Sweden",
+    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
+    "2024-01-07",
+    ["Marketing", "Design"]
+  ),
 ];
 
 export const fetchJobListings = async (
@@ -178,80 +207,135 @@ export const fetchJobListings = async (
   filters?: JobFilters,
   sort?: JobSort
 ): Promise<JobListingsResponse> => {
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  try {
+    // Call real API
+    const response = (await api.get("/jobs/public")) as { data: JobListing[] };
+    let jobs = response.data || [];
 
-  let filteredJobs = [...mockJobs];
+    // Transform backend data to frontend format
+    jobs = jobs.map((job) => ({
+      ...job,
+      title: job.jobName,
+      company: "Company", // Default company name since backend doesn't have this
+      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
+      location: "Remote", // Default location
+      appliedCount: Math.floor(Math.random() * 10) + 1, // Random for display
+      tags: job.requireSkill
+        ? job.requireSkill.split(",").map((s) => s.trim())
+        : [],
+      postedDate: job.createdAt,
+    }));
 
-  // Apply filters
-  if (filters?.jobType) {
-    filteredJobs = filteredJobs.filter(
-      (job) => job.jobType === filters.jobType
-    );
+    // Apply local search filters
+    if (filters?.search) {
+      const searchTerm = filters.search.toLowerCase();
+      jobs = jobs.filter(
+        (job) =>
+          job.jobName.toLowerCase().includes(searchTerm) ||
+          job.description.toLowerCase().includes(searchTerm) ||
+          job.category.toLowerCase().includes(searchTerm) ||
+          job.requireSkill.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    if (filters?.jobType) {
+      jobs = jobs.filter(
+        (job) => job.jobType.toLowerCase() === filters.jobType!.toLowerCase()
+      );
+    }
+
+    if (filters?.category) {
+      jobs = jobs.filter(
+        (job) => job.category.toLowerCase() === filters.category!.toLowerCase()
+      );
+    }
+
+    // Apply sorting
+    if (sort) {
+      jobs.sort((a, b) => {
+        let aValue: string | number = "";
+        let bValue: string | number = "";
+
+        switch (sort.field) {
+          case "title":
+            aValue = a.jobName;
+            bValue = b.jobName;
+            break;
+          case "company":
+            aValue = a.company || "";
+            bValue = b.company || "";
+            break;
+          case "postedDate":
+            aValue = new Date(a.createdAt).getTime();
+            bValue = new Date(b.createdAt).getTime();
+            break;
+          case "salary":
+            aValue = parseInt(a.salary.replace(/[^0-9]/g, "")) || 0;
+            bValue = parseInt(b.salary.replace(/[^0-9]/g, "")) || 0;
+            break;
+        }
+
+        if (sort.direction === "asc") {
+          return aValue > bValue ? 1 : -1;
+        } else {
+          return aValue < bValue ? 1 : -1;
+        }
+      });
+    }
+
+    const total = jobs.length;
+    const totalPages = Math.ceil(total / limit);
+    const startIndex = (page - 1) * limit;
+    const paginatedJobs = jobs.slice(startIndex, startIndex + limit);
+
+    return {
+      jobs: paginatedJobs,
+      total,
+      page,
+      limit,
+      totalPages,
+    };
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    // Fallback to mock data if API fails
+    return {
+      jobs: mockJobs.slice(0, limit),
+      total: mockJobs.length,
+      page,
+      limit,
+      totalPages: Math.ceil(mockJobs.length / limit),
+    };
   }
-
-  if (filters?.category) {
-    filteredJobs = filteredJobs.filter(
-      (job) => job.category === filters.category
-    );
-  }
-
-  if (filters?.location) {
-    filteredJobs = filteredJobs.filter((job) =>
-      job.location.toLowerCase().includes(filters.location!.toLowerCase())
-    );
-  }
-
-  if (filters?.search) {
-    const searchTerm = filters.search.toLowerCase();
-    filteredJobs = filteredJobs.filter(
-      (job) =>
-        job.title.toLowerCase().includes(searchTerm) ||
-        job.company.toLowerCase().includes(searchTerm) ||
-        job.category.toLowerCase().includes(searchTerm)
-    );
-  }
-
-  // Apply sorting
-  if (sort) {
-    filteredJobs.sort((a, b) => {
-      let aValue: string | number = a[sort.field] || "";
-      let bValue: string | number = b[sort.field] || "";
-
-      if (sort.field === "postedDate") {
-        aValue = new Date(aValue).getTime();
-        bValue = new Date(bValue).getTime();
-      }
-
-      if (sort.direction === "asc") {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
-    });
-  }
-
-  const total = filteredJobs.length;
-  const totalPages = Math.ceil(total / limit);
-  const startIndex = (page - 1) * limit;
-  const jobs = filteredJobs.slice(startIndex, startIndex + limit);
-
-  return {
-    jobs,
-    total,
-    page,
-    limit,
-    totalPages,
-  };
 };
 
 export const fetchJobById = async (
   jobId: string
 ): Promise<JobListing | null> => {
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  try {
+    // Call real API
+    const response = (await api.get(`/jobs/public/${jobId}`)) as {
+      data: JobListing;
+    };
+    const job = response.data;
 
-  return mockJobs.find((job) => job.id === jobId) || null;
+    // Transform backend data to frontend format
+    return {
+      ...job,
+      title: job.jobName,
+      company: "Company", // Default company name since backend doesn't have this
+      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center",
+      location: "Remote", // Default location
+      appliedCount: Math.floor(Math.random() * 10) + 1, // Random for display
+      tags: job.requireSkill
+        ? job.requireSkill.split(",").map((s) => s.trim())
+        : [],
+      postedDate: job.createdAt,
+    };
+  } catch (error) {
+    console.error("Error fetching job detail:", error);
+    // Fallback to mock data if API fails
+    return mockJobs.find((job) => job.id === jobId) || null;
+  }
 };
 
 export const useJobListings = (

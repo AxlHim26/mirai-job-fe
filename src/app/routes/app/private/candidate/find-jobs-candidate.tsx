@@ -21,7 +21,7 @@ const FindJobsCandidate = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useState("");
 
-  const limit = 6; // Giảm từ 9 xuống 6 để tránh overflow
+  const limit = 9; // 9 jobs per page
 
   // Convert sortBy to JobSort
   const sort: JobSort = useMemo(() => {

@@ -1,25 +1,19 @@
 import { Input, Button } from "@/components/ui";
 import { Form } from "@/components/ui/form/form";
-import { profileInputSchema, ProfileInputValues } from "../api";
-import { useAccount } from "../api";
-import { useState } from "react";
+import {
+  profileInputSchema,
+  ProfileInputValues,
+  useCandidateSettings,
+  useUpdateCandidateSettings,
+} from "../api";
 import { FieldError } from "react-hook-form";
 
 export const ProfileForm = () => {
-  const { data: accountData, isLoading } = useAccount();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { data: candidateData, isLoading } = useCandidateSettings();
+  const updateCandidateMutation = useUpdateCandidateSettings();
 
   const handleSubmit = async (data: ProfileInputValues) => {
-    setIsSubmitting(true);
-    try {
-      // TODO: Implement profile update API call
-      console.log("Profile update data:", data);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-    } catch (error) {
-      console.error("Profile update failed:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    updateCandidateMutation.mutate(data);
   };
 
   if (isLoading) {
@@ -47,11 +41,15 @@ export const ProfileForm = () => {
         onSubmit={handleSubmit}
         option={{
           defaultValues: {
-            fullName: accountData?.fullName || "",
-            email: accountData?.email || "",
-            phone: accountData?.phone || "",
-            location: accountData?.location || "",
-            bio: accountData?.bio || "",
+            name: candidateData?.name || "",
+            email: candidateData?.email || "",
+            phone: candidateData?.phone || "",
+            address: candidateData?.address || "",
+            bio: candidateData?.bio || "",
+            avatar: candidateData?.avatar || "",
+            experience: candidateData?.experience || "",
+            education: candidateData?.education || "",
+            skills: candidateData?.skills || [],
           },
         }}
       >
@@ -61,8 +59,8 @@ export const ProfileForm = () => {
               <Input
                 label="Full Name"
                 placeholder="Enter your full name"
-                register={register("fullName")}
-                error={formState.errors.fullName as FieldError | undefined}
+                register={register("name")}
+                error={formState.errors.name as FieldError | undefined}
               />
               <Input
                 label="Email Address"
@@ -80,10 +78,10 @@ export const ProfileForm = () => {
                 error={formState.errors.phone as FieldError | undefined}
               />
               <Input
-                label="Location"
-                placeholder="Enter your location"
-                register={register("location")}
-                error={formState.errors.location as FieldError | undefined}
+                label="Address"
+                placeholder="Enter your address"
+                register={register("address")}
+                error={formState.errors.address as FieldError | undefined}
               />
             </div>
 
@@ -104,13 +102,49 @@ export const ProfileForm = () => {
               )}
             </div>
 
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Experience
+              </label>
+              <textarea
+                {...register("experience")}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Describe your work experience..."
+              />
+              {formState.errors.experience && (
+                <p className="mt-1 text-sm text-red-600">
+                  {(formState.errors.experience as FieldError)?.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Education
+              </label>
+              <textarea
+                {...register("education")}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Describe your educational background..."
+              />
+              {formState.errors.education && (
+                <p className="mt-1 text-sm text-red-600">
+                  {(formState.errors.education as FieldError)?.message}
+                </p>
+              )}
+            </div>
+
             <div className="flex justify-end">
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={updateCandidateMutation.isPending}
                 className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
               >
-                {isSubmitting ? "Saving..." : "Save Changes"}
+                {updateCandidateMutation.isPending
+                  ? "Saving..."
+                  : "Save Changes"}
               </Button>
             </div>
           </div>
