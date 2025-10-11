@@ -31,22 +31,19 @@ export type UpdateEmailFormValues = z.infer<typeof updateEmailSchema>;
 
 const changePassword = async (data: ChangePasswordFormValues) => {
   const response = await api.post<ResponseMessage>(
-    "/api/auth/change-password",
+    "/auth/change-password",
     data
   );
   return response.data;
 };
 
 const updateEmail = async (data: UpdateEmailFormValues) => {
-  const response = await api.post<ResponseMessage>(
-    "/api/auth/update-email",
-    data
-  );
+  const response = await api.post<ResponseMessage>("/auth/update-email", data);
   return response.data;
 };
 
 const getAccountInfo = async () => {
-  const response = await api.get("/api/auth/account");
+  const response = await api.get("/candidate/setting");
   return response.data;
 };
 

@@ -13,7 +13,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const api = Axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "https://summer-project-be-production.up.railway.app/api/",
   withCredentials: true,
 });
 

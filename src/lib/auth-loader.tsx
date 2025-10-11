@@ -43,7 +43,7 @@ export const AuthLoader = ({
       }
     };
     loadAuth();
-  }, [refreshTokenQuery, setAccessToken, setUser, userQuery]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!ready || refreshTokenQuery.isFetching || userQuery.isFetching) {
     return renderLoading ? renderLoading() : <div>Loading...</div>;

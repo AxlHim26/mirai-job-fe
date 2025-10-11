@@ -1,4 +1,6 @@
 import { LocalIcon } from "@/assets/icons/local-icon";
+import { useParams } from "react-router-dom";
+import { useJobApplicationStatus } from "../../api/application-status";
 
 interface JobHeaderProps {
   jobName: string;
@@ -17,7 +19,16 @@ export const JobHeader = ({
   companyLogo,
   onApply,
 }: JobHeaderProps) => {
+  const { jobId } = useParams<{ jobId: string }>();
+  const { data: hasApplied, isLoading } = useJobApplicationStatus(jobId || "");
+
   const isLogoUrl = companyLogo?.startsWith("http");
+
+  const handleApplyClick = () => {
+    if (!hasApplied && onApply) {
+      onApply();
+    }
+  };
 
   return (
     <div className="px-32 py-24 bg-gray-100">
@@ -55,10 +66,15 @@ export const JobHeader = ({
             />
           </figure>
           <button
-            onClick={onApply}
-            className="px-8 py-3 bg-indigo-600 text-white text-lg rounded-md hover:bg-indigo-700 transition-colors"
+            onClick={handleApplyClick}
+            disabled={hasApplied || isLoading}
+            className={`px-8 py-3 text-white text-lg rounded-md transition-colors ${
+              hasApplied
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
           >
-            Apply
+            {isLoading ? "Checking..." : hasApplied ? "Applied" : "Apply"}
           </button>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { MoreVertical, ChevronUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { sortApplications, getApplicationsByStatus } from "./mock-data";
 import { Button } from "@/components/ui";
+import {
+  useCandidateApplications,
+  CandidateApplicationsSort,
+} from "../../api/application-history";
 
 type SortField = "company" | "dateApplied" | "status" | "role";
 type SortOrder = "asc" | "desc";
@@ -23,12 +26,32 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
     }
   };
 
-  // Filter applications based on active tab
-  const filteredApplications = getApplicationsByStatus(activeTab);
-  const sortedApplications = sortApplications(
-    filteredApplications,
-    sortField,
-    sortOrder
+  // Map frontend sort field to API sort field
+  const getApiSortField = (
+    field: SortField
+  ): CandidateApplicationsSort["field"] => {
+    switch (field) {
+      case "company":
+        return "company";
+      case "role":
+        return "role";
+      case "dateApplied":
+        return "dateApplied";
+      default:
+        return "dateApplied";
+    }
+  };
+
+  const sort: CandidateApplicationsSort = {
+    field: getApiSortField(sortField),
+    direction: sortOrder,
+  };
+
+  const { data, isLoading, error } = useCandidateApplications(
+    1,
+    100,
+    { status: activeTab },
+    sort
   );
 
   const getSortIcon = (field: SortField) => {
@@ -41,6 +64,41 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
       <ChevronDown className="w-4 h-4 text-gray-600" />
     );
   };
+
+  const getStatusColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "pending":
+        return "bg-yellow-100 text-yellow-800";
+      case "reviewed":
+        return "bg-blue-100 text-blue-800";
+      case "interview":
+        return "bg-purple-100 text-purple-800";
+      case "offered":
+        return "bg-green-100 text-green-800";
+      case "rejected":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-red-600">Error loading applications</p>
+      </div>
+    );
+  }
+
+  const applications = data?.applications || [];
 
   return (
     <div className="overflow-x-auto">
@@ -90,28 +148,24 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {sortedApplications.map((app) => (
+          {applications.map((app, index) => (
             <tr
               key={app.id}
               className="hover:bg-gray-50"
             >
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {app.id}
+                {index + 1}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center gap-3">
                   <img
-                    src={app.logo}
-                    alt={`${app.company} logo`}
+                    src={`https://ui-avatars.com/api/?name=${app.companyName}&background=3b82f6&color=fff&size=40`}
+                    alt={`${app.companyName} logo`}
                     className="w-10 h-10 rounded-lg object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = `https://ui-avatars.com/api/?name=${app.company}&background=3b82f6&color=fff&size=40`;
-                    }}
                   />
                   <div>
                     <span className="text-sm font-medium text-gray-900">
-                      {app.company}
+                      {app.companyName}
                     </span>
                     {app.location && (
                       <p className="text-xs text-gray-500">{app.location}</p>
@@ -121,18 +175,18 @@ export const ApplicationTables = ({ activeTab }: ApplicationTablesProps) => {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div>
-                  <span className="text-sm text-gray-900">{app.role}</span>
+                  <span className="text-sm text-gray-900">{app.jobName}</span>
                   {app.salary && (
-                    <p className="text-xs text-gray-500">{app.salary}</p>
+                    <p className="text-xs text-gray-500">${app.salary}</p>
                   )}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {app.dateApplied}
+                {app.appliedAt}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${app.statusColor}`}
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(app.status)}`}
                 >
                   {app.status}
                 </span>

@@ -1,54 +1,51 @@
-import { RestResponse, ApplicantDetail } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api-client";
+import { RestResponse } from "@/types";
 
-export const fetchApplicantDetail = async (): Promise<
-  RestResponse<ApplicantDetail>
-> => {
-  // Using mock data for now - replace with real API call later
-  const { getApplicantDetail } = await import("./mock");
+// Backend API type for applicant detail
+export interface ApplicantDetail {
+  applicationId: string;
+  candidateId: string;
+  candidateName: string;
+  candidateEmail: string;
+  candidatePhone: string;
+  jobId: string;
+  jobName: string;
+  jobType: string;
+  salary: string;
+  category: string;
+  status: string;
+  appliedAt: string;
+  resumeId: string;
+  currentJob: string;
+  portfolioLink: string;
+  about: string;
+  experience: string;
+  education: string;
+  skills: string;
+  address: string;
+  avatar: string;
+}
 
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
-  const applicantDetail = getApplicantDetail();
-
-  return {
-    data: applicantDetail,
-    message: "Success",
-    status: "200",
-    errorDetail: null,
-    path: "/api/applicant-detail",
-    timestamp: new Date().toISOString(),
-  };
+export const fetchApplicantDetail = async (
+  applicationId: string
+): Promise<RestResponse<ApplicantDetail>> => {
+  try {
+    const response = (await api.get(
+      `/jobs/recruiter/applicants/${applicationId}`
+    )) as RestResponse<ApplicantDetail>;
+    return response;
+  } catch (error) {
+    console.error("Error fetching applicant detail:", error);
+    throw error;
+  }
 };
 
-export const updateApplicantStage = async (): Promise<
-  RestResponse<{ success: boolean }>
-> => {
-  // Mock implementation
-  await new Promise((resolve) => setTimeout(resolve, 300));
-
-  return {
-    data: { success: true },
-    message: "Stage updated successfully",
-    status: "200",
-    errorDetail: null,
-    path: "/api/applicant-detail/stage",
-    timestamp: new Date().toISOString(),
-  };
-};
-
-export const scheduleInterview = async (): Promise<
-  RestResponse<{ success: boolean }>
-> => {
-  // Mock implementation
-  await new Promise((resolve) => setTimeout(resolve, 300));
-
-  return {
-    data: { success: true },
-    message: "Interview scheduled successfully",
-    status: "200",
-    errorDetail: null,
-    path: "/api/applicant-detail/interview",
-    timestamp: new Date().toISOString(),
-  };
+export const useApplicantDetail = (applicationId: string) => {
+  return useQuery({
+    queryKey: ["applicantDetail", applicationId],
+    queryFn: () => fetchApplicantDetail(applicationId),
+    enabled: !!applicationId,
+    select: (res) => res.data,
+  });
 };
