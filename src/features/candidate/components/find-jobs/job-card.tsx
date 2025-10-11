@@ -47,7 +47,7 @@ export const JobCard = ({ job }: JobCardProps) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer overflow-hidden h-full flex flex-col">
       <div className="flex items-start gap-4 mb-4">
         <img
           src={job.logo}
@@ -67,7 +67,7 @@ export const JobCard = ({ job }: JobCardProps) => {
             >
               {job.jobType}
             </span>
-            {job.tags.map((tag: string) => (
+            {job.tags?.map((tag: string) => (
               <span
                 key={tag}
                 className={`px-2 py-1 text-xs font-medium rounded-full ${getTagColor(tag)}`}
@@ -79,26 +79,30 @@ export const JobCard = ({ job }: JobCardProps) => {
         </div>
       </div>
 
-      <div className="space-y-3">
-        <Button
-          variant="filled"
-          size="sm"
-          onClick={handleJobClick}
-          className="w-full"
-        >
-          Apply
-        </Button>
-
-        <div className="text-center">
-          <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
-            <div
-              className="bg-blue-600 h-2 rounded-full"
-              style={{ width: `${(job.appliedCount / job.capacity) * 100}%` }}
-            ></div>
+      <div className="flex-1 flex flex-col justify-end">
+        <div className="space-y-3">
+          <div className="text-center">
+            <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
+              <div
+                className="bg-blue-600 h-2 rounded-full"
+                style={{
+                  width: `${Math.min(((job.appliedCount || 0) / job.capacity) * 100, 100)}%`,
+                }}
+              ></div>
+            </div>
+            <p className="text-xs text-gray-500">
+              {job.appliedCount || 0} applied of {job.capacity} capacity
+            </p>
           </div>
-          <p className="text-xs text-gray-500">
-            {job.appliedCount} applied of {job.capacity} capacity
-          </p>
+
+          <Button
+            variant="filled"
+            size="sm"
+            onClick={handleJobClick}
+            className="w-full"
+          >
+            Apply
+          </Button>
         </div>
       </div>
     </div>

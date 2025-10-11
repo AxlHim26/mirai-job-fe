@@ -110,7 +110,7 @@ export const JobListView = ({ jobs, loading }: JobListViewProps) => {
                 >
                   {job.jobType}
                 </span>
-                {job.tags.map((tag: string) => (
+                {job.tags?.map((tag: string) => (
                   <span
                     key={tag}
                     className={`px-2 py-1 text-xs font-medium rounded-full ${getTagColor(tag)}`}
@@ -130,7 +130,7 @@ export const JobListView = ({ jobs, loading }: JobListViewProps) => {
                 Apply
               </Button>
               <div className="text-xs text-gray-500">
-                {job.appliedCount} applied of {job.capacity} capacity
+                {job.appliedCount || 0} applied of {job.capacity} capacity
               </div>
             </div>
           </div>

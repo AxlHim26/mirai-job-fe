@@ -1,6 +1,8 @@
 import { Edit2, MapPin } from "lucide-react";
+import { useCandidateProfile } from "../../api/profile/profile";
 
 export const ProfileHeader = () => {
+  const { data: candidateData } = useCandidateProfile();
   return (
     <div className="bg-white rounded-lg shadow-sm mb-6">
       {/* Header with banner */}
@@ -14,7 +16,10 @@ export const ProfileHeader = () => {
       <div className="px-8 pb-8 relative">
         <div className="flex items-start mb-6">
           <img
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
+            src={
+              candidateData?.avatar ||
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
+            }
             alt="Profile"
             className="w-40 h-40 rounded-full border-4 border-white shadow-lg object-cover -mt-20 relative z-10"
           />
@@ -23,7 +28,7 @@ export const ProfileHeader = () => {
               <div>
                 <div className="flex items-center gap-3">
                   <h1 className="text-3xl font-bold text-gray-900">
-                    Jake Gyll
+                    {candidateData?.name || "Jake Gyll"}
                   </h1>
                   <button className="text-blue-600 text-sm hover:underline font-medium">
                     Edit Profile
@@ -31,12 +36,14 @@ export const ProfileHeader = () => {
                 </div>
 
                 <p className="text-gray-600 mt-2 text-lg">
-                  Product Designer at Twitter
+                  {candidateData?.experience || "Product Designer"} at{" "}
+                  {candidateData?.education || "Twitter"}
                 </p>
 
                 <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
                   <span className="flex items-center gap-1">
-                    <MapPin size={16} /> Manchester, UK
+                    <MapPin size={16} />{" "}
+                    {candidateData?.address || "Manchester, UK"}
                   </span>
                 </div>
 

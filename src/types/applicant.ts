@@ -26,6 +26,7 @@ export type ApplicantResponse = {
   applicants: Applicant[];
   total: number;
   page: number;
+  limit: number;
   totalPages: number;
   hasMore: boolean;
 };
@@ -42,6 +43,6 @@ export type ApplicantFilters = {
 };
 
 export type ApplicantSort = {
-  field: "fullName" | "appliedDate" | "status" | "rating";
+  field: "fullName" | "appliedDate" | "status" | "rating" | "jobTitle";
   direction: "asc" | "desc";
 };

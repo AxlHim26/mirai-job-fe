@@ -5,11 +5,11 @@ import { profileSchema } from "@/features/candidate/components/settings/api/prof
 type ProfileFormValues = z.infer<typeof profileSchema>;
 
 type TypeRadioProps = {
-  value: ProfileFormValues["accountType"];
+  value: string;
   title: string;
   description: string;
   register: UseFormRegister<ProfileFormValues>;
-  name: "accountType";
+  name: keyof ProfileFormValues;
 };
 
 export const TypeAccountRadio = ({

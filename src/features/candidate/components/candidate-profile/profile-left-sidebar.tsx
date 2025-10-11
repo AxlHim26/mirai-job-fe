@@ -1,6 +1,8 @@
 import { Edit2, Globe, Mail, Phone, Twitter } from "lucide-react";
+import { useCandidateProfile } from "../../api/profile/profile";
 
 export const ProfileLeftSidebar = () => {
+  const { data: candidateData } = useCandidateProfile();
   return (
     <div className="lg:col-span-1 space-y-4">
       {/* Additional Details */}
@@ -17,14 +19,18 @@ export const ProfileLeftSidebar = () => {
               size={18}
               className="text-gray-400 mt-0.5 flex-shrink-0"
             />
-            <span className="text-gray-700">jakagy@email.com</span>
+            <span className="text-gray-700">
+              {candidateData?.email || "jakagy@email.com"}
+            </span>
           </div>
           <div className="flex items-start gap-3">
             <Phone
               size={18}
               className="text-gray-400 mt-0.5 flex-shrink-0"
             />
-            <span className="text-gray-700">+44 798 572 135</span>
+            <span className="text-gray-700">
+              {candidateData?.phone || "+44 798 572 135"}
+            </span>
           </div>
           <div className="pt-2 border-t border-gray-100">
             <p className="text-gray-500 text-xs mb-1">Languages</p>

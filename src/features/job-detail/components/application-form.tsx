@@ -7,6 +7,10 @@ import {
   Link as LinkIcon,
   Image,
 } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "@/lib/api-client";
+import { useToastStore } from "@/stores/toast-store";
+import { useParams } from "react-router-dom";
 
 interface FormData {
   fullName: string;
@@ -23,7 +27,24 @@ interface ApplicationFormProps {
   onClose?: () => void;
 }
 
-export const ApplicationForm: React.FC<ApplicationFormProps> = () => {
+interface JobApplicationRequest {
+  fullName: string;
+  email: string;
+  phone: string;
+  jobTitle: string;
+  linkedinUrl: string;
+  portfolioUrl: string;
+  additionalInfo: string;
+  resume: string; // Base64 encoded file
+}
+
+export const ApplicationForm: React.FC<ApplicationFormProps> = ({
+  onClose,
+}) => {
+  const { jobId } = useParams<{ jobId: string }>();
+  const { addToast } = useToastStore();
+  const queryClient = useQueryClient();
+
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -61,10 +82,93 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Convert file to base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Remove data:application/pdf;base64, prefix
+        const base64 = result.split(",")[1];
+        resolve(base64);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // API call to apply for job
+  const applyToJob = async (data: JobApplicationRequest) => {
+    const response = await api.post(`/jobs/${jobId}/apply`, data);
+    return response;
+  };
+
+  const applyMutation = useMutation({
+    mutationFn: applyToJob,
+    onSuccess: () => {
+      addToast({
+        title: "Success",
+        message: "Application submitted successfully!",
+        type: "success",
+      });
+      // Invalidate application status query to update the Apply button
+      queryClient.invalidateQueries({
+        queryKey: ["job-application-status", jobId],
+      });
+      // Invalidate applications list to update application history
+      queryClient.invalidateQueries({ queryKey: ["candidate-applications"] });
+      onClose?.();
+    },
+    onError: (error: unknown) => {
+      const errorMessage =
+        error && typeof error === "object" && "response" in error
+          ? (error as { response?: { data?: { message?: string } } }).response
+              ?.data?.message
+          : "Failed to submit application";
+
+      addToast({
+        title: "Error",
+        message: errorMessage || "Failed to submit application",
+        type: "error",
+      });
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission logic here
+
+    if (!formData.resume) {
+      addToast({
+        title: "Error",
+        message: "Please attach your resume",
+        type: "error",
+      });
+      return;
+    }
+
+    try {
+      // Convert resume file to base64
+      const resumeBase64 = await fileToBase64(formData.resume);
+
+      const applicationData: JobApplicationRequest = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        jobTitle: formData.jobTitle,
+        linkedinUrl: formData.linkedinUrl,
+        portfolioUrl: formData.portfolioUrl,
+        additionalInfo: formData.additionalInfo,
+        resume: resumeBase64,
+      };
+
+      applyMutation.mutate(applicationData);
+    } catch {
+      addToast({
+        title: "Error",
+        message: "Failed to process resume file",
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -263,9 +367,10 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors"
+          disabled={applyMutation.isPending}
+          className="w-full bg-indigo-600 text-white py-3 rounded-md font-medium hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Submit Application
+          {applyMutation.isPending ? "Submitting..." : "Submit Application"}
         </button>
 
         {/* Terms */}

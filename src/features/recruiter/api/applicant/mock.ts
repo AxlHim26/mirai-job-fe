@@ -280,6 +280,7 @@ export const mockApplicantResponse = (
     applicants,
     total: mockApplicants.length,
     page,
+    limit,
     totalPages: Math.ceil(mockApplicants.length / limit),
     hasMore: endIndex < mockApplicants.length,
   };
